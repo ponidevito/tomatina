@@ -1,1 +1,258 @@
-/* You can add global styles to this file, and also import other style files */
+@import "app/shared/styles/reset";
+@import "app/shared/styles/mixins";
+@import "app/shared/styles/vars";
+@import "app/shared/styles/fonts";
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: "Geometria", sans-serif;
+  line-height: 1.5em;
+
+  &.lockBurger {
+    @media (max-width: 1100px) {
+      overflow: hidden;
+    }
+  }
+  //   &.lockModal {
+  //     overflow: hidden;
+  //   }
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+[class*="__container"] {
+  max-width: 1920px;
+  padding: 0px 15px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.btn {
+  display: inline-block;
+  vertical-align: bottom;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  background: none;
+  -webkit-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  padding: 10px 25px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.btn-grey {
+  color: #599921;
+  background: #f5f5f5;
+  border-radius: 6px;
+  padding: 20px 30px;
+  &:hover {
+    @media (min-width: 992px) {
+      background-color: #599921;
+      color: #fff;
+    }
+  }
+}
+.btn-icon {
+  position: relative;
+  margin-right: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:active {
+    transform: translateY(2px);
+  }
+  &:hover {
+    &.btn-icon-disabled {
+      .bg path {
+        fill: #599921;
+      }
+      .bg-icon path {
+        fill: #ffffff;
+      }
+    }
+    .bg path {
+      fill: #599921;
+
+      @media (min-width: 991.98px) {
+        fill: transparent;
+      }
+    }
+    .bg-icon path {
+      fill: #ffffff;
+      @media (min-width: 991.98px) {
+        fill: #599921;
+      }
+    }
+
+    .burger-btn::before {
+      background-color: #599921;
+    }
+    .burger-btn span {
+      background-color: #599921;
+    }
+    .burger-btn::after {
+      background-color: #599921;
+    }
+  }
+  &.facebook {
+    .bg {
+      path {
+        fill: #255a9c;
+        stroke: #255a9c;
+        transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+      }
+    }
+    &:hover {
+      .bg-icon path {
+        fill: #255a9c;
+      }
+      .bg {
+        path {
+          fill: transparent;
+          stroke: #255a9c;
+          transition: all 0.3s;
+          -webkit-transition: all 0.3s;
+        }
+      }
+    }
+  }
+  &.insta {
+    .bg {
+      path {
+        fill: url(#myGradient);
+        stroke: transparent;
+        transition: all 0.3s;
+      }
+    }
+    &:hover {
+      .bg {
+        path {
+          fill: transparent;
+          stroke: url(#myGradient);
+          transition: all 0.3s;
+          -webkit-transition: all 0.3s;
+        }
+      }
+      .bg-icon path {
+        fill: url(#myGradient);
+      }
+    }
+  }
+  &.btn-icon-disabled {
+    &:active {
+      transform: unset;
+    }
+  }
+}
+
+.bg {
+  path {
+    fill: #599921;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+  }
+}
+.bg-icon {
+  position: absolute;
+  margin-top: 2px;
+  margin-left: 2px;
+  path {
+    transition: all 0.3s;
+  }
+}
+
+.burger {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:active {
+    transform: translateY(2px);
+  }
+  @media (max-width: 1200px) {
+    margin-right: 20px;
+  }
+  @include md {
+    margin-right: 0;
+  }
+  @include xs {
+    order: 2;
+    .bg {
+      width: 30px;
+      height: 28px;
+    }
+    .burger-btn {
+      width: 18px;
+      height: 10px;
+    }
+  }
+}
+
+.burger-btn {
+  position: absolute;
+  display: block;
+  width: 18px;
+  height: 14px;
+  transform: translate(1px, 1px);
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  &::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+  }
+  span {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+  }
+  &::after {
+    position: absolute;
+    content: "";
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s;
+  }
+}
+
+.main {
+  flex: 1 1 auto;
+  // padding-top: 150px;
+  // @include lg {
+  //   padding: 115px 0px 0px 0px;
+  // }
+  // @include sm {
+  //   padding: 77px 0px 0px 0px;
+  // }
+}
