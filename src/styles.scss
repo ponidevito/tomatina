@@ -5,8 +5,6 @@
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 @import "app/shared/styles/themes";
 
-
-
 html,
 body {
   height: 100%;
@@ -285,6 +283,14 @@ body {
   }
 }
 
+.text-center {
+  text-align: center !important;
+}
+
+.title {
+  font-weight: 700;
+}
+
 .main {
   flex: 1 1 auto;
   // padding-top: 150px;
@@ -296,11 +302,11 @@ body {
   // }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-
-
-
-
-
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

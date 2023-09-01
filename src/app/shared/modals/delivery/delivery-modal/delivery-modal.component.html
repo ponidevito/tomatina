@@ -1,19 +1,20 @@
-<div class="popup-align text-center">
-                 
-    <div class="popup-title h3 title"><b>Раді бачити вас на нашому сайті!</b> Будь ласка, оберіть спосіб отримання замовлення</div>
-                                <!-- <div class="delivery-popup-block">
-    <a href="#" class="delivery-popup-link btn_delivery" data-type-delivery="courierdelivery">
-        <div>
-            <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/delivery_popup_one.svg" alt="" data-pagespeed-url-hash="2890079394" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-            <p>Доставка кур’єром</p>
-        </div>
-    </a>
-    <span>або</span>
-    <a href="#" class="delivery-popup-link btn_delivery" data-type-delivery="selfdelivery">
-        <div>
-            <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/delivery_popup_two.svg" alt="" data-pagespeed-url-hash="3136286228" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-            <p>Самовивіз</p>
-        </div>
-    </a> -->
-<!-- </div> -->
-</div>
+<div class="delivery-modal_container">
+    <div class="delivery-modal_align text-center">
+       <h3 class="delivery-modal_title title"><b>Раді бачити вас на нашому сайті!</b> Будь ласка, оберіть спосіб отримання замовлення</h3>
+       <div class="delivery-modal_block">
+          <a href="#" class="delivery-modal_link btn_delivery" (click)="onClickLink('Доставка кур’єром')">
+             <div>
+                <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/delivery_popup_one.svg" alt="" >
+                <p>Доставка кур’єром</p>
+             </div>
+          </a>
+          <span>або</span>
+          <a href="#" class="delivery-modal_link btn_delivery" (click)="onClickLink('Самовивіз')">
+             <div>
+                <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/delivery_popup_two.svg" alt="" >
+                <p>Самовивіз</p>
+             </div>
+          </a>
+       </div>
+    </div>
+ </div>
