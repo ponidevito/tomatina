@@ -1,4 +1,8 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from 'src/app/shared/modals/login/login.component';
+import { DeliveryModalComponent } from '../../shared/modals/delivery/delivery-modal/delivery-modal.component';
+
 
 
 @Component({
@@ -7,7 +11,7 @@ import { Component, ElementRef, HostListener } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  constructor(private elRef: ElementRef) {}
+  constructor(private elRef: ElementRef,private dialog: MatDialog) {}
 
   @HostListener('document:click', ['$event'])
     onClick(event: MouseEvent) {
@@ -39,5 +43,17 @@ export class HeaderComponent {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('lockBurger');
   }
+
+   //  open modal login
+   openModalLogin() {
+    this.dialog.open(LoginComponent);
+  }
+
+     //  open modal delivery
+     openModalDelivery() {
+      this.dialog.open(DeliveryModalComponent);
+    }
+
+
 
 }

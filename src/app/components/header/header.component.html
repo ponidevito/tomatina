@@ -3,7 +3,7 @@
         <a href="#" class="btn_delivery">Доставка кур’єром</a> -->
         <!-- <span class="d-none">
             Самовивіз</span>  -->
-        <a href="#" class="header-informer__modal" data-rel="10">Натисніть тут щоб змінити</a>
+        <button type="button" class="header-informer__modal" (click)="openModalDelivery()">Натисніть тут щоб змінити</button>
     </div>
 <header class="header">
     <div class="header__container">
@@ -62,7 +62,7 @@
                             </div>
                     </div>
 
-                    <button class="header__phone-user" >
+                    <button class="header__phone-user" (click)="openModalLogin()">
                         <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/user.svg" >
                         <span>Вхід</span>
                     </button>

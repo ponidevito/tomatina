@@ -1,6 +1,41 @@
 @import "../../../styles.scss";
 
 .footer {
+  // .footer-decor-left {
+  //   &::before {
+  //     content: "";
+  //     background: url(../../../assets/images/footer/footer-decor-left.png);
+  //     background-position: 0 100%;
+  //     display: block;
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     background-repeat: no-repeat;
+  //     background-size: 33% auto;
+  //     pointer-events: none;
+  //     z-index: 3;
+  //   }
+  // }
+  // .footer-decor-right {
+  //   &::before {
+  //     content: "";
+  //     background: url(../../../assets/images/footer/footer-decor-right.png);
+  //     background-position: 100% 100%;
+  //     display: block;
+  //     position: absolute;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     background-repeat: no-repeat;
+  //     background-size: 33% auto;
+  //     pointer-events: none;
+  //     z-index: 3;
+  //   }
+  // }
+
   &__container {
     max-width: 1840px;
     padding: 0px 60px;
@@ -60,9 +95,6 @@
       gap: 20px;
     }
   }
-  &__menu {
-  }
-
   &__box {
     display: flex;
     align-items: flex-start;
@@ -89,16 +121,10 @@
     }
   }
 
-  &__content {
-  }
-
   &__label {
     &:not(:last-child) {
       margin-bottom: 10px;
     }
-  }
-
-  &__text {
   }
 
   &__time {
@@ -148,20 +174,7 @@
 .footer .btn-icon {
   margin-right: 15px;
 }
-.btn-icon-disabled {
-}
-.bg {
-}
-.bg-icon {
-}
-.margin {
-}
 
-.social {
-}
-
-.insta {
-}
 .footer-bottom {
   padding: 40px 0 30px 0;
 
@@ -171,7 +184,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    @include xs{
+    @include xs {
       flex-direction: column;
     }
   }
@@ -196,9 +209,6 @@
       border: 1px solid #ececec;
       border-radius: 5px;
     }
-  }
-
-  &__dev {
   }
 
   &__link {

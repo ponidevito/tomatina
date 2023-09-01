@@ -34,7 +34,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    padding: 0px 15px;
+    padding: 5px 15px;
     margin-left: 20px;
     border-radius: 99px;
     color: #34681d;
@@ -58,7 +58,7 @@
     height: 105px;
     background-color: #fff;
     z-index: 9;
-    top: 51.2px;
+    top: 46.2px;
     left: 0;
     padding: 0px 15px;
     display: flex;
@@ -70,7 +70,7 @@
       min-height: 70px;
     }
     @include xs {
-      top: 84px;
+      top: 76px;
       height: 50px;
       min-height: 50px;
     }

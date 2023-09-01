@@ -1,0 +1,130 @@
+@import "../../../../styles.scss";
+
+.mat-wrapper {
+  width: 600px;
+  position: relative;
+  padding: 20px 60px;
+  overflow: hidden;
+  @include md {
+    max-width: 100%;
+    width: 100%;
+    padding: 20px 40px;
+  }
+  @include sm {
+    padding: 15px 20px;
+  }
+}
+.mat-modal {
+  &__close {
+    margin: 10px 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    svg {
+      transition: 0.35s;
+    }
+    &:hover {
+      svg {
+        fill: #b5d8f7;
+      }
+    }
+  }
+  &__title {
+    color: #252525;
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 1.2em;
+    text-align: center;
+    @include sm {
+      font-size: 20px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 24px 0px 24px;
+    @include sm {
+      padding: 20px 0px 0px 0px;
+    }
+  }
+
+  &__actions {
+    padding: 8px 25px;
+    @include sm {
+      padding: 0px;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    transition: 0.35s;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bold;
+    padding: 16px 24px;
+    border-radius: 10px;
+    color: #ffffff;
+    border: 2px solid #599921;
+    background-color: #599921;
+    &:not(:last-child) {
+      margin-bottom: 30px;
+      @include sm {
+        margin-bottom: 15px;
+      }
+    }
+    &:hover {
+      background-color: transparent;
+      color: #252525;
+    }
+    @include sm {
+      padding: 14px 15px;
+    }
+    @include xs {
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+  &__register {
+    display: inline-flex;
+    margin-left: auto;
+    position: relative;
+    font-weight: 500;
+    transition: 0.35s;
+    color: #6d6d6d;
+    font-size: 16px;
+    cursor: pointer;
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: auto;
+      right: 0;
+      height: 2px;
+      width: 0;
+      background: #6D6D6D;
+      -webkit-transition: all 0.35s ease-out;
+      transition: all 0.35s ease-out;
+    }
+    &:hover {
+      color: #6d6d6d;
+    }
+    &:hover::before {
+      width: 100%;
+      right: auto;
+      left: 0;
+    }
+  }
+}
+
+
