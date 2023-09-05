@@ -1,0 +1,72 @@
+<div class="admin-category category">
+    <div class="category__container">
+        <div class="category__items">
+            <div class="category__actions">
+                <!--  button add action -->
+                <button type="button" class="category__button button-add" (click)="openCategory()">
+                    ДОДАТИ КАТЕГОРІЮ
+                </button>
+                <!-- form category -->
+                <form class="category-form form-category form-admin" [class.active]="showForm"  [formGroup]="categoryForm" (ngSubmit)="addCategory()" >
+                    <div class="form-category__box form-admin__box">
+                        <input type="text" formControlName="name" name="name" class="form-category__input form-admin__input" placeholder="*Назва">
+                        <input type="text"  formControlName="path" name="path" class="form-category__input form-admin__input" placeholder="*Шлях">
+                      </div>
+                      <div class="form-category__file form-admin__file">
+                        <div class="form-category__body form-admin__body">
+                        <!-- <input type="file" class="form-category__fileBtn form-admin__fileBtn" id="file" [disabled]="isUploaded" (change)="upload($event)"> -->
+                        <!-- <div class="animated-progress progress-lightred">
+                            <span data-progress="100" [ngStyle]="{ width: uploadPercent + '%' }"></span>
+                          </div> -->
+                          <!-- <ng-container  *ngIf="isUploaded">
+                            <button type="button" class="form-action__btnDelete btn-delete-image" (click)="deleteImage()">Delete</button>
+                        </ng-container> -->
+                        </div>
+                        <!-- <ng-container *ngIf="isUploaded">
+                            <img [src]="valueByControl('image')" width="265px" height="auto" alt="img">
+                        </ng-container> -->
+                      </div>
+                      <!-- <button type="submit" class="form-category__btnSave button-save" [disabled]="categoryForm.invalid">{{ editStatus ? 'Зберегти' : 'Додати' }}</button> -->
+                </form>
+
+                <!-- table -->
+                <table class="table table-category table-global"> 
+                    <thead>
+                        <tr class="tr-top  table-category__tr-top">
+                        <th>№</th>
+                        <th>Назва</th>
+                        <th>Шлях</th>
+                        <th>Картинка</th>
+                        <th>Дії</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="adminCategory && adminCategory.length > 0">
+                        <ng-container *ngFor="let item of adminCategory;index as i">
+                        <tr >
+                            <td>№ {{i+1}}</td>
+                            <td>{{item.name  | slice:0:15}}
+                                <span *ngIf="item.name && item.name.length > 15">...</span>
+                            </td>
+                            <td>{{item.path  | slice:0:20}}
+                                <span *ngIf="item.path && item.path.length > 20">...</span>
+                            </td>
+                       
+                            <td><img [src]="item.image" alt="img" height="30px"></td>
+                            <td ><div class=" table-category__actions table-global__actions">
+                                 <button type="button" class=" table-category__button table-global__button"  (click)="editCategory(item);openEdit()" >Редагувати</button>
+                                 <button class=" table-category__button table-global__button" (click)="deleteCategory(item)" >Видалити</button>
+                                 </div>
+                            </td>
+                        </tr>
+                    </ng-container> 
+                </ng-container>
+                <ng-container *ngIf="!adminCategory || adminCategory.length === 0">
+                    <div class=" table-category__empty table-global__empty">Немає доданих категорій</div>
+                  </ng-container>
+                    </tbody>
+             </table>
+            </div>
+        </div>
+    </div>
+</div>

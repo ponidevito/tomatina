@@ -1,8 +1,11 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from 'src/app/shared/modals/login/login.component';
-import { DeliveryModalComponent } from '../../shared/modals/delivery/delivery-modal/delivery-modal.component';
+import { DeliveryModalComponent } from '../../shared/modals/delivery-modal/delivery-modal.component';
 import { DataService } from '../../shared/services/dataService/data.service';
+import { ROLE } from 'src/app/shared/constants/role.constant';
+import { AccountService } from 'src/app/shared/services/account/account.service';
+
 
 @Component({
   selector: 'app-header',
@@ -13,7 +16,9 @@ export class HeaderComponent implements OnInit {
   constructor(
     private elRef: ElementRef,
     private dialog: MatDialog,
-    private dataService: DataService
+    private dataService: DataService,
+    private accountService: AccountService,
+
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -25,7 +30,9 @@ export class HeaderComponent implements OnInit {
       this.closeBlock();
     }
   }
-
+  public isLogin = false;
+  public loginUrl = '';
+  public userRole!: string;
   public show = false;
   public layer = false;
 
@@ -44,6 +51,32 @@ export class HeaderComponent implements OnInit {
       this.message = message;
     });
   }
+
+    // This method checks whether the browser's local storage contains a record of the logged-in user.
+    checkUserLogin(): void {
+      const currentUser = JSON.parse(
+        localStorage.getItem('currentUser') as string
+      );
+      const role = JSON.parse(localStorage.getItem('userRole') || '{}');
+      this.userRole = role;
+      if (currentUser && currentUser.role === ROLE.ADMIN) {
+        this.isLogin = true;
+        this.loginUrl = 'admin/category';
+      } else if (currentUser && currentUser.role === ROLE.USER) {
+        this.isLogin = true;
+        this.loginUrl = 'my-cabinet/user';
+      } else {
+        this.isLogin = false;
+        this.loginUrl = '';
+      }
+    }
+  
+    // This method checks the user's status. If the status has changed, the user's record is checked for in the browser's local storage and the isLogin, loginUrl, and loginPage variables are set to the appropriate values.
+    checkUpdatesUserLogin(): void {
+      this.accountService.isUserLogin$.subscribe(() => {
+        this.checkUserLogin();
+      });
+    }
 
   //  close
   closeBlock() {

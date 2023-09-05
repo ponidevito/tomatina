@@ -21,14 +21,12 @@ const MATERIAL = [
 // other modules
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { DeliveryModalComponent } from './modals/delivery/delivery-modal/delivery-modal.component';
 
 
 @NgModule({
   declarations: [
   
   
-    DeliveryModalComponent
   ],
   imports: [
     ...MATERIAL,

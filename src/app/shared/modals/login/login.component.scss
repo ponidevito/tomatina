@@ -74,9 +74,9 @@
     font-weight: bold;
     padding: 16px 24px;
     border-radius: 10px;
-    color: #ffffff;
-    border: 2px solid #599921;
-    background-color: #599921;
+    color: #252525;
+    border: 2px solid #b5d8f7;
+    background-color: #b5d8f7;
     &:not(:last-child) {
       margin-bottom: 30px;
       @include sm {
@@ -85,7 +85,6 @@
     }
     &:hover {
       background-color: transparent;
-      color: #252525;
     }
     @include sm {
       padding: 14px 15px;
@@ -99,9 +98,9 @@
     display: inline-flex;
     margin-left: auto;
     position: relative;
-    font-weight: 500;
+    font-weight: bold;
     transition: 0.35s;
-    color: #6d6d6d;
+    color: #252525;
     font-size: 16px;
     cursor: pointer;
     &::before {
@@ -112,12 +111,12 @@
       right: 0;
       height: 2px;
       width: 0;
-      background: #6D6D6D;
+      background: #b5d8f7;
       -webkit-transition: all 0.35s ease-out;
       transition: all 0.35s ease-out;
     }
     &:hover {
-      color: #6d6d6d;
+      color: #b5d8f7;
     }
     &:hover::before {
       width: 100%;
@@ -126,5 +125,3 @@
     }
   }
 }
-
-
