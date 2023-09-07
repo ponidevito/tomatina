@@ -4,7 +4,7 @@ import { AdminRoutingModule } from '../admin/admin-routing.module';
 import { AdminComponent } from '../admin/admin.component';
 // import { AdminActionsComponent } from '../admin/admin-actions/admin-actions.component';
 import { AdminCategoryComponent } from '../admin/admin-category/admin-category.component';
-// import { AdminGoodsComponent } from '../admin/admin-goods/admin-goods.component';
+import { AdminGoodsComponent } from '../admin/admin-goods/admin-goods.component';
 // import { AdminOrderComponent } from '../admin/admin-order/admin-order.component';
 import { SharedModule } from '../shared/shared.module';
 
@@ -16,7 +16,7 @@ import { SharedModule } from '../shared/shared.module';
     AdminComponent,
     // AdminActionsComponent,
     AdminCategoryComponent,
-    // AdminGoodsComponent,
+    AdminGoodsComponent,
     // AdminOrderComponent
   ],
   imports: [

@@ -283,6 +283,111 @@ body {
   }
 }
 
+// button add item
+.button-add {
+  padding: 20px;
+  min-width: 250px;
+  background-color: #b5d8f7;
+  border-radius: 10px;
+  font-size: 17px;
+  line-height: 1em;
+  color: #252525;
+  font-weight: bold;
+  border: 2px solid transparent;
+  transition: 0.35s;
+  margin-bottom: 40px;
+  &:hover {
+    background-color: transparent;
+    border: 2px solid #b5d8f7;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+  @include lg {
+    padding: 10px 15px;
+    min-width: 150px;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  @include md {
+    display: flex;
+    justify-content: center;
+  }
+  @include xs {
+    width: 100%;
+    min-width: 100%;
+  }
+}
+
+//form
+
+.form-admin {
+  display: none;
+  width: 750px;
+  &.active {
+    display: block;
+  }
+  @include lg {
+    width: 100%;
+  }
+  &__box {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    &:not(:last-child) {
+      margin-bottom: 30px;
+      @include md {
+        margin-bottom: 15px;
+      }
+    }
+    @include md {
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__input {
+    flex: 0 1 50%;
+    padding: 20px 15px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    transition: 0.3s ease;
+    outline: 2px solid transparent;
+    &::placeholder {
+      opacity: 0.7;
+    }
+    &:focus {
+      outline: 2px solid #b5d8f7;
+      border: 1px solid #b5d8f7;
+    }
+    @include md {
+      flex: 1 1 100%;
+      padding: 10px 15px;
+    }
+  }
+
+  &__file {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 0px 15px 20px 15px;
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    @include sm {
+      flex-wrap: wrap;
+    }
+
+  }
+
+  &__fileBtn {
+    @include sm {
+      padding: 10px;
+    }
+  }
+}
+
 .text-center {
   text-align: center !important;
 }
@@ -309,7 +414,133 @@ app-admin-actions {
   }
 }
 
+// animated progress 
+
+.animated-progress {
+  width: 300px;
+  height: 20px;
+  border-radius: 5px;
+  margin: 20px 10px;
+  border: 1px solid rgb(189, 113, 113);
+  overflow: hidden;
+  position: relative;
+  transition: 1s ease;
+  @include lg {
+    width: 20%;
+  }
+}
+
+.animated-progress span {
+  height: 100%;
+  display: block;
+  width: 0;
+  color: rgb(255, 251, 251);
+  line-height: 30px;
+  position: absolute;
+  text-align: center;
+  transition: 0.2s ease;
+}
+.progress-percents {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 100%;
+}
+
+.progress-lightred span {
+  background-color: #ff6161cc;
+}
+
 #toast-container > div {
   opacity: 1;
   background-color: #255a9c;
 }
+
+// button-save
+.button-save {
+  margin-top: 10px;
+  background-color: #b5d8f7;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-size: 17px;
+  line-height: 1em;
+  color: #252525;
+  font-weight: bold;
+  border: 2px solid transparent;
+  transition: 0.35s;
+  &:hover {
+    background-color: transparent;
+    border: 2px solid #b5d8f7;
+  }
+  @include xs {
+    width: 100%;
+  }
+}
+//  btn-delete-image
+.btn-delete-image {
+  margin-left: 20px;
+  background-color: #b5d8f7;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-size: 17px;
+  line-height: 1em;
+  color: #252525;
+  font-weight: bold;
+  border: 2px solid transparent;
+  transition: 0.35s;
+  &:hover {
+    background-color: transparent;
+    border: 2px solid #b5d8f7;
+  }
+}
+
+/* ========   table  ========== */
+.table-global {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  @include sm {
+    flex-direction: unset;
+    justify-content: center;
+  }
+  tbody {
+    @include sm {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+    }
+  }
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__button {
+    display: flex;
+    background-color: transparent;
+    font-weight: 700;
+    color: #90c5f5;
+    transition: 0.3s ease;
+    &:hover {
+      color: #61a6e7;
+    }
+  }
+
+  &__empty {
+    padding: 50px;
+    font-size: 40px;
+    letter-spacing: 1px;
+    @include sm {
+      font-size: 20px;
+      padding: 50px 15px 50px 15px;
+    }
+  }
+}
+
+
+/* ========   table  ========== */

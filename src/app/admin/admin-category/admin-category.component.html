@@ -14,19 +14,19 @@
                       </div>
                       <div class="form-category__file form-admin__file">
                         <div class="form-category__body form-admin__body">
-                        <!-- <input type="file" class="form-category__fileBtn form-admin__fileBtn" id="file" [disabled]="isUploaded" (change)="upload($event)"> -->
-                        <!-- <div class="animated-progress progress-lightred">
+                        <input type="file" class="form-category__fileBtn form-admin__fileBtn" id="file" [disabled]="isUploaded" (change)="upload($event)">
+                        <div class="animated-progress progress-lightred">
                             <span data-progress="100" [ngStyle]="{ width: uploadPercent + '%' }"></span>
-                          </div> -->
-                          <!-- <ng-container  *ngIf="isUploaded">
+                          </div>
+                          <ng-container  *ngIf="isUploaded">
                             <button type="button" class="form-action__btnDelete btn-delete-image" (click)="deleteImage()">Delete</button>
-                        </ng-container> -->
+                        </ng-container>
                         </div>
-                        <!-- <ng-container *ngIf="isUploaded">
+                        <ng-container *ngIf="isUploaded">
                             <img [src]="valueByControl('image')" width="265px" height="auto" alt="img">
-                        </ng-container> -->
+                        </ng-container>
                       </div>
-                      <!-- <button type="submit" class="form-category__btnSave button-save" [disabled]="categoryForm.invalid">{{ editStatus ? 'Зберегти' : 'Додати' }}</button> -->
+                      <button type="submit" class="form-category__btnSave button-save" [disabled]="categoryForm.invalid">{{ editStatus ? 'Зберегти' : 'Додати' }}</button>
                 </form>
 
                 <!-- table -->

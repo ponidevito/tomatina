@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/shared/services/category/category.service';
-// import { ImageService } from 'src/app/shared/services/image/image.service';
+import { ImageService } from 'src/app/shared/services/image/image.service';
 import {
   ICategory,
   ICategoryResponse,
@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AdminCategoryComponent implements OnInit {
   constructor(
     public CategoryService: CategoryService,
-    // private ImageService: ImageService,
+    private ImageService: ImageService,
     private fb: FormBuilder,
     private toastService: ToastrService
   ) {}
@@ -93,27 +93,27 @@ export class AdminCategoryComponent implements OnInit {
   }
 
   // This method uploads an image to the server when the user selects a file in the form.
-  // upload(event: any): void {
-  //   const file = event.target.files[0];
-  //   this.ImageService.uploadFile('images/category', file.name, file)
-  //     .then((data) => {
-  //       this.categoryForm.patchValue({
-  //         image: data,
-  //       });
-  //       this.isUploaded = true;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
+  upload(event: any): void {
+    const file = event.target.files[0];
+    this.ImageService.uploadFile('images/category', file.name, file)
+      .then((data) => {
+        this.categoryForm.patchValue({
+          image: data,
+        });
+        this.isUploaded = true;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-  //   this.ImageService.progress$.subscribe((progress) => {
-  //     this.progress = progress;
-  //   });
+    this.ImageService.progress$.subscribe((progress) => {
+      this.progress = progress;
+    });
 
-  //   this.ImageService.progress$.subscribe((percent) => {
-  //     this.uploadPercent = percent;
-  //   });
-  // }
+    this.ImageService.progress$.subscribe((percent) => {
+      this.uploadPercent = percent;
+    });
+  }
 
   // edit category
   editCategory(action: ICategoryResponse): void {
@@ -128,18 +128,18 @@ export class AdminCategoryComponent implements OnInit {
   }
 
   // delete image from firebase
-  // deleteImage(): void {
-  //   this.ImageService.deleteUploadFile(this.valueByControl('image')).then(
-  //     () => {
-  //       console.log('File deleted');
-  //       this.isUploaded = false;
-  //       this.uploadPercent = 0;
-  //       this.categoryForm.patchValue({
-  //         image: null,
-  //       });
-  //     }
-  //   );
-  // }
+  deleteImage(): void {
+    this.ImageService.deleteUploadFile(this.valueByControl('image')).then(
+      () => {
+        console.log('File deleted');
+        this.isUploaded = false;
+        this.uploadPercent = 0;
+        this.categoryForm.patchValue({
+          image: null,
+        });
+      }
+    );
+  }
 
   // delete category
   deleteCategory(category: ICategoryResponse): void {

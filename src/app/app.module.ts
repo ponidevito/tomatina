@@ -21,6 +21,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { SharedModule } from '../app/shared/shared.module';
+import { ProductsComponent } from './pages/products/products.component';
+import { HealthyMenuComponent } from './pages/healthy-menu/healthy-menu.component';
+import { CapitalizePipe } from './shared/pipes/capitalize/capitalize.pipe';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -28,6 +32,8 @@ import { SharedModule } from '../app/shared/shared.module';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ProductsComponent,
+    HealthyMenuComponent,
 
   ],
   imports: [
@@ -41,12 +47,18 @@ import { SharedModule } from '../app/shared/shared.module';
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
-    HttpClientModule
+    HttpClientModule,
+    
     
 
   ],
+  exports: [
+    CapitalizePipe,
+    HeaderComponent,
+
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

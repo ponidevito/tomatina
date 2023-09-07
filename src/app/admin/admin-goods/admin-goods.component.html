@@ -1,0 +1,93 @@
+<div class="admin-goods goods">
+    <div class="goods__container">
+        <div class="goods__items">
+            <div class="goods__actions">
+                <!--  button add action -->
+                <button type="button" class="goods__button button-add" (click)="openGoods()">
+                    ДОДАТИ ПРОДУКТ
+                </button>
+                <!-- form category -->
+                <form class="goods-form form-goods form-admin" [class.active]="showForm" [formGroup]="goodsForm" (ngSubmit)="addGoods()">
+                    <div class="form-goods__box form-admin__box">
+                        <select formControlName="category"  class="form-select">
+                            <ng-container *ngFor="let category of adminCategories;first as f">
+                            
+                            <option [ngValue]="category" [attr.selected]="category.name === category.name ? true : null">{{category.name}}
+                            </option>
+                        </ng-container>
+                        </select>
+                        <input type="text"  formControlName="name" name="name" class="form-goods__input form-admin__input" placeholder="*Назва">
+                      </div>
+                      <div class="form-goods__box form-admin__box">
+                        <input type="text" formControlName="ingredients" name="ingredients" class="form-goods__input form-admin__input" placeholder="*Інгредієнти">
+                        <input type="number"   formControlName="weight"  name="weight" class="form-goods__input form-admin__input" placeholder="*Вага">
+                        <input type="number" min="1"   formControlName="price" name="price" class="form-goods__input form-admin__input" placeholder="*Ціна">
+                      </div>
+                      <div class="form-goods__file form-admin__file">
+                        <div class="form-goods__body form-admin__body">
+                         <input type="file" class="form-goods__fileBtn form-admin__fileBtn" id="file" [disabled]="isUploaded" (change)="upload($event)"> -->
+                          <div class="animated-progress progress-lightred" >
+                            <span data-progress="100"  [ngStyle]="{ width: uploadPercent + '%' }"></span>
+                          </div> 
+                          <ng-container  *ngIf="isUploaded"> 
+                            <button type="button" class="forgoods__btnDelete btn-delete-image" (click)="deleteImage()">Delete</button> 
+                        </ng-container>
+                    </div>
+                    <ng-container *ngIf="isUploaded">
+                        <img [src]="valueByControl('image')" width="265px" height="auto" alt="img">
+                    </ng-container>
+                        </div>
+                      <button type="submit" class="form-goods__btnSave button-save" [disabled]="goodsForm.invalid">{{ editStatus ? 'Зберегти' : 'Додати' }}</button>
+                 </form> 
+
+
+                <!-- table -->
+                 <table class="table table-goods table-global"> 
+                    <thead>
+                        <tr class="tr-top  table-goods__tr-top">
+                        <th>№</th>
+                        <th>Категорія</th>
+                        <th>Назва</th>
+                        <th>Інгредієнти</th>
+                        <th>Вага</th>
+                        <th>Ціна</th>
+                        <th>Картинка</th>
+                        <th>Дії</th>
+                    </tr>
+                    </thead>
+                     <tbody>
+                        <ng-container *ngIf="adminGoods && adminGoods.length > 0">
+                        <ng-container *ngFor="let item of adminGoods;index as i">
+                        <tr >
+                            <td>№ {{i+1}}</td>
+                            <td>{{item.category.name | slice:0:10}}
+                             <span *ngIf="item.category.name && item.category.name.length > 10">...</span> 
+
+                            </td>
+
+                            <td >{{item.name | capitalize | slice:0:10}}
+                                <span *ngIf="item.name && item.name.length > 10">...</span>
+                            </td>
+                            <td>{{item.ingredients | capitalize | slice:0:12}}
+                                <span *ngIf="item.ingredients && item.ingredients.length > 12">...</span>
+                            </td>
+                            <td>{{item.weight}}</td>
+                            <td>{{item.price}}</td>
+                            <td><img [src]="item.image" alt="img" height="30px"></td>
+                            <td ><div class=" table-goods__actions table-global__actions">
+                                 <button type="button" class=" table-goods__button table-global__button"  (click)="editGoods(item);openEdit()" >Редагувати</button>
+                                 <button class=" table-goods__button table-global__button" (click)="deleteGoods(item)" >Видалити</button>
+                                 </div>
+                            </td>
+                        </tr>
+                    </ng-container> 
+                </ng-container>
+                <ng-container *ngIf="!adminGoods || adminGoods.length === 0">
+                    <div class=" table-goods__empty table-global__empty">Немає доданих категорій</div>
+                  </ng-container>
+                    </tbody> 
+             </table> 
+            </div>
+        </div>
+    </div>
+</div>
