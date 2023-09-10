@@ -25,7 +25,6 @@
     gap: 10px;
     flex-direction: column;
   }
- 
 
   &__modal {
     font-size: 12px;
@@ -234,15 +233,15 @@
     &:hover {
       color: #599921;
     }
-    @media (max-width:1200px) {
+    @media (max-width: 1200px) {
       margin-right: 20px;
     }
-    @include xs{
+    @include xs {
       margin-right: 10px;
       order: 1;
     }
-    span{
-      @include xs{
+    span {
+      @include xs {
         display: none;
       }
     }
@@ -268,13 +267,22 @@
         display: none;
       }
     }
+    &.menu-show {
+      &:hover {
+        .menu__submenu {
+          opacity: 1;
+          visibility: visible;
+          margin-top: 0;
+        }
+      }
+    }
   }
 
   &__link {
     position: relative;
     font-size: 14px;
     font-weight: 500;
-    padding: 42px 0;
+    // padding: 42px 0;
     color: #2d2c2c;
     text-transform: uppercase;
     transition: all 0.3s;
@@ -283,6 +291,70 @@
     }
     @media (max-width: 670px) {
       font-size: 12px;
+    }
+  }
+
+  &__submenu {
+    width: 62%;
+    position: fixed;
+    display: flex;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
+    padding: 10px 9px 10px 10px;
+    margin-top: 30px;
+    top: 156px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f5f5f5;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+  }
+
+  &__submenu-item {
+    position: relative;
+    display: inline-block;
+    width: 16.6%;
+    vertical-align: top;
+    padding: 8px 0;
+    text-align: center;
+    transition: all 0.3s;
+    &:hover {
+      background-color: #fff;
+      .menu__submenu-link {
+        span {
+          color: #599921;
+        }
+      }
+    }
+  }
+
+  &__submenu-link {
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 42px 0;
+    color: #2d2c2c;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    span{
+      font-size: 14px;
+      font-weight: 500;
+      color: #6D6D6D;
+      text-transform: uppercase;
+      transition: all 0.3s;
+    }
+  }
+
+  &__submenu-imgs {
+    position: relative;
+    display: block;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 10px auto;
+    img {
+      width: auto;
+      height: 100%;
     }
   }
 }

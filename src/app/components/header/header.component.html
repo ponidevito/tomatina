@@ -12,8 +12,19 @@
                 <div class="header__menu menu">
                     <nav class="menu__body">
                       <ul class="menu__list">
-                        <li class="menu__item">
+                        <li class="menu__item menu-show">
                           <a href="#" class="menu__link">МЕНЮ</a>
+                          <ul class="menu__submenu">
+                            <li  class="menu__show-submenu menu__submenu-item">
+                                <!-- <a [routerLink]="[ 'category-menu' ]" routerLinkActive="route-active" class="menu__submenu-link"> -->
+                                    <a [routerLink]="[ 'category-menu/souces' ]" routerLinkActive="route-active" class="menu__submenu-link">
+
+                                <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsalmon-salat-boul.webp.pagespeed.ic.julA0vK2aP.webp" alt="">
+                                </div><span>healthy &amp; tasty menu</span>
+                                </a>
+                           </li>
+                          
+                        </ul>
                         </li>
                         <li class="menu__item">
                           <a href="#" class="menu__link">ДОСТАВКА</a>

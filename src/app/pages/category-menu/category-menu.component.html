@@ -1,0 +1,94 @@
+<p>category-menu works!</p>
+<section class="healthy-menu">
+    <div class="healthy-menu__container">
+      <!-- <h1 class="rols__title title" >{{categoryName==='drinks' ? 'Напої' :categoryName==='rolls' ? 'Роли' :categoryName==='seti' ? 'Сети' :categoryName==='souces' ? 'Соуси' : 'Продукти'}}</h1> -->
+      <h1 class="rols__title title" >{{categoryName==='drinks' ? 'Напої' :categoryName==='rolls' ? 'Роли' :categoryName==='seti' ? 'Сети' :categoryName==='souces' ? 'Соуси' : 'Продукти'}}</h1>
+        <div class="categories-menu">
+            <div class="category-title">healthy &amp; tasty menu</div>
+                <ul class="categories-list" itemscope="" itemtype="https://schema.org/ItemList">
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/special-edition/" class="" data-id="82">Special Edition</a></li>
+                    <li class="categories-list-item " [class.active]="categoryName === 'drinks'"><a  [routerLink]="[ '/category-menu', 'drinks' ]" routerLinkActive="route-active">напої</a></li>
+                    <li class="categories-list-item " [class.active]="categoryName === 'souces'"><a  [routerLink]="[ '/category-menu/souces' ]" routerLinkActive="route-active">Соуси</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/snidanky/" class="" data-id="64">Сніданки до 18:00</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/salaty-pasty/" class="" data-id="16">Салати пасти</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/salat-boul/" class="" data-id="76">Салат боули</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/salaty/" class="" data-id="26">Салати</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/fresh-rol/" class="" data-id="77">Фреш-роли</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/supy/" class="" data-id="27">Супи</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/zapikanky/" class="" data-id="75">Запіканки</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/deserty/" class="" data-id="28">Десерти</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/smuzi/" class="" data-id="78">Смузі</a></li>
+                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/napoyi/" class="" data-id="31">Напої</a></li>            
+                </ul>
+        </div>
+         <div class="row product-row filters-row isotop-row">
+         <ng-container *ngFor="let product of  goodsArray">
+            <div class="col-sm-6 col-lg-4 col-xl-3 product__column">
+                
+               <div class="product js-product">
+                  <div class="product_image-wrap">
+                     <a class="product_image">
+                        <img [src]="product.image" [routerLink]="[ '/product/'+product.category.path, product.id ]" alt="">
+                        <ul class="product_labels" *ngIf="categoryName !=='drinks'">
+                           <li class="product_label"  style="background-color: #28af33">Сніданки до 18:00</li>
+                        </ul>
+                     </a>
+                     <!-- <div class="product_top-right">
+                        <button class="fav-btn " data-id="80316"></button>
+                        <div class="info-main">
+                           <button class="info-btn">
+                              <svg width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M4.37587 1.25044C4.37587 1.73365 3.98414 2.12538 3.50092 2.12538C3.01771 2.12538 2.62598 1.73365 2.62598 1.25044C2.62598 0.76722 3.01771 0.375488 3.50092 0.375488C3.98414 0.375488 4.37587 0.76722 4.37587 1.25044Z" fill="#2d7d7d"></path>
+                                 <path d="M3.50092 12.6249C3.13867 12.6249 2.84467 12.3309 2.84467 11.9687V5.1875H1.96973C1.60748 5.1875 1.31348 4.8935 1.31348 4.53125C1.31348 4.169 1.60748 3.875 1.96973 3.875H3.50092C3.86317 3.875 4.15717 4.169 4.15717 4.53125V11.9687C4.15717 12.3309 3.86317 12.6249 3.50092 12.6249Z" fill="#2d7d7d"></path>
+                                 <path d="M5.46875 12.6245H1.53125C1.169 12.6245 0.875 12.3305 0.875 11.9683C0.875 11.606 1.169 11.312 1.53125 11.312H5.46875C5.831 11.312 6.125 11.606 6.125 11.9683C6.125 12.3305 5.831 12.6245 5.46875 12.6245Z" fill="#2d7d7d"></path>
+                              </svg>
+                           </button>
+                           <div class="info-block">
+                              <div class="info-head">Основна страва: <b>772 ккал</b></div>
+                              <div class="info-body">
+                                 <div class="info-item">
+                                    <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/bilki_one.svg" alt="" data-pagespeed-url-hash="4122069232" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                                    <p>Білки – <b>48</b> г;</p>
+                                 </div>
+                                 <div class="info-item">
+                                    <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/jiri.svg" alt="" data-pagespeed-url-hash="3530309680" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                                    <p>Жири – <b>51</b> г;</p>
+                                 </div>
+                                 <div class="info-item">
+                                    <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/vug.svg" alt="" data-pagespeed-url-hash="2395744006" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                                    <p>Вуглеводи – <b>51</b> г;</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>  -->
+                     <!-- <div class="floating_buttons">
+                        <button class="btn btn-grey fast-order" data-id="80316">Швидке замовлення</button>
+                     </div> -->
+                  </div>
+                  <div class="product_title-wrap">
+                     <div class="product_title">
+                        <h2 [routerLink]="[ '/product/'+product.category.path, product.id ]" class="h5 medium">{{product.name | capitalize }}</h2>
+                     </div>
+                     <div class="product_price-wrap">
+                        {{product.price}}грн            
+                     </div>
+                  </div>
+                  <div class="product_desc text style-4">{{product.ingredients}}
+                  </div>
+                   <!-- <div class="product_controls ">
+                     <div class="thumb-input-number">
+                        <button type="button" class="decrement">-</button>
+                        <input value="1" readonly="" class="product-qty" tabindex="-1" max="999">
+                        <button type="button" class="increment">+</button>
+                     </div>
+                     <button class="btn btn-primary order-btn btn-small add-to-cart-btn" data-sku="16903" data-id="80316">Замовити</button>
+                  </div>  -->
+               </div>
+            
+            </div>
+
+         </ng-container>
+         </div>
+    </div>
+</section>

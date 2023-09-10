@@ -21,10 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { SharedModule } from '../app/shared/shared.module';
-import { ProductsComponent } from './pages/products/products.component';
-import { HealthyMenuComponent } from './pages/healthy-menu/healthy-menu.component';
 import { CapitalizePipe } from './shared/pipes/capitalize/capitalize.pipe';
 import { DatePipe } from '@angular/common';
+
 
 
 @NgModule({
@@ -32,8 +31,7 @@ import { DatePipe } from '@angular/common';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ProductsComponent,
-    HealthyMenuComponent,
+  
 
   ],
   imports: [
