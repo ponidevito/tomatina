@@ -12,6 +12,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+
 
 // capitalize
 import { CapitalizePipe } from '../shared/pipes/capitalize/capitalize.pipe';
@@ -29,7 +31,8 @@ const MATERIAL = [
   MatRadioModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatMenuModule
+  MatMenuModule,
+  MatIconModule
   
 ];
 

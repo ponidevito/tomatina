@@ -17,7 +17,7 @@
                           <ul class="menu__submenu">
                             <li  class="menu__show-submenu menu__submenu-item">
                                 <!-- <a [routerLink]="[ 'category-menu' ]" routerLinkActive="route-active" class="menu__submenu-link"> -->
-                                    <a [routerLink]="[ 'category-menu/souces' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/healthy' ]" routerLinkActive="route-active" class="menu__submenu-link">
 
                                 <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsalmon-salat-boul.webp.pagespeed.ic.julA0vK2aP.webp" alt="">
                                 </div><span>healthy &amp; tasty menu</span>
@@ -73,10 +73,17 @@
                             </div>
                     </div>
 
-                    <button class="header__phone-user" (click)="openModalLogin()">
+                    <button class="header__phone-user"  *ngIf="!isLogin" (click)="openModalLogin()">
                         <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/user.svg" >
-                        <span>Вхід</span>
+                        <span >Вхід</span>
                     </button>
+                     <button class="header__phone-user" *ngIf="isLogin">
+                         <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/user.svg" >
+                         <span *ngIf="userRole==='ADMIN'" [routerLink]="[ '/'+loginUrl ]">Адмін</span>
+                         <span *ngIf="userRole==='USER'" [routerLink]="[ '/'+loginUrl ]">{{userName}}</span>
+
+                    </button>
+
                 
                     <div class="burger btn-icon open-menu" (click)="burger()"  id="burger">
                         <svg class="bg menu__icon" width="47" height="45" viewBox="0 0 47 45" fill="none" xmlns="http://www.w3.org/2000/svg">

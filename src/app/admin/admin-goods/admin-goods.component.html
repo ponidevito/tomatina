@@ -20,12 +20,14 @@
                       </div>
                       <div class="form-goods__box form-admin__box">
                         <input type="text" formControlName="ingredients" name="ingredients" class="form-goods__input form-admin__input" placeholder="*Інгредієнти">
-                        <input type="number"   formControlName="weight"  name="weight" class="form-goods__input form-admin__input" placeholder="*Вага">
+                        <input type="number"   formControlName="proteins"  name="proteins" class="form-goods__input form-admin__input" placeholder="*Білки">
+                        <input type="number"   formControlName="fats"  name="fats" class="form-goods__input form-admin__input" placeholder="*Жири">
+                        <input type="number"   formControlName="carbohydrates"  name="carbohydrates" class="form-goods__input form-admin__input" placeholder="*Вуглеводи">
                         <input type="number" min="1"   formControlName="price" name="price" class="form-goods__input form-admin__input" placeholder="*Ціна">
                       </div>
                       <div class="form-goods__file form-admin__file">
                         <div class="form-goods__body form-admin__body">
-                         <input type="file" class="form-goods__fileBtn form-admin__fileBtn" id="file" [disabled]="isUploaded" (change)="upload($event)"> -->
+                         <input type="file" class="form-goods__fileBtn form-admin__fileBtn" id="file" [disabled]="isUploaded" (change)="upload($event)"> 
                           <div class="animated-progress progress-lightred" >
                             <span data-progress="100"  [ngStyle]="{ width: uploadPercent + '%' }"></span>
                           </div> 
@@ -49,7 +51,7 @@
                         <th>Категорія</th>
                         <th>Назва</th>
                         <th>Інгредієнти</th>
-                        <th>Вага</th>
+                        <!-- <th>Вага</th> -->
                         <th>Ціна</th>
                         <th>Картинка</th>
                         <th>Дії</th>
@@ -71,7 +73,7 @@
                             <td>{{item.ingredients | capitalize | slice:0:12}}
                                 <span *ngIf="item.ingredients && item.ingredients.length > 12">...</span>
                             </td>
-                            <td>{{item.weight}}</td>
+                            <!-- <td>{{item.proteins}}</td> -->
                             <td>{{item.price}}</td>
                             <td><img [src]="item.image" alt="img" height="30px"></td>
                             <td ><div class=" table-goods__actions table-global__actions">

@@ -64,6 +64,27 @@ export class CategoryMenuComponent {
       });
   }
 
+
+  proteins: number = 45;
+  fats: number = 48;
+  carbohydrates: number = 33;
+  // Функція для розрахунку калорій
+  // calculateCalories(): number {
+  //    const proteinCalories = this.proteins * 4;
+  //    const fatCalories = this.fats * 9;
+  //   const carbohydrateCalories = this.carbohydrates * 4;
+  //   const totalCalories = proteinCalories + fatCalories + carbohydrateCalories;
+  //    return totalCalories;
+  // }
+
+  calculateCalories(proteins: number, fats: number, carbohydrates: number): number {
+    const proteinCalories = proteins * 4;
+    const fatCalories = fats * 9;
+    const carbohydrateCalories = carbohydrates * 4;
+    const totalCalories = proteinCalories + fatCalories + carbohydrateCalories;
+    return totalCalories;
+  }
+
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
   }

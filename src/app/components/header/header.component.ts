@@ -50,8 +50,11 @@ export class HeaderComponent implements OnInit {
     this.dataService.currentMessage.subscribe((message) => {
       this.message = message;
     });
+    this.checkUserLogin();
+    this.checkUpdatesUserLogin();
   }
 
+  public userName = '';
     // This method checks whether the browser's local storage contains a record of the logged-in user.
     checkUserLogin(): void {
       const currentUser = JSON.parse(
@@ -62,9 +65,11 @@ export class HeaderComponent implements OnInit {
       if (currentUser && currentUser.role === ROLE.ADMIN) {
         this.isLogin = true;
         this.loginUrl = 'admin/category';
+        this.userName=currentUser['firstName']
       } else if (currentUser && currentUser.role === ROLE.USER) {
         this.isLogin = true;
         this.loginUrl = 'my-cabinet/user';
+        this.userName=currentUser['firstName']
       } else {
         this.isLogin = false;
         this.loginUrl = '';
