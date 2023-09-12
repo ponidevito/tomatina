@@ -27,16 +27,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
-
-[class*="__container"] {
-  max-width: 1920px;
-  padding: 0px 15px;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-.decor-left {
+  position: relative;
   &::before {
     content: "";
     background: url(../src/assets/images/footer/footer-decor-left.png);
@@ -52,9 +43,7 @@ body {
     pointer-events: none;
     z-index: 3;
   }
-}
-.decor-right {
-  &::before {
+  &::after {
     content: "";
     background: url(../src/assets/images/footer/footer-decor-right.png);
     background-position: 100% 100%;
@@ -70,6 +59,15 @@ body {
     z-index: 3;
   }
 }
+
+[class*="__container"] {
+  max-width: 1920px;
+  padding: 0px 15px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+
 
 .btn {
   display: inline-block;
@@ -544,3 +542,47 @@ app-admin-actions {
 
 
 /* ========   table  ========== */
+
+//  breadcumb
+.breadcrumb {
+  &__list {
+    padding: 0px 15px;
+    position: absolute;
+    top: 0px;
+    // left: 0;
+    display: flex;
+    list-style-type: none;
+    font-size: 12px;
+    line-height: 13px;
+    left: -25px;
+    margin-bottom: 50px;
+    @include lg {
+      top: -30px;
+    }
+  }
+
+  &__item {
+    &:not(:last-child) {
+      &::after {
+        content: "";
+        position: relative;
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #5a5a5a;
+        margin: 0 10px 2px;
+      }
+    }
+  }
+
+  &__link {
+    color: #5a5a5a;
+    transition: 0.35s;
+    &:hover {
+      color: #000;
+    }
+  }
+}
+
+

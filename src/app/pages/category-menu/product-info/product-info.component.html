@@ -1,0 +1,43 @@
+<section class="product-info">
+    <div class="product-info__container">
+        <ngx-spinner 
+        color = "#fff" type="ball-fall" [fullScreen] = "true"><p style="color: white" > Loading... </p>
+      </ngx-spinner>
+        <!-- breadcrump -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb__list">
+              <li class="breadcrumb__item" *ngFor="let item of breadcrumbItems; let last = last" [class.active]="last">
+                <a class="breadcrumb__link" *ngIf="!last" [routerLink]="item.path">{{ item.label }}</a>
+                <span *ngIf="last">{{ product.name | capitalize }}</span>
+              </li>
+            </ol>
+          </nav>
+        <div class="product-info__items">
+            <div class="product-info__item">
+                <div class="product-info__picture">
+                    <img  [src]="product.image"  alt="img" class="product-info__image">
+                </div>
+            </div>
+            
+            <div class="product-info__item">
+                <div class="product-info__content">
+                    <h2 class="product-info__title">{{product.name | capitalize}}</h2>
+                    <div class="product-info__ingredients" ><span>Склад: </span>{{product.ingredients | capitalize}}</div>
+                    <!-- <div class="product-info__weight"  ><span>Вага: </span>{{product.category.path === 'drinks' ? product.weight + ' л' : product.category.path === 'souces' ? product.weight + ' мл' : product.weight + ' г'}}
+                    </div> -->
+                    <div class="product-info__order">
+                            <!-- <div class="product-info__price">{{product.price * product.count}}<span> грн</span> 
+                        </div> -->
+                        <!-- <div class="number-input input-number">
+                            <button  (click)="productCount(product, false)" class="input-number__button input-number__minus" type="button">-</button>
+                            <input type="number" class="input-number__inputNumber" min="1" [value]="product.count || 1" readonly>
+                            <button (click)="productCount(product ,true)" class="input-number__button input-number__plus" type="button">+</button>
+                          </div>  -->
+                        <!-- <a  class="product-info__btn  row-sushi__order" (click)="addToBasket(product)">ЗАМОВИТИ</a> -->
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section> 

@@ -1,0 +1,41 @@
+@import "../../../../styles.scss";
+
+.product-info {
+  padding: 50px 0px 80px;
+  &__container {
+    position: relative;
+  }
+
+  &__items {
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    padding-top: 50px;
+  }
+
+  &__item {
+    flex: 0 1 50%;
+  }
+
+  &__picture {
+    text-align: center;
+  }
+
+  &__content {
+  }
+
+  &__title {
+  }
+
+  &__ingredients {
+  }
+
+  &__order {
+  }
+  &__image {
+    width: 500px;
+  }
+}

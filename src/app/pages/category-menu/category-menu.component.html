@@ -4,7 +4,7 @@
         <div class="categories-menu">
             <div class="category-title">healthy &amp; tasty menu</div>
                 <ul class="categories-list" itemscope="" itemtype="https://schema.org/ItemList">
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/special-edition/" >Special Edition</a></li>
+                    <li class="categories-list-item  " ><a href="https://www.tomatina.ua/product-category/special-edition/" >Special Edition</a></li>
                     <li class="categories-list-item " [class.active]="categoryName === 'healthy'"><a  [routerLink]="[ '/category-menu/healthy' ]" routerLinkActive="route-active">healthy & tasty menu</a></li>
                     <li class="categories-list-item " [class.active]="categoryName === 'souces'"><a  [routerLink]="[ '/category-menu/souces' ]" routerLinkActive="route-active">Комбо меню</a></li>
                     <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/snidanky/" class="" data-id="64">Сніданки до 18:00</a></li>
@@ -16,7 +16,7 @@
                     <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/zapikanky/" class="" data-id="75">Запіканки</a></li>
                     <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/deserty/" class="" data-id="28">Десерти</a></li>
                     <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/smuzi/" class="" data-id="78">Смузі</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a [class.active]="categoryName === 'drinks'" [routerLink]="[ '/category-menu', 'drinks' ]">Напої</a></li>            
+                    <li class="categories-list-item  " [class.active]="categoryName === 'drinks'"><a [routerLink]="[ '/category-menu/drinks' ]">Напої</a></li>            
                 </ul>
         </div>
          <div class="row product-row filters-row isotop-row">
@@ -26,7 +26,7 @@
                <div class="product js-product">
                   <div class="product_image-wrap">
                      <a class="product_image">
-                        <img [src]="product.image" [routerLink]="[ '/product/'+product.category.path, product.id ]" alt="">
+                        <img [src]="product.image" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]" alt="">
                         <ul class="product_labels" *ngIf="categoryName !=='drinks'">
                            <li class="product_label"  style="background-color: #28af33">Сніданки до 18:00</li>
                         </ul>
@@ -60,28 +60,30 @@
                            </div>
                         </div>
                      </div> 
-                     <!-- <div class="floating_buttons">
+                     <div class="floating_buttons">
                         <button class="btn btn-grey fast-order">Швидке замовлення</button>
-                     </div> -->
+                     </div>
                   </div>
                   <div class="product_title-wrap">
                      <div class="product_title">
-                        <h2 [routerLink]="[ '/product/'+product.category.path, product.id ]" class="h5 medium">{{product.name | capitalize }}</h2>
+                        <a [routerLink]="[ '/product/'+product.category.path, product.id ]" class="h5 medium">{{product.name | capitalize }}</a>
                      </div>
                      <div class="product_price-wrap">
                         {{product.price}}грн            
                      </div>
                   </div>
-                  <div class="product_desc text style-4">{{product.ingredients}}
+                  <div class="product_desc text style-4">{{product.ingredients | slice:0:120}}
+                     <span *ngIf="product.ingredients && product.ingredients.length > 120">...</span>
+
                   </div>
-                   <!-- <div class="product_controls ">
+                   <div class="product_controls ">
                      <div class="thumb-input-number">
                         <button type="button" class="decrement">-</button>
                         <input value="1" readonly="" class="product-qty" tabindex="-1" max="999">
                         <button type="button" class="increment">+</button>
                      </div>
                      <button class="btn btn-primary order-btn btn-small add-to-cart-btn" data-sku="16903" data-id="80316">Замовити</button>
-                  </div>  -->
+                  </div> 
                </div>
             
             </div>
