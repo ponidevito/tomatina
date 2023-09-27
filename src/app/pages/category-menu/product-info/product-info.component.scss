@@ -9,6 +9,7 @@
   &__items {
     display: -webkit-box;
     display: flex;
+    justify-content: center;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-right: -15px;
@@ -17,25 +18,114 @@
   }
 
   &__item {
-    flex: 0 1 50%;
+    flex: 0 1 40%;
+    &.item-right {
+      flex: 0 1 40%;
+      padding: 0 100px 0 30px;
+    }
   }
 
   &__picture {
-    text-align: center;
+    text-align: right;
   }
 
   &__content {
   }
 
   &__title {
+    font-size: 42px;
+    line-height: 1.2em;
+    font-weight: 700;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__weight {
+    font-size: 16px;
+    line-height: 1;
+    padding: 5px;
+    border: 1px solid #ececec;
+    margin-top: 5px;
+    display: inline-block;
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
   }
 
   &__ingredients {
+    line-height: 1.6em;
+    color: #6d6d6d;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__variations {
+    span {
+      color: #6d6d6d;
+    }
+    b {
+      font-weight: 500;
+      margin: 0 5px;
+    }
   }
 
   &__order {
   }
   &__image {
     width: 500px;
+  }
+}
+
+.info-block {
+  position: relative;
+  display: block;
+  width: 100%;
+  opacity: 1;
+  top: auto;
+  left: auto;
+  right: auto;
+  margin: 30px 0;
+  padding: 20px 30px;
+  transform: none;
+  visibility: visible;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+.info-head {
+  font-size: 14px;
+  margin: 0px 0 10px 0;
+  b {
+    font-weight: 500;
+    margin: 0 5px;
+  }
+}
+.info-body {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+}
+.info-item {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 10px;
+  p {
+    font-size: 14px;
+    color: #6d6d6d;
+  }
+  b{
+    color: #2D2C2C;
+    font-weight: 500;
   }
 }

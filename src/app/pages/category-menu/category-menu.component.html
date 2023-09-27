@@ -4,18 +4,18 @@
         <div class="categories-menu">
             <div class="category-title">healthy &amp; tasty menu</div>
                 <ul class="categories-list" itemscope="" itemtype="https://schema.org/ItemList">
-                    <li class="categories-list-item  " ><a href="https://www.tomatina.ua/product-category/special-edition/" >Special Edition</a></li>
+                    <li class="categories-list-item " [class.active]="categoryName === 'special-edition'"><a [routerLink]="[ '/category-menu/special-edition' ]" >Special Edition</a></li>
                     <li class="categories-list-item " [class.active]="categoryName === 'healthy'"><a  [routerLink]="[ '/category-menu/healthy' ]" routerLinkActive="route-active">healthy & tasty menu</a></li>
-                    <li class="categories-list-item " [class.active]="categoryName === 'souces'"><a  [routerLink]="[ '/category-menu/souces' ]" routerLinkActive="route-active">Комбо меню</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/snidanky/" class="" data-id="64">Сніданки до 18:00</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/salaty-pasty/" class="" data-id="16">Салати пасти</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/salat-boul/" class="" data-id="76">Салат боули</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/salaty/" class="" data-id="26">Салати</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/fresh-rol/" class="" data-id="77">Фреш-роли</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/supy/" class="" data-id="27">Супи</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/zapikanky/" class="" data-id="75">Запіканки</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/deserty/" class="" data-id="28">Десерти</a></li>
-                    <li class="categories-list-item  " itemprop="itemListElement"><a href="https://www.tomatina.ua/product-category/smuzi/" class="" data-id="78">Смузі</a></li>
+                    <li class="categories-list-item " [class.active]="categoryName === 'combo'"><a  [routerLink]="[ '/category-menu/combo' ]" routerLinkActive="route-active">Комбо меню</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'snidanky'"><a [routerLink]="[ '/category-menu/snidanky' ]">Сніданки до 18:00</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'salaty-pasty'"><a [routerLink]="[ '/category-menu/salaty-pasty' ]">Салати пасти</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'salat-boul'"><a [routerLink]="[ '/category-menu/salat-boul' ]">Салат боули</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'salaty'"><a [routerLink]="[ '/category-menu/salaty' ]">Салати</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'fresh-rol'"><a [routerLink]="[ '/category-menu/fresh-rol' ]">Фреш-роли</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'supy'"><a [routerLink]="[ '/category-menu/supy' ]">Супи</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'zapikanky'"><a [routerLink]="[ '/category-menu/zapikanky' ]">Запіканки</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'deserty'"><a [routerLink]="[ '/category-menu/deserty' ]">Десерти</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'smuzi'"><a [routerLink]="[ '/category-menu/smuzi' ]">Смузі</a></li>
                     <li class="categories-list-item  " [class.active]="categoryName === 'drinks'"><a [routerLink]="[ '/category-menu/drinks' ]">Напої</a></li>            
                 </ul>
         </div>
@@ -26,12 +26,12 @@
                <div class="product js-product">
                   <div class="product_image-wrap">
                      <a class="product_image">
-                        <img [src]="product.image" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]" alt="">
-                        <ul class="product_labels" *ngIf="categoryName !=='drinks'">
+                        <img [src]="product.image" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]" alt="img">
+                        <ul class="product_labels" *ngIf="categoryName !=='drinks' && categoryName !=='special-edition'">
                            <li class="product_label"  style="background-color: #28af33">Сніданки до 18:00</li>
                         </ul>
                      </a>
-                      <div class="product_top-right">
+                      <div class="product_top-right" *ngIf="categoryName !=='special-edition'">
                         <button class="fav-btn " data-id="80316"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="19" fill="none"><path d="M11.04 18.79c-.3 0-.59-.109-.816-.307a246.673 246.673 0 00-2.402-2.065l-.003-.004c-2.128-1.813-3.965-3.379-5.244-4.921C1.146 9.768.48 8.133.48 6.347c0-1.735.596-3.336 1.676-4.508A5.68 5.68 0 016.38 0C7.6 0 8.716.385 9.7 1.145c.496.384.945.854 1.341 1.401a6.793 6.793 0 011.342-1.4A5.312 5.312 0 0115.701 0a5.68 5.68 0 014.224 1.839C21.005 3.01 21.6 4.612 21.6 6.347c0 1.786-.665 3.421-2.094 5.146-1.279 1.542-3.116 3.108-5.243 4.921-.727.62-1.551 1.322-2.406 2.07a1.24 1.24 0 01-.817.306zM6.38 1.237a4.456 4.456 0 00-3.315 1.44c-.869.943-1.348 2.246-1.348 3.67 0 1.502.559 2.846 1.81 4.356 1.21 1.46 3.01 2.994 5.094 4.77l.004.003c.728.621 1.554 1.325 2.414 2.076.864-.753 1.691-1.458 2.421-2.08 2.084-1.775 3.883-3.309 5.093-4.769 1.252-1.51 1.81-2.854 1.81-4.356 0-1.424-.478-2.727-1.348-3.67a4.455 4.455 0 00-3.315-1.44c-.938 0-1.8.299-2.561.887-.678.525-1.15 1.188-1.428 1.652a.775.775 0 01-.67.381.775.775 0 01-.671-.381c-.277-.464-.75-1.127-1.428-1.652a4.103 4.103 0 00-2.562-.887z" fill="#DB2526"/></svg></button>
                         <div class="info-main">
                            <button class="info-btn">
@@ -42,7 +42,8 @@
                               </svg>
                            </button>
                            <div class="info-block">
-                              <div class="info-head">Основна страва: <b>{{ calculateCalories(product.proteins, product.fats, product.carbohydrates) }}</b></div>
+                              <div class="info-head">Основна страва:   <b> {{ (product.proteins !== undefined && product.fats !== undefined && product.carbohydrates !== undefined) ? calculateCalories(product.proteins, product.fats, product.carbohydrates) : '' }} </b>
+                              </div>
                               <div class="info-body">
                                  <div class="info-item">
                                     <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/bilki_one.svg" alt="icon" >

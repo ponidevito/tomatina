@@ -281,7 +281,8 @@
   &__link {
     position: relative;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
+    background: transparent;
     // padding: 42px 0;
     color: #2d2c2c;
     text-transform: uppercase;
@@ -298,6 +299,7 @@
     width: 62%;
     position: fixed;
     display: flex;
+    flex-wrap: wrap;
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
     padding: 10px 9px 10px 10px;
     margin-top: 30px;

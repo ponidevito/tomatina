@@ -4,9 +4,11 @@ export interface IGoodsRequest {
   category: ICategoryResponse;
   name: string;
   ingredients: string;
-  proteins: number;
-  fats:number;
-  carbohydrates:number;
+  addInfo?: string;
+  proteins?: number;
+  fats?:number;
+  carbohydrates?:number;
+  weight?:number;
   price: number;
   image: string;
   count: number;

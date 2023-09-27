@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GoodsService } from '../../../shared/services/goods/goods.service';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 
 
@@ -19,10 +20,13 @@ export class ProductInfoComponent implements OnInit {
     // private spinnerService: NgxSpinnerService
   ) {}
 
+  
+
   public product: IGoodsResponse = {
     id: '',
     name: '',
     ingredients: '',
+    addInfo:'',
     category: {
       id: '',
       name: '',
@@ -33,9 +37,13 @@ export class ProductInfoComponent implements OnInit {
     proteins: 0,
     fats:0,
     carbohydrates:0,
+    weight:0,
     image: '',
     count: 1,
   };
+
+  public categoryName!: string;
+
 
     // breadcrumb
     public category!: string;
@@ -48,6 +56,7 @@ export class ProductInfoComponent implements OnInit {
     ngOnInit(): void {
       // this.spinnerService.show(); // show spinner
       this.loadGoods();
+      this.loadGoodsCategory();
     }
 
     loadGoods(): void {
@@ -67,6 +76,26 @@ export class ProductInfoComponent implements OnInit {
       });
     }
 
+
+    public goodsArray: Array<IGoodsResponse> = [];
+
+    loadGoodsCategory(): void {
+      this.activatedRoute.params
+        .pipe(
+          switchMap((params) => {
+            this.categoryName = params['category'];
+            return this.goodsService.getAllByCategoryFirebase(this.categoryName);
+          })
+        )
+        .subscribe((data) => {
+          this.goodsArray = data as IGoodsResponse[];
+          // this.selectFilter('Соуси');
+          // this.spinnerService.hide();
+        });
+    }
+
+
+
     getCategoryLabel(): string {
       if (this.category === 'healthy') {
         return 'healthy';
@@ -79,6 +108,14 @@ export class ProductInfoComponent implements OnInit {
       } else {
         return '';
       }
+    }
+
+    calculateCalories(proteins: number, fats: number, carbohydrates: number): number {
+      const proteinCalories = proteins * 4;
+      const fatCalories = fats * 9;
+      const carbohydrateCalories = carbohydrates * 4;
+      const totalCalories = proteinCalories + fatCalories + carbohydrateCalories;
+      return totalCalories;
     }
 
 }

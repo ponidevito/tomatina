@@ -13,18 +13,42 @@
             </ol>
           </nav>
         <div class="product-info__items">
+          <ng-container></ng-container>
+          
             <div class="product-info__item">
                 <div class="product-info__picture">
                     <img  [src]="product.image"  alt="img" class="product-info__image">
                 </div>
             </div>
             
-            <div class="product-info__item">
+            <div class="product-info__item item-right" >
                 <div class="product-info__content">
+                    <div class="product-info__weight">{{ product.weight }} г</div>
                     <h2 class="product-info__title">{{product.name | capitalize}}</h2>
-                    <div class="product-info__ingredients" ><span>Склад: </span>{{product.ingredients | capitalize}}</div>
+                    <div class="product-info__ingredients" >{{ product.ingredients ? (product.ingredients | capitalize) : ''}}</div>
+                    <div class="product-info__ingredients" >*{{ product.addInfo ? (product.addInfo | capitalize) : '' }}</div>
+                    <div class="product-info__variations"><span>Харчова цінність:</span>  <b> {{ (product.proteins !== undefined && product.fats !== undefined && product.carbohydrates !== undefined) ? calculateCalories(product.proteins, product.fats, product.carbohydrates) : '' }} </b>
+                      <span>ккал</span></div>
                     <!-- <div class="product-info__weight"  ><span>Вага: </span>{{product.category.path === 'drinks' ? product.weight + ' л' : product.category.path === 'souces' ? product.weight + ' мл' : product.weight + ' г'}}
                     </div> -->
+                    <div class="info-block" *ngIf="categoryName !=='special-edition'">
+                      <div class="info-head">Харчова цінність страви:   <b> {{ (product.proteins !== undefined && product.fats !== undefined && product.carbohydrates !== undefined) ? calculateCalories(product.proteins, product.fats, product.carbohydrates) : '' }} </b>
+                      </div>
+                      <div class="info-body">
+                         <div class="info-item">
+                            <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/bilki_one.svg" alt="icon" >
+                            <p>Білки – <b> {{product.proteins}} </b> г;</p>
+                         </div>
+                         <div class="info-item">
+                            <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/jiri.svg" alt="icon" >
+                            <p>Жири – <b> {{product.fats}} </b> г;</p>
+                         </div>
+                         <div class="info-item">
+                            <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/vug.svg" alt="icon" >
+                            <p>Вуглеводи – <b> {{product.carbohydrates}} </b> г;</p>
+                         </div>
+                      </div>
+                   </div>
                     <div class="product-info__order">
                             <!-- <div class="product-info__price">{{product.price * product.count}}<span> грн</span> 
                         </div> -->
@@ -37,6 +61,7 @@
                     </div>
                 </div>
             </div>
+            
             
         </div>
     </div>
