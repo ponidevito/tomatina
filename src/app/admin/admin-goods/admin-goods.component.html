@@ -9,13 +9,15 @@
                 <!-- form category -->
                 <form class="goods-form form-goods form-admin" [class.active]="showForm" [formGroup]="goodsForm" (ngSubmit)="addGoods()">
                     <div class="form-goods__box form-admin__box">
-                        <select formControlName="category"  class="form-select">
-                            <ng-container *ngFor="let category of adminCategories;first as f">
-                            
-                            <option [ngValue]="category" [attr.selected]="category.name === category.name ? true : null">{{category.name}}
-                            </option>
-                        </ng-container>
-                        </select>
+                        
+
+                        <select formControlName="category" class="form-select" *ngIf="adminCategories && adminCategories.length > 0">
+                            <option disabled selected value="">Виберіть категорію</option>
+                            <ng-container *ngFor="let category of adminCategories">
+                              <option [ngValue]="category">{{category.name}}</option>
+                            </ng-container>
+                          </select>
+
                         <input type="text"  formControlName="name" name="name" class="form-goods__input form-admin__input" placeholder="*Назва">
                       </div>
                       <div class="form-goods__box form-admin__box">

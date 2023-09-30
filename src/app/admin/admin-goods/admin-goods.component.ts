@@ -20,7 +20,11 @@ export class AdminGoodsComponent implements OnInit {
     private ImageService: ImageService,
     private categoryService: CategoryService,
     private toastService: ToastrService
-  ) {}
+  ) {
+    this.goodsForm = this.fb.group({
+      category: [''] // Початкове значення поля "category"
+    });
+  }
 
   // FormGroup
   public goodsForm!: FormGroup;
@@ -45,7 +49,7 @@ export class AdminGoodsComponent implements OnInit {
   // This code initializes a form in Angular using FormBuilder. It creates a group of form elements with fields for "category", "name","ingredients","weight","price" and "image" .
   initGoodsForm(): void {
     this.goodsForm = this.fb.group({
-      category: [null, Validators.required],
+      category: ['', Validators.required],
       name: [null, Validators.required],
       ingredients: [null],
       addInfo: [null],
@@ -63,6 +67,7 @@ export class AdminGoodsComponent implements OnInit {
     this.loadCategories();
     this.initGoodsForm();
     this.loadGoods();
+
   }
 
   // open button add goods (toggle)
@@ -83,7 +88,7 @@ export class AdminGoodsComponent implements OnInit {
       this.adminCategories = data as ICategoryResponse[];
       if (this.adminCategories.length > 0) {
         this.goodsForm.patchValue({
-          category: this.adminCategories[0].id,
+          category: this.adminCategories[0],
         });
       }
     });
