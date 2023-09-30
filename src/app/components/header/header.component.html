@@ -156,11 +156,11 @@
                     </div>
 
                     <button class="header__phone-user"  *ngIf="!isLogin" (click)="openModalLogin()">
-                        <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/user.svg" >
-                        <span >Вхід</span>
+                        <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/user.svg">
+                        <span>Вхід</span>
                     </button>
                      <button class="header__phone-user" *ngIf="isLogin">
-                         <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/user.svg" >
+                         <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/user.svg" *ngIf="userRole==='ADMIN'" [routerLink]="[ '/'+loginUrl ]">
                          <span *ngIf="userRole==='ADMIN'" [routerLink]="[ '/'+loginUrl ]">Адмін</span>
                          <span *ngIf="userRole==='USER'" [routerLink]="[ '/'+loginUrl ]">{{userName}}</span>
 

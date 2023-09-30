@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: unset;
     justify-content: space-between;
-    gap: 30px;
+    gap: 10px;
     margin-top: 0px;
   }
   @include sm {
@@ -36,7 +36,7 @@
         100px
       )
       minmax(auto, 100px);
-    border-bottom: 2px solid #b5d8f7;
+    border-bottom: 2px solid #599921;
    
     @media (max-width: 1200px) {
       grid-template-columns:
@@ -69,7 +69,7 @@ tr {
     )
     minmax(auto, 100px);
   gap: 30px;
-  border-bottom: 2px solid lightgray;
+  // border-bottom: 2px solid lightgray;
   padding: 25px 0px;
   align-items: center;
 
@@ -98,7 +98,7 @@ tr {
     flex-direction: column;
     gap: 20px;
     border-bottom: unset;
-    min-width: 160px;
+    min-width: 140px;
   }
 }
 

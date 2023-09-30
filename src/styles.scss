@@ -67,8 +67,6 @@ body {
   box-sizing: border-box;
 }
 
-
-
 .btn {
   display: inline-block;
   vertical-align: bottom;
@@ -285,18 +283,19 @@ body {
 .button-add {
   padding: 20px;
   min-width: 250px;
-  background-color: #b5d8f7;
+  background-color: #599921;
   border-radius: 10px;
   font-size: 17px;
   line-height: 1em;
-  color: #252525;
+  color: #fff;
   font-weight: bold;
   border: 2px solid transparent;
   transition: 0.35s;
   margin-bottom: 40px;
   &:hover {
     background-color: transparent;
-    border: 2px solid #b5d8f7;
+    border: 2px solid #599921;
+    color: #000;
   }
   &:active {
     transform: translateY(2px);
@@ -376,7 +375,6 @@ body {
     @include sm {
       flex-wrap: wrap;
     }
-
   }
 
   &__fileBtn {
@@ -401,7 +399,7 @@ body {
     padding: 115px 0px 0px 0px;
   }
   @include sm {
-    padding: 77px 0px 0px 0px;
+    // padding: 77px 0px 0px 0px;
   }
 }
 
@@ -412,7 +410,13 @@ app-admin-actions {
   }
 }
 
-// animated progress 
+app-admin-goods {
+  @include md {
+    width: 100%;
+  }
+}
+
+// animated progress
 
 .animated-progress {
   width: 300px;
@@ -460,18 +464,19 @@ app-admin-actions {
 // button-save
 .button-save {
   margin-top: 10px;
-  background-color: #b5d8f7;
+  background-color: #599921;
   padding: 10px 25px;
   border-radius: 10px;
   font-size: 17px;
   line-height: 1em;
-  color: #252525;
+  color: #fff;
   font-weight: bold;
   border: 2px solid transparent;
   transition: 0.35s;
   &:hover {
     background-color: transparent;
-    border: 2px solid #b5d8f7;
+    border: 2px solid #599921;
+    color: #000;
   }
   @include xs {
     width: 100%;
@@ -480,18 +485,19 @@ app-admin-actions {
 //  btn-delete-image
 .btn-delete-image {
   margin-left: 20px;
-  background-color: #b5d8f7;
+  background-color: #599921;
   padding: 10px 25px;
   border-radius: 10px;
   font-size: 17px;
   line-height: 1em;
-  color: #252525;
+  color: #fff;
   font-weight: bold;
   border: 2px solid transparent;
   transition: 0.35s;
   &:hover {
     background-color: transparent;
-    border: 2px solid #b5d8f7;
+    border: 2px solid #599921;
+    color: #000;
   }
 }
 
@@ -522,10 +528,10 @@ app-admin-actions {
     display: flex;
     background-color: transparent;
     font-weight: 700;
-    color: #90c5f5;
+    color: #599921;
     transition: 0.3s ease;
     &:hover {
-      color: #61a6e7;
+      color: #599921ae;
     }
   }
 
@@ -539,7 +545,6 @@ app-admin-actions {
     }
   }
 }
-
 
 /* ========   table  ========== */
 
@@ -584,5 +589,3 @@ app-admin-actions {
     }
   }
 }
-
-
