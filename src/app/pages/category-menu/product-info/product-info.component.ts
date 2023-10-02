@@ -3,6 +3,7 @@ import { GoodsService } from '../../../shared/services/goods/goods.service';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { OrderService } from 'src/app/shared/services/order/order.service';
 
 @Component({
   selector: 'app-product-info',
@@ -13,7 +14,8 @@ export class ProductInfoComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     // private orderService: OrderService,
-    private goodsService: GoodsService // private spinnerService: NgxSpinnerService
+    private goodsService: GoodsService,
+    public orderService: OrderService
   ) {}
 
   public product: IGoodsResponse = {
@@ -48,6 +50,8 @@ export class ProductInfoComponent implements OnInit {
 
   ngOnInit(): void {
     // this.spinnerService.show(); // show spinner
+    this.orderService.loadBasket();
+    this.orderService.updateBasket();
     this.loadGoods();
     this.loadGoodsCategory();
   }
@@ -121,6 +125,20 @@ export class ProductInfoComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  // method count products
+  productCount(product: IGoodsResponse, value: boolean): void {
+    if (value) {
+      ++product.count;
+    } else if (!value && product.count > 1) {
+      --product.count;
+    }
+  }
+
+  // add to basket
+  addToBasket(product: IGoodsResponse): void {
+    this.orderService.addToBasket(product);
   }
 
   calculateCalories(

@@ -79,11 +79,11 @@
                   </div>
                    <div class="product_controls ">
                      <div class="thumb-input-number">
-                        <button type="button" class="decrement">-</button>
-                        <input value="1" readonly="" class="product-qty" tabindex="-1" max="999">
-                        <button type="button" class="increment">+</button>
+                        <button type="button" class="decrement" (click)="productCount(product, false)">-</button>
+                        <input [value]="product.count" readonly="" class="product-qty" tabindex="-1" max="999">
+                        <button type="button" class="increment" (click)="productCount(product, true)">+</button>
                      </div>
-                     <button class="btn btn-primary order-btn btn-small add-to-cart-btn" data-sku="16903" data-id="80316">Замовити</button>
+                     <button class="btn btn-primary order-btn btn-small add-to-cart-btn" (click)="addToBasket(product)">Замовити</button>
                   </div> 
                </div>
             

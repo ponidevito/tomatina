@@ -12,9 +12,7 @@
               </li>
             </ol>
           </nav>
-        <div class="product-info__items">
-          <ng-container></ng-container>
-          
+        <div class="product-info__items">          
             <div class="product-info__item">
                 <div class="product-info__picture">
                     <img  [src]="product.image"  alt="img" class="product-info__image">
@@ -49,16 +47,14 @@
                          </div>
                       </div>
                    </div>
-                    <div class="product-info__order">
-                            <!-- <div class="product-info__price">{{product.price * product.count}}<span> грн</span> 
-                        </div> -->
-                        <!-- <div class="number-input input-number">
-                            <button  (click)="productCount(product, false)" class="input-number__button input-number__minus" type="button">-</button>
-                            <input type="number" class="input-number__inputNumber" min="1" [value]="product.count || 1" readonly>
-                            <button (click)="productCount(product ,true)" class="input-number__button input-number__plus" type="button">+</button>
-                          </div>  -->
-                        <!-- <a  class="product-info__btn  row-sushi__order" (click)="addToBasket(product)">ЗАМОВИТИ</a> -->
-                    </div>
+                   <div class="product_detail-controls">
+                    <div class="thumb-input-number"> 
+                      <button type="button" class="decrement" (click)="productCount(product, false)">-</button> 
+                      <input class="product-qty" [value]="product.count" readonly="" class="product-qty" tabindex="-1" max="999"> 
+                      <button type="button" class="increment" (click)="productCount(product, true)">+</button>
+                    </div><div class="product_price-wrap"><div class="product_price" itemprop="price"><b class="price">{{product.price * product.count}}</b> грн</div></div>
+                  </div>
+                  <div class="product-detail-btns "> <button class="btn btn-primary order-btn add-to-cart-btn" (click)="addToBasket(product)"> Додати в кошик </button> <button class="btn btn-white order-btn fast-order"> Швидке замовлення </button></div>
                 </div>
             </div>
             

@@ -85,6 +85,20 @@ body {
   padding: 10px 25px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  &.btn-primary{
+    color: #fff;
+    background: #599921;
+    border: 2px solid #599921;
+    border-radius: 6px;
+    padding: 18px 30px;
+  }
+  &.btn-white{
+    color: #599921;
+    background: #fff;
+    border: 2px solid #599921;
+    border-radius: 6px;
+    padding: 18px 30px;
+  }
 }
 
 .btn-grey {
@@ -588,4 +602,130 @@ app-admin-goods {
       color: #000;
     }
   }
+}
+
+// buscket
+
+.basket {
+  position: fixed;
+  display: block;
+  top: 165px;
+  right: 20px;
+  width: 120px;
+  height: 88px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-image: url(//www.tomatina.ua/wp-content/themes/tomatina/css/../img/icons/basket_bg.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 8;
+  cursor: pointer;
+  opacity: 1;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  &:hover{
+    .basket-green {
+      transform: translate(-50%,-50%) rotate(0);
+    }
+  }
+}
+.basket {
+  background-image: none;
+}
+.open-cart {
+}
+.icon {
+  &_cart {
+  }
+}
+.basket-green {
+  position: absolute;
+  width: 108px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(15deg);
+  z-index: 1;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+}
+.basket-imgs {
+  position: relative;
+  display: block;
+  margin-right: 15px;
+  top: 1px;
+  z-index: 2;
+  span {
+    position: absolute;
+    z-index: 1;
+    top: -6px;
+    right: -8px;
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border-radius: 50%;
+    font-size: 14px;
+    color: #2d2c2c;
+    font-weight: 700;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.cart-count {
+}
+.basket-block {
+  position: relative;
+  display: block;
+  z-index: 2;
+  p {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 10px;
+  }
+  span {
+    font-size: 14px;
+    color: #fff;
+  }
+}
+.basket-info {
+}
+.no {
+  &_active {
+  }
+}
+
+.basket.active .basket-green {
+  animation-name: basket;
+  animation-duration: 1s;
+}
+
+
+
+// scroll
+
+// html:not(.touch-screen)::-webkit-scrollbar, html:not(.touch-screen) *::-webkit-scrollbar {
+//   width: 5px;
+//   height: 5px;
+//   background: #599921;
+// }
+
+html:not(.touch-screen)::-webkit-scrollbar,
+html:not(.touch-screen) *::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+html:not(.touch-screen)::-webkit-scrollbar-thumb,
+html:not(.touch-screen) *::-webkit-scrollbar-thumb {
+  background: #599921;
 }

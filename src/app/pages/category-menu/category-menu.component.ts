@@ -4,6 +4,8 @@ import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { OrderService } from 'src/app/shared/services/order/order.service';
+
 
 @Component({
   selector: 'app-category-menu',
@@ -14,7 +16,8 @@ export class CategoryMenuComponent {
   constructor(
     private goodsService: GoodsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private orderService: OrderService,
   ) {
  
     this.eventSubscription = this.router.events.subscribe((event) => {
@@ -63,13 +66,32 @@ export class CategoryMenuComponent {
   fats: number = 48;
   carbohydrates: number = 33;
 
-
+// calulator calories
   calculateCalories(proteins: number, fats: number, carbohydrates: number): number {
     const proteinCalories = proteins * 4;
     const fatCalories = fats * 9;
     const carbohydrateCalories = carbohydrates * 4;
     const totalCalories = proteinCalories + fatCalories + carbohydrateCalories;
     return totalCalories;
+  }
+
+
+    // method count products
+    public productCount(product: IGoodsResponse, value: boolean): void {
+      const index = this.goodsArray.findIndex((p) => p.id === product.id);
+      if (index !== -1) {
+        if (value) {
+          ++this.goodsArray[index].count;
+        } else if (!value && this.goodsArray[index].count > 1) {
+          --this.goodsArray[index].count;
+        }
+      }
+    }
+
+
+      //  add to basket method
+  addToBasket(product: IGoodsResponse): void {
+    this.orderService.addToBasket(product);
   }
 
   ngOnDestroy(): void {
