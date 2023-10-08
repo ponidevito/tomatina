@@ -34,9 +34,18 @@ export class HeaderComponent implements OnInit {
     const menuBlock = this.elRef.nativeElement.querySelector('.menu-block');
     const burger = this.elRef.nativeElement.querySelector('#burger');
 
+    const menuButton = this.elRef.nativeElement.querySelector('.menu__link');
+
+    const submenu = this.elRef.nativeElement.querySelector('.menu__submenu');
+
     if (!menuBlock.contains(event.target) && !burger.contains(event.target)) {
       this.closeBlock();
     }
+    if (!menuButton.contains(event.target) &&  !submenu.contains(event.target)
+    ) {
+      this.closeSubMenu();
+    }
+
   }
   public isLogin = false;
   public loginUrl = '';
@@ -129,4 +138,20 @@ export class HeaderComponent implements OnInit {
   openModalDelivery() {
     this.dialog.open(DeliveryModalComponent);
   }
+
+  isSubMenu=false;
+
+  openSubMenu() {
+    this.isSubMenu=!this.isSubMenu;
+  }
+
+  closeSubMenu() {
+    this.isSubMenu = false;
+  }
+
+  onMenuItemSelect() {
+    this.closeSubMenu();
+    // Інша логіка, яка повинна виконуватися при виборі пункта меню
+  }
+
 }

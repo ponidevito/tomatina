@@ -14,94 +14,94 @@
                     <nav class="menu__body">
                        <ul class="menu__list">
                           <li class="menu__item menu-show">
-                             <button type="button" class="menu__link">МЕНЮ</button>
-                             <ul class="menu__submenu">
+                             <button type="button"  class="menu__link" (click)=" openSubMenu()">МЕНЮ</button>
+                             <ul class="menu__submenu" [ngClass]="{'active': isSubMenu}">
                                 <li  class="menu__show-submenu menu__submenu-item">
-                                   <a [routerLink]="[ 'category-menu/healthy' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                   <a [routerLink]="[ 'category-menu/healthy' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                       <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsalmon-salat-boul.webp.pagespeed.ic.julA0vK2aP.webp" alt="healthy">
                                       </div>
                                       <span>healthy &amp; tasty menu</span>
                                    </a>
                                 </li>
                                 <li  class="menu__show-submenu menu__submenu-item">
-                                   <a [routerLink]="[ 'category-menu/special-edition' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                   <a [routerLink]="[ 'category-menu/special-edition' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                       <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/08/xproshuto-dynya-site.webp.pagespeed.ic.wzEws5hrTd.webp" alt="special-edition">
                                       </div>
                                       <span>Special Edition</span>
                                    </a>
                                 </li>
                                 <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/combo' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/combo' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/09/x635fe339-1dcc-4d5b-8173-b854e4fd28b0.png.pagespeed.ic.ik9mKJAO2w.png" alt="combo">
                                        </div>
                                        <span>Комбо меню</span>
                                     </a>
                                  </li>
                                  <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/snidanky' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/snidanky' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsyrnyky-z-lososem-ta-avokado.webp.pagespeed.ic.T95rsNx159.webp" alt="snidanky">
                                        </div>
                                        <span>Сніданки до 18:00</span>
                                     </a>
                                  </li>
                                  <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/salaty-pasty' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/salaty-pasty' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsoba-z-moreproduktamy.webp.pagespeed.ic.2WeXArocI5.webp" alt="salaty-pasty">
                                        </div>
                                        <span>Салати пасти</span>
                                     </a>
                                  </li>
                                  <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/salat-boul' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/salat-boul' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xbif-salat-boul.webp.pagespeed.ic.XZcUu7oGA6.webp" alt="salat-boul">
                                        </div>
                                        <span>Салат боули</span>
                                     </a>
                                  </li>
                                  <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/salaty' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/salaty' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xgrand-czezar.webp.pagespeed.ic.xSONy4vCRb.webp" alt="salaty">
                                        </div>
                                        <span>Салати</span>
                                     </a>
                                  </li>
                                  <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/fresh-rol' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/fresh-rol' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xfresh-proshuto-rol.webp.pagespeed.ic.Q9HKFHl0qI.webp" alt="fresh-rol">
                                        </div>
                                        <span>Фреш-роли</span>
                                     </a>
                                  </li>
                                  <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/supy' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/supy' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xshpynatnyj-krem-sup.webp.pagespeed.ic.Yd1U2zJdr3.webp" alt="supy">
                                        </div>
                                        <span>Супи</span>
                                     </a>
                                  </li>
                                  <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/zapikanky' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/zapikanky' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsyrna-zapikanka-z-polunychnym-dzhemom.webp.pagespeed.ic.FAtgA3QNHw.webp" alt="zapikanky">
                                        </div>
                                        <span>Запіканки</span>
                                     </a>
                                  </li>
                                  <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/deserty' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/deserty' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xmango-chyzkejk-z-syru-filadelfiya.webp.pagespeed.ic.pm4Ij0YCJV.webp" alt="deserty">
                                        </div>
                                        <span>Десерти</span>
                                     </a>
                                  </li>
                                  <li  class="menu__show-submenu menu__submenu-item">
-                                    <a [routerLink]="[ 'category-menu/smuzi' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                    <a [routerLink]="[ 'category-menu/smuzi' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                        <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xavogrin.webp.pagespeed.ic.fRofpQHMU9.webp" alt="smuzi">
                                        </div>
                                        <span>Смузі</span>
                                     </a>
                                  </li>
                                 <li  class="menu__show-submenu menu__submenu-item">
-                                   <a [routerLink]="[ 'category-menu/drinks' ]" routerLinkActive="route-active" class="menu__submenu-link">
+                                   <a [routerLink]="[ 'category-menu/drinks' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
                                       <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xmango-chia.webp.pagespeed.ic.eEn_yC7rai.webp" alt="drinks">
                                       </div>
                                       <span>Напої</span>

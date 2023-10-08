@@ -267,15 +267,28 @@
         display: none;
       }
     }
+    // &.menu-show {
+    //   &:hover {
+    //     .menu__submenu {
+    //       opacity: 1;
+    //       visibility: visible;
+    //       margin-top: 0;
+    //     }
+    //   }
+    // }
     &.menu-show {
-      &:hover {
+      
         .menu__submenu {
-          opacity: 1;
-          visibility: visible;
-          margin-top: 0;
+          &.active{
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0;
+          }
+        
         }
-      }
+      
     }
+
   }
 
   &__link {
