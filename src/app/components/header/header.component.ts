@@ -141,8 +141,16 @@ export class HeaderComponent implements OnInit {
 
   isSubMenu=false;
 
+  autoCloseTimer: any;
+
   openSubMenu() {
     this.isSubMenu=!this.isSubMenu;
+    if (this.autoCloseTimer) {
+      clearTimeout(this.autoCloseTimer);
+    }
+    this.autoCloseTimer = setTimeout(() => {
+      this.isSubMenu = false;
+    }, 20000);
   }
 
   closeSubMenu() {
@@ -153,5 +161,7 @@ export class HeaderComponent implements OnInit {
     this.closeSubMenu();
     // Інша логіка, яка повинна виконуватися при виборі пункта меню
   }
+
+  
 
 }
