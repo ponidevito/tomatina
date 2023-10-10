@@ -2,19 +2,19 @@
     <div class="delivery-modal_align text-center">
        <h3 class="delivery-modal_title title"><b>Раді бачити вас на нашому сайті!</b> Будь ласка, оберіть спосіб отримання замовлення</h3>
        <div class="delivery-modal_block">
-          <a href="#" class="delivery-modal_link btn_delivery" (click)="onClickLink('Доставка кур’єром')">
+          <button type="button" class="delivery-modal_link btn_delivery" (click)="onClickLink('Доставка кур’єром')">
              <div>
                 <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/delivery_popup_one.svg" alt="" >
                 <p>Доставка кур’єром</p>
              </div>
-          </a>
+          </button>
           <span>або</span>
-          <a href="#" class="delivery-modal_link btn_delivery" (click)="onClickLink('Самовивіз')">
+          <button type="button" class="delivery-modal_link btn_delivery" (click)="onClickLink('Самовивіз')">
              <div>
                 <img src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/delivery_popup_two.svg" alt="" >
                 <p>Самовивіз</p>
              </div>
-          </a>
+          </button>
        </div>
     </div>
  </div>

@@ -8,6 +8,8 @@ import { AccountService } from 'src/app/shared/services/account/account.service'
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { GoodsService } from 'src/app/shared/services/goods/goods.service';
 import { OrderService } from 'src/app/shared/services/order/order.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -23,6 +25,7 @@ export class HeaderComponent implements OnInit {
     private accountService: AccountService,
     private goodsService: GoodsService,
     public orderService: OrderService,
+    public router: Router,
 
 
 
@@ -143,8 +146,21 @@ export class HeaderComponent implements OnInit {
 
   autoCloseTimer: any;
 
-  openSubMenu() {
+  // openSubMenu() {
+  //   this.isSubMenu=!this.isSubMenu;
+    
+  //   if (this.autoCloseTimer) {
+  //     clearTimeout(this.autoCloseTimer);
+  //   }
+  //   this.autoCloseTimer = setTimeout(() => {
+  //     this.isSubMenu = false;
+  //   }, 20000);
+  // }
+
+  openSubMenu(event: Event) {
+    event.preventDefault();
     this.isSubMenu=!this.isSubMenu;
+    
     if (this.autoCloseTimer) {
       clearTimeout(this.autoCloseTimer);
     }
@@ -159,9 +175,82 @@ export class HeaderComponent implements OnInit {
 
   onMenuItemSelect() {
     this.closeSubMenu();
-    // Інша логіка, яка повинна виконуватися при виборі пункта меню
   }
 
+  // basket
+
+
+    //  modal
+    public showModalCart = false;
+    //  open cart modal
+    openModalCart() {
+      this.showModalCart = !this.showModalCart;
+      // this.basketHeight = !this.basketHeight;
+      // this.layerBig = !this.layerBig;
+      const body = document.getElementsByTagName('body')[0];
+      body.classList.add('lockModal');
+    }
+
+    
+  // This method is responsible for closing the cart modal window when the user clicks outside of it.
+  onModalWrapperClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const modal = target.closest('.modal');
+    const body = document.getElementsByTagName('body')[0];
+    if (!modal) {
+      this.showModalCart = false;
+      // this.layerBig = false;
+      // this.basketHeight = false;
+      body.classList.remove('lockModal');
+    }
+  }
+
+   // close busket
+   closeBusket(): void {
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.remove('lockModal');
+    this.showModalCart = false;
+    // this.layerBig = false;
+    // this.basketHeight = false;
+  }
+
+  navigateToCatalog() {
+    this.showModalCart = false;
+    // this.basketHeight = false;
+    // this.layerBig = false;
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.remove('lockModal');
+
+    // navigate to /home
+    this.router.navigate(['/home']);
+  }
+
+    // remove product
+    removeProduct(product: IGoodsResponse, event: any) {
+      const index = this.orderService.basket.indexOf(product);
+      if (index > -1) {
+        this.orderService.basket.splice(index, 1);
+        --this.orderService.count;
+        localStorage.setItem('basket', JSON.stringify(this.orderService.basket));
+        localStorage.setItem('count', JSON.stringify(this.orderService.count));
+      }
+      // this line to stop the event from propagating
+      event.stopPropagation();
+    }
   
+  
+  // method count products
+  public productCount(product: IGoodsResponse, value: boolean): void {
+    const index = this.orderService.basket.findIndex(
+      (p) => p.id === product.id
+    );
+    if (index !== -1) {
+      if (value) {
+        ++this.orderService.basket[index].count;
+      } else if (!value && this.orderService.basket[index].count > 1) {
+        --this.orderService.basket[index].count;
+      }
+    }
+  }
 
 }

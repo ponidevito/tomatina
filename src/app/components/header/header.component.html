@@ -3,10 +3,57 @@
         <a href="#" class="btn_delivery">Доставка кур’єром</a> -->
         <!-- <span class="d-none">
             Самовивіз</span>  -->
+            
         <button type="button" class="header-informer__modal" (click)="openModalDelivery()">{{ message }}</button>
     </div>
-    <div class="basket open-cart icon_cart_active"> <img class="basket-green" alt=""  src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/basket_green.svg" ><div class="basket-imgs"> <img alt="" src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/basket.svg"> <span class="cart-count">{{orderService.count}}</span></div><div class="basket-block"><p>{{ getTotalSum() }}</p> <span>грн</span></div><div class="basket-info no_active" ></div></div>
-<header class="header">
+    
+    <div class="basket open-cart icon_cart_active" (click)="openModalCart()"> <img class="basket-green" alt=""  src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/basket_green.svg" ><div class="basket-imgs"> <img alt="" src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/basket.svg"> <span class="cart-count">{{orderService.count}}</span></div><div class="basket-block"><p>{{ getTotalSum() }}</p> <span>грн</span></div><div class="basket-info no_active" ></div></div>
+    
+    <!-- modal basket -->
+    <div class="modal__wrapper" [class.active]="showModalCart" (click)="onModalWrapperClick($event)">
+      <div class="modal">
+          <div class="modal__body">
+            <!-- <div class="modal__body-cart_title"><h4 class="h4 title">Кошик</h4> <button class="modal__body-cart-delete-all" (click)="removeProduct(product, $event)">очистити кошик</button></div> -->
+            <ng-container *ngIf="orderService.basket && orderService.basket.length > 0; else emptyBasket">
+                          
+            <ng-container *ngFor="let product of orderService.basket">
+
+            <div class="modal__products">
+               <div class="modal__body-cart_title"><h4 class="h4 title">Кошик</h4> <button class="modal__body-cart-delete-all" (click)="removeProduct(product, $event)">очистити кошик</button></div>
+              <img [src]="product.image" (click)="openModalCart()" [routerLink]="[ '/rolls-details', product.id ]"  alt="image" class="modal__image">
+                <div class="modal__count">
+                  <h5 class="modal__title" (click)="openModalCart()" [routerLink]="[ '/rolls-details', product.id ]">{{product.name}}</h5>
+                  <div class="modal__box">
+                  <div class="number-input input-number">
+                    <button  (click)="productCount(product, false)" class="input-number__button input-number__minus" type="button">-</button>
+                    <input type="number" class="input-number__inputNumber" min="1" [value]="product.count" readonly >
+                    <button (click)="productCount(product ,true)" class="input-number__button input-number__plus" type="button">+</button>
+                  </div> 
+                  <div class="modal__summa">{{ product.price * product.count }} <span>грн</span></div>
+                  <button class="modal__remove"  (click)="removeProduct(product, $event)"><div class="modal__trash"></div></button>
+                </div>
+                </div>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-template #emptyBasket>
+          <div class="modal__empty-box">
+          <img class="modal__empty-image" src="../../../assets/images/header-informer/cart-empty.png" alt="img">
+          <div class="modal__empty">Кошик порожній</div>
+          <a  (click)="navigateToCatalog()"  class="modal__empty-btn">ПЕРЕЙТИ ДО КАТАЛОГУ</a>
+        </div>
+        </ng-template>
+          </div>
+          <div class="modal__bottom bottom-bg">
+            <div class="modal__total"><span> Сумма:</span> {{ getTotalSum() }} <span>грн</span></div>
+
+            <button class="modal__submit" [disabled]="!orderService.basket || orderService.basket.length === 0" (click)="closeBusket()" [routerLink]="[ '/checkout' ]">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+          </div>
+      </div>
+    
+   </div>
+
+    <header class="header">
     <div class="header__container">
             <div class="header__body">
                 <a href="#" class="header__logo"><img src="assets/images/header/logo.png" alt="logo"></a>
@@ -14,7 +61,7 @@
                     <nav class="menu__body">
                        <ul class="menu__list">
                           <li class="menu__item menu-show">
-                             <button type="button"  class="menu__link" (click)=" openSubMenu()">МЕНЮ</button>
+                             <a href="javascript:void(0)"  class="menu__link menu" (click)="openSubMenu($event)">МЕНЮ</a>
                              <ul class="menu__submenu" [ngClass]="{'active': isSubMenu}">
                                 <li  class="menu__show-submenu menu__submenu-item">
                                    <a [routerLink]="[ 'category-menu/healthy' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
