@@ -67,6 +67,14 @@ body {
   box-sizing: border-box;
 }
 
+.lockBurger {
+  overflow: hidden;
+}
+
+.lockModal {
+  overflow: hidden;
+}
+
 .btn {
   display: inline-block;
   vertical-align: bottom;
@@ -85,14 +93,14 @@ body {
   padding: 10px 25px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  &.btn-primary{
+  &.btn-primary {
     color: #fff;
     background: #599921;
     border: 2px solid #599921;
     border-radius: 6px;
     padding: 18px 30px;
   }
-  &.btn-white{
+  &.btn-white {
     color: #599921;
     background: #fff;
     border: 2px solid #599921;
@@ -406,6 +414,89 @@ body {
   font-weight: 700;
 }
 
+// .bg-layer {
+
+//   position: fixed;
+//   left: 0;
+//   top: 0;
+//   width: 100%;
+//   height: 100%;
+//   z-index: 10;
+//   background: rgba(0, 0, 0, 0.41);
+//   -webkit-backdrop-filter: blur(0);
+//   backdrop-filter: blur(0);
+//   opacity: 0;
+//   visibility: hidden;
+//   transition: all 0.25s, backdrop-filter 0s;
+//   &._active {
+//     opacity: 1;
+//     visibility: visible;
+//     backdrop-filter: blur(2px);
+//     transition: all 0.25s, backdrop-filter 0.1s 0.25s;
+//   }
+// }
+
+.bg-layer {
+  &__burger {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.41);
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s, backdrop-filter 0s;
+    &._active {
+      opacity: 1;
+      visibility: visible;
+      backdrop-filter: blur(2px);
+      transition: all 0.25s, backdrop-filter 0.1s 0.25s;
+    }
+  }
+  &__cart {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.41);
+    -webkit-backdrop-filter: blur(0);
+    backdrop-filter: blur(0);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s, backdrop-filter 0s;
+    &._active {
+      opacity: 1;
+      visibility: visible;
+      backdrop-filter: blur(2px);
+      transition: all 0.25s, backdrop-filter 0.1s 0.25s;
+    }
+  }
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.41);
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s, backdrop-filter 0s;
+  &._active {
+    opacity: 1;
+    visibility: visible;
+    backdrop-filter: blur(2px);
+    transition: all 0.25s, backdrop-filter 0.1s 0.25s;
+  }
+}
+
 .main {
   flex: 1 1 auto;
   padding-top: 150px;
@@ -631,21 +722,16 @@ app-admin-goods {
   opacity: 1;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
-  &:hover{
+  &:hover {
     .basket-green {
-      transform: translate(-50%,-50%) rotate(0);
+      transform: translate(-50%, -50%) rotate(0);
     }
   }
 }
 .basket {
   background-image: none;
 }
-.open-cart {
-}
-.icon {
-  &_cart {
-  }
-}
+
 .basket-green {
   position: absolute;
   width: 108px;
@@ -697,10 +783,48 @@ app-admin-goods {
     color: #fff;
   }
 }
-.basket-info {
+
+.h4 {
+  font-size: 26px;
+  line-height: 1.2em;
 }
-.no {
-  &_active {
+
+.thumb-input-number {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #181818;
+  font-size: 14px;
+  line-height: 1;
+  button {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: none;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    font-size: 18px;
+    font-weight: 700;
+    color: #2d2c2c;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    &:hover {
+      background-color: #599921;
+      color: #fff;
+    }
+  }
+  input {
+    width: 50px;
+    height: 26px;
+    font-weight: 500;
+    color: #2d2c2c;
+    text-align: center;
+    font-size: 16px;
   }
 }
 
@@ -708,8 +832,6 @@ app-admin-goods {
   animation-name: basket;
   animation-duration: 1s;
 }
-
-
 
 // scroll
 

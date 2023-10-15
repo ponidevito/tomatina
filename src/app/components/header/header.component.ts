@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
   public userRole!: string;
   public show = false;
   public layer = false;
-
+  public layerCart = false;
   public message = 'натисніть для заміни';
 
   public goodsArray: Array<IGoodsResponse> = [];
@@ -65,7 +65,7 @@ export class HeaderComponent implements OnInit {
   // burger menu
   burger() {
     this.show = !this.show;
-    this.layer = !this.layer;
+    this.layer = true;
     const body = document.getElementsByTagName('body')[0];
     body.classList.toggle('lockBurger');
   }
@@ -179,17 +179,27 @@ export class HeaderComponent implements OnInit {
 
   // basket
 
-
     //  modal
     public showModalCart = false;
     //  open cart modal
     openModalCart() {
-      this.showModalCart = !this.showModalCart;
+     this.showModalCart = !this.showModalCart;
+     this.layerCart = !this.layerCart;
       // this.basketHeight = !this.basketHeight;
       // this.layerBig = !this.layerBig;
       const body = document.getElementsByTagName('body')[0];
       body.classList.add('lockModal');
     }
+
+   closeModalCart() {
+      this.showModalCart = false;
+      this.layerCart = false;
+ 
+       // this.basketHeight = !this.basketHeight;
+       // this.layerBig = !this.layerBig;
+       const body = document.getElementsByTagName('body')[0];
+       body.classList.remove('lockModal');
+     }
 
     
   // This method is responsible for closing the cart modal window when the user clicks outside of it.
@@ -198,6 +208,9 @@ export class HeaderComponent implements OnInit {
     const modal = target.closest('.modal');
     const body = document.getElementsByTagName('body')[0];
     if (!modal) {
+      // event.stopPropagation();
+
+      this.layerCart = false;
       this.showModalCart = false;
       // this.layerBig = false;
       // this.basketHeight = false;
@@ -210,12 +223,20 @@ export class HeaderComponent implements OnInit {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('lockModal');
     this.showModalCart = false;
-    // this.layerBig = false;
+    this.layerCart = false;
     // this.basketHeight = false;
+  }
+
+  clearBasket() {
+    this.orderService.basket = []; // Очистити кошик, просто призначити пустий масив
+    this.orderService.count = 0; // Скинути кількість товарів
+    localStorage.removeItem('basket'); // Видалити збережений кошик
+    localStorage.removeItem('count'); 
   }
 
   navigateToCatalog() {
     this.showModalCart = false;
+    this.layerCart = false;
     // this.basketHeight = false;
     // this.layerBig = false;
     const body = document.getElementsByTagName('body')[0];
@@ -235,7 +256,7 @@ export class HeaderComponent implements OnInit {
         localStorage.setItem('count', JSON.stringify(this.orderService.count));
       }
       // this line to stop the event from propagating
-      event.stopPropagation();
+      // event.stopPropagation();
     }
   
   

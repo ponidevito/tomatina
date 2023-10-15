@@ -16,25 +16,35 @@
             <!-- <div class="modal__body-cart_title"><h4 class="h4 title">Кошик</h4> <button class="modal__body-cart-delete-all" (click)="removeProduct(product, $event)">очистити кошик</button></div> -->
             <ng-container *ngIf="orderService.basket && orderService.basket.length > 0; else emptyBasket">
                           
-            <ng-container *ngFor="let product of orderService.basket">
+            
 
             <div class="modal__products">
-               <div class="modal__body-cart_title"><h4 class="h4 title">Кошик</h4> <button class="modal__body-cart-delete-all" (click)="removeProduct(product, $event)">очистити кошик</button></div>
-              <img [src]="product.image" (click)="openModalCart()" [routerLink]="[ '/rolls-details', product.id ]"  alt="image" class="modal__image">
+               <div class="modal__body-cart_title">
+                  <h4 class="h4 title">Кошик</h4>
+                  <div class="modal__body-cart-close-box">
+                  <button class="modal__body-cart-delete-all" (click)="clearBasket()">очистити кошик</button>
+                  <button class="modal__body-cart-close" (click)="closeModalCart()"><svg _ngcontent-dtd-c10="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path _ngcontent-dtd-c10="" d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"></path></svg></button>
+               </div>
+               </div>
+               <ng-container *ngFor="let product of orderService.basket">
+               <div class="modal__box">
+              <img [src]="product.image" (click)="openModalCart()" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]"  alt="image" class="modal__image">
                 <div class="modal__count">
-                  <h5 class="modal__title" (click)="openModalCart()" [routerLink]="[ '/rolls-details', product.id ]">{{product.name}}</h5>
-                  <div class="modal__box">
-                  <div class="number-input input-number">
-                    <button  (click)="productCount(product, false)" class="input-number__button input-number__minus" type="button">-</button>
-                    <input type="number" class="input-number__inputNumber" min="1" [value]="product.count" readonly >
-                    <button (click)="productCount(product ,true)" class="input-number__button input-number__plus" type="button">+</button>
+                  <h5 class="modal__title" (click)="openModalCart()" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]">{{product.name}}</h5>
+                  <div class="modal__box-count">
+                  <div class="number-input input-number thumb-input-number">
+                    <button  (click)="productCount(product, false)" class="input-number__button input-number__minus decrement" type="button">-</button>
+                    <input [value]="product.count" readonly="" class="product-qty" tabindex="-1" max="999">
+                    <button (click)="productCount(product ,true)" class="input-number__button input-number__plus increment" type="button">+</button>
                   </div> 
                   <div class="modal__summa">{{ product.price * product.count }} <span>грн</span></div>
                   <button class="modal__remove"  (click)="removeProduct(product, $event)"><div class="modal__trash"></div></button>
                 </div>
                 </div>
+               </div>
+            </ng-container>
+
             </div>
-          </ng-container>
         </ng-container>
         <ng-template #emptyBasket>
           <div class="modal__empty-box">
@@ -45,7 +55,7 @@
         </ng-template>
           </div>
           <div class="modal__bottom bottom-bg">
-            <div class="modal__total"><span> Сумма:</span> {{ getTotalSum() }} <span>грн</span></div>
+            <div class="modal__total"><span> Сума:</span> {{ getTotalSum() }} <span>грн</span></div>
 
             <button class="modal__submit" [disabled]="!orderService.basket || orderService.basket.length === 0" (click)="closeBusket()" [routerLink]="[ '/checkout' ]">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
           </div>
@@ -240,8 +250,8 @@
                       <img class="menu-block__decor" alt="decor"  src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/menu_decor.svg">
                     </div>
                 </div>
-                <div class="bg-layer" [class._active]="layer"></div>
-
+                <div class="bg-layer__burger" [class._active]="layer"></div>
+                <div class="bg-layer__cart" [class._active]="layerCart"></div>
 
             </div>
     </div>
