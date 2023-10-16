@@ -92,6 +92,7 @@ export class CategoryMenuComponent {
       //  add to basket method
   addToBasket(product: IGoodsResponse): void {
     this.orderService.addToBasket(product);
+    this.orderService.showCartIcon();
   }
 
   ngOnDestroy(): void {

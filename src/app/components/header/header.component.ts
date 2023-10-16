@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+
 })
 export class HeaderComponent implements OnInit {
   constructor(
@@ -232,6 +233,8 @@ export class HeaderComponent implements OnInit {
     this.orderService.count = 0; // Скинути кількість товарів
     localStorage.removeItem('basket'); // Видалити збережений кошик
     localStorage.removeItem('count'); 
+    this.orderService.hideCartIcon();
+
   }
 
   navigateToCatalog() {

@@ -27,6 +27,9 @@ export class OrderService {
   public changeTotalSum$: Subject<number> = new Subject<number>();
   ordersArray: IOrdersResponse[] = [];
 
+  public isCartOpen: boolean = false;
+  public isCartIconVisible: boolean = false;
+
   constructor(public afs: Firestore) {
     this.ordersCollection = collection(this.afs, 'orders');
     this.basket = [];
@@ -74,6 +77,14 @@ export class OrderService {
   updateBasket(): void {
     this.loadBasket();
     this.changeBasket.next(true);
+  }
+
+  showCartIcon() {
+    this.isCartIconVisible = true;
+  }
+
+  hideCartIcon() {
+    this.isCartIconVisible = false;
   }
 
     // ========== firebase ======// 
