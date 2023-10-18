@@ -49,7 +49,16 @@ export class HeaderComponent implements OnInit {
     ) {
       this.closeSubMenu();
     }
+  }
 
+  @HostListener('window:scroll', ['$event'])
+  onScroll() {
+    const nav = this.elRef.nativeElement.querySelector('.header__body');
+    if (window.pageYOffset > 0) {
+      nav.classList.add('shadow');
+    } else {
+      nav.classList.remove('shadow');
+    }
   }
   public isLogin = false;
   public loginUrl = '';

@@ -724,6 +724,16 @@ app-admin-goods {
   &.active{
     opacity: 1;
   }
+  @media (max-width: 1540px) {
+    top: 130px;
+  }
+  @include sm{
+    right: 10px;
+  }
+  @include xs{
+    right: 5px;
+    top: 135px;
+  }
 }
 .basket {
   background-image: none;
