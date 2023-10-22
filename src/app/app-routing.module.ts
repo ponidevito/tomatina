@@ -35,6 +35,13 @@ const routes: Routes = [
         (m) => m.HomeModule
       ),
   },
+  {
+    path: 'checkout',
+    loadChildren: () =>
+      import('../app/pages/checkout/checkout.module').then(
+        (m) => m.CheckoutModule
+      ),
+  },
     { path: '', pathMatch: 'full', redirectTo: 'home' },
 
 

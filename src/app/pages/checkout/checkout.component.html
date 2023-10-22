@@ -1,0 +1,63 @@
+<section class="section-checkout checkout">
+    <div class="checkout_container">
+      <!-- <ngx-spinner 
+      color = "#fff" type="ball-fall" [fullScreen] = "true"><p style="color: white" > Loading... </p>
+    </ngx-spinner> -->
+        <div class="checkout__top top-title">
+            <h1 class="checkout__title title" *ngIf="!orderService.basket || orderService.basket.length > 0">Оформити замовлення</h1>
+        </div>
+        <div class="checkout__items">
+          <div class="checkout__item">
+            <form class="checkout__formFood" [formGroup]="foodForm"  >
+
+
+            </form>
+
+            <div class="checkout__map map-checkout">
+              <div class="map-checkout__map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4325.453004906748!2d24.01251778183582!3d49.8625643484255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473addae674cfd1d%3A0xa8962158c408d4fc!2z0L_RgNC-0YHQv9C10LrRgiDQkifRj9GH0LXRgdC70LDQstCwINCn0L7RgNC90L7QstC-0LvQsCwgOTUsINCb0YzQstGW0LIsINCb0YzQstGW0LLRgdGM0LrQsCDQvtCx0LvQsNGB0YLRjCwgNzkwMDA!5e0!3m2!1suk!2sua!4v1682593399022!5m2!1suk!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe> 
+              </div>
+             </div>  
+          </div>
+
+          <div class="checkout__item">
+            <div class="checkout__busket">
+              <ng-container *ngFor="let product of orderService.basket">
+              <div class="checkout__products">
+                <img [src]="product.image" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]" alt="img">
+                                      <div class="checkout__count">
+                      <h5 class="checkout__title" [routerLink]="[ '/rolls-details', product.id ]">{{product.name}}</h5>
+                      <div class="checkout__box">
+                      <div class="number-input input-number">
+                        <button  (click)="productCount(product, false)" class="input-number__button input-number__minus" type="button">-</button>
+                        <input type="number" class="input-number__inputNumber" min="1" [value]="product.count" readonly >
+                        <button (click)="productCount(product ,true)" class="input-number__button input-number__plus" type="button">+</button>
+                      </div> 
+                      <div class="checkout__summa">{{ product.price * product.count }} <span>грн</span></div>
+                      <button class="checkout__remove"  (click)="removeProduct(product, $event)"><div class="checkout__trash"></div></button>
+                    </div>
+                    </div>
+          </div>
+      </ng-container>
+     
+      <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span></div>
+      <ng-container *ngIf="!orderService.basket || orderService.basket.length === 0">
+          <div class="checkout__empty-box">
+          <img class="checkout__empty-image" src="../../../assets/images/header-informer/cart-empty.png" alt="img">
+          <h3 class="checkout__empty">Кошик порожній</h3>
+          <a  (click)="navigateToCatalog()"  class="checkout__empty-btn">ПЕРЕЙТИ ДО КАТАЛОГУ</a>
+        </div>
+        </ng-container>
+          </div>
+
+          <div class="checkout__actions">
+            <button type="submit" (click)="addForm()" class="checkout__btn" [disabled]="!isCheckboxSelected && foodForm.invalid">Оформити замовлення</button>
+
+          </div> 
+          </div>
+ 
+           </div>
+    </div>
+</section>
+

@@ -15,6 +15,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 
 
@@ -31,7 +32,7 @@ import { DatePipe } from '@angular/common';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-  
+    CheckoutComponent
 
   ],
   imports: [

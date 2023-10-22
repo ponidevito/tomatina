@@ -7,7 +7,7 @@
         <button type="button" class="header-informer__modal" (click)="openModalDelivery()">{{ message }}</button>
     </div>
     
-    <div class="basket open-cart icon_cart_active" (click)="openModalCart()" *ngIf="orderService.isCartIconVisible"  [class.active]="orderService.isCartIconVisible"> <img class="basket-green" alt=""  src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/basket_green.svg" ><div class="basket-imgs"> <img alt="" src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/basket.svg"> <span class="cart-count">{{orderService.count}}</span></div><div class="basket-block"><p>{{ getTotalSum() }}</p> <span>грн</span></div><div class="basket-info no_active" ></div></div>
+    <div class="basket open-cart icon_cart_active" (click)="openModalCart()" *ngIf="orderService.basket.length > 0" [class.active]="orderService.isCartIconVisible"> <img class="basket-green" alt=""  src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/basket_green.svg" ><div class="basket-imgs"> <img alt="" src="https://www.tomatina.ua/wp-content/themes/tomatina/img/icons/basket.svg"> <span class="cart-count">{{orderService.count}}</span></div><div class="basket-block"><p>{{ getTotalSum() }}</p> <span>грн</span></div><div class="basket-info no_active" ></div></div>
     
     <!-- modal basket -->
     <div class="modal__wrapper" [class.active]="showModalCart" (click)="onModalWrapperClick($event)">
