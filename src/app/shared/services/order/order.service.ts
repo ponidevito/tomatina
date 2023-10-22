@@ -87,6 +87,14 @@ export class OrderService {
     this.isCartIconVisible = false;
   }
 
+  getCartItems(): IGoodsResponse[] {
+    return this.basket;
+  }
+
+  setCartItems(items: IGoodsResponse[]): void {
+    this.basket = items;
+  }
+
     // ========== firebase ======// 
 
 

@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { GoodsService } from '../../shared/services/goods/goods.service';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order/order.service';
-
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-category-menu',
@@ -18,8 +18,8 @@ export class CategoryMenuComponent {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private orderService: OrderService,
+    private cookieService: CookieService
   ) {
- 
     this.eventSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.loadGoods();
@@ -38,12 +38,24 @@ export class CategoryMenuComponent {
 
   ngOnInit(): void {
     this.loadGoods();
-   
-    // this.selectFilter('Соуси');
+
+    // // Перевірити наявність збереженого стану корзини в localStorage
+    // Перевірити наявність збереженого стану корзини в localStorage
+    const savedBasket = localStorage.getItem('basket');
+    if (savedBasket) {
+      const basketItems = JSON.parse(savedBasket);
+      this.orderService.setCartItems(basketItems);
+      this.orderService.showCartIcon();
+    } else {
+      if (this.orderService.count > 0) {
+        this.orderService.showCartIcon();
+      } else {
+        this.orderService.hideCartIcon();
+      }
+    }
   }
 
   // This method downloads products from the server that match a specific category.
-
 
   // This method downloads products from the server that match a specific category.
   loadGoods(): void {
@@ -61,13 +73,16 @@ export class CategoryMenuComponent {
       });
   }
 
-
   proteins: number = 45;
   fats: number = 48;
   carbohydrates: number = 33;
 
-// calulator calories
-  calculateCalories(proteins: number, fats: number, carbohydrates: number): number {
+  // calulator calories
+  calculateCalories(
+    proteins: number,
+    fats: number,
+    carbohydrates: number
+  ): number {
     const proteinCalories = proteins * 4;
     const fatCalories = fats * 9;
     const carbohydrateCalories = carbohydrates * 4;
@@ -75,30 +90,37 @@ export class CategoryMenuComponent {
     return totalCalories;
   }
 
-
-    // method count products
-    public productCount(product: IGoodsResponse, value: boolean): void {
-      const index = this.goodsArray.findIndex((p) => p.id === product.id);
-      if (index !== -1) {
-        if (value) {
-          ++this.goodsArray[index].count;
-        } else if (!value && this.goodsArray[index].count > 1) {
-          --this.goodsArray[index].count;
-        }
+  // method count products
+  public productCount(product: IGoodsResponse, value: boolean): void {
+    const index = this.goodsArray.findIndex((p) => p.id === product.id);
+    if (index !== -1) {
+      if (value) {
+        ++this.goodsArray[index].count;
+      } else if (!value && this.goodsArray[index].count > 1) {
+        --this.goodsArray[index].count;
       }
     }
+  }
 
+  // add to basket
 
-      //  add to basket method
   addToBasket(product: IGoodsResponse): void {
     this.orderService.addToBasket(product);
-    this.orderService.showCartIcon();
+
+    if (this.orderService.count > 0) {
+      this.orderService.showCartIcon();
+    } else {
+      this.orderService.hideCartIcon();
+    }
+
+    // Зберегти стан корзини в localStorage
+    localStorage.setItem(
+      'basket',
+      JSON.stringify(this.orderService.getCartItems())
+    );
   }
 
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
-
-
-
 }
