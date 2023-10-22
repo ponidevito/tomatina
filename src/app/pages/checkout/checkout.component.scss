@@ -20,14 +20,14 @@
     // padding-right: 60px;
     // margin-right: auto;
     // margin-left: auto;
-    @media (min-width: 1200px){
+    @media (min-width: 1200px) {
       width: 100%;
       max-width: 1840px;
       padding-left: 60px;
       padding-right: 60px;
       margin-right: auto;
       margin-left: auto;
-}
+    }
   }
 
   &__top {
@@ -38,13 +38,14 @@
         margin-bottom: 5px;
       }
     }
-
   }
   &__title {
     font-size: 42px;
     line-height: 1.2em;
   }
   &__busket {
+    border: 1px solid #ececec;
+    border-radius: 6px;
     &:not(:last-child) {
       margin-bottom: 40px;
       @include md {
@@ -52,13 +53,58 @@
       }
     }
   }
-  &__products {
+
+  &__items {
     display: flex;
-    align-items: center;
+    gap: 120px;
+    justify-content: center;
+  }
+
+  &__item {
+    flex: 0 1 40%;
+  }
+
+  &__delivery-text {
+    font-size: 20px;
+    line-height: 1.3em;
+    font-weight: 500;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+  &__products {
+    position: relative;
+    border-radius: 6px;
     padding: 20px;
-    min-height: 100px;
-    border-top: 1px solid #dcdcdc;
-    border-bottom: 1px solid #dcdcdc;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    img {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      width: 124px;
+      height: 124px;
+      max-height: 124px;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      -ms-flex-item-align: start;
+      align-self: flex-start;
+    }
   }
 
   &__image {
@@ -76,31 +122,43 @@
   }
 
   &__count {
+    padding: 20px 20px 20px 30px;
     display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-    padding: 0px 10px 0px 20px;
-    gap: 20px;
+    flex-direction: column;
     @include sm {
-      flex-direction: column;
-      align-items: start;
-      gap: 10px;
+      // flex-direction: column;
+      // align-items: start;
+      // gap: 10px;
     }
   }
 
-  &__title {
+  &__title-buy {
     cursor: pointer;
-    color: #252525;
-    font-weight: bold;
-    transition: 0.35s;
+    font-size: 18px;
+    color: #2d2c2c;
+    font-weight: 500;
+    position: relative;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 3em;
+    &:not(:last-child){
+      margin-bottom: 10px;
+    }
     &:hover {
-      color: #b5d8f7;
     }
   }
 
   &__box {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     @include sm {
       width: 100%;
@@ -190,13 +248,15 @@
     }
   }
   &__total {
-    margin-top: 10px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
     display: flex;
     justify-content: flex-end;
     color: #252525;
     font-weight: bold;
     color: #252525;
-    font-size: 22px;
+    font-size: 20px;
     gap: 5px;
     @include lg {
       padding: 0px 10px;
@@ -586,5 +646,47 @@
       height: 500px;
       max-width: 100%;
     }
+  }
+}
+
+
+
+
+.thumb-input-number {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #181818;
+  font-size: 14px;
+  line-height: 1;
+  button {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: none;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    font-size: 18px;
+    font-weight: 700;
+    color: #2d2c2c;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    &:hover{
+      background-color: #599921;
+      color: #fff;
+    }
+  }
+  input {
+    width: 50px;
+    height: 26px;
+    font-weight: 500;
+    color: #2d2c2c;
+    text-align: center;
+    font-size: 16px;
   }
 }

@@ -22,26 +22,31 @@
           </div>
 
           <div class="checkout__item">
+            <h2 class="checkout__delivery-text">Ваше замовлення</h2>
             <div class="checkout__busket">
               <ng-container *ngFor="let product of orderService.basket">
               <div class="checkout__products">
                 <img [src]="product.image" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]" alt="img">
-                                      <div class="checkout__count">
-                      <h5 class="checkout__title" [routerLink]="[ '/rolls-details', product.id ]">{{product.name}}</h5>
+                   <div class="checkout__count">
+                      <h5 class="checkout__title-buy" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]">{{product.name}}</h5>
                       <div class="checkout__box">
-                      <div class="number-input input-number">
-                        <button  (click)="productCount(product, false)" class="input-number__button input-number__minus" type="button">-</button>
-                        <input type="number" class="input-number__inputNumber" min="1" [value]="product.count" readonly >
-                        <button (click)="productCount(product ,true)" class="input-number__button input-number__plus" type="button">+</button>
-                      </div> 
-                      <div class="checkout__summa">{{ product.price * product.count }} <span>грн</span></div>
+                        <div class="checkout__summa">{{ product.price * product.count }} <span>грн</span></div>
+                        <div class="thumb-input-number">
+                          <button type="button" class="decrement" (click)="productCount(product, false)">-</button>
+                          <input [value]="product.count" readonly="" class="product-qty" tabindex="-1" max="999">
+                          <button type="button" class="increment" (click)="productCount(product, true)">+</button>
+                       </div>
+                      
                       <button class="checkout__remove"  (click)="removeProduct(product, $event)"><div class="checkout__trash"></div></button>
+
                     </div>
                     </div>
+                    <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span></div>
+
           </div>
       </ng-container>
      
-      <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span></div>
+      <!-- <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span></div> -->
       <ng-container *ngIf="!orderService.basket || orderService.basket.length === 0">
           <div class="checkout__empty-box">
           <img class="checkout__empty-image" src="../../../assets/images/header-informer/cart-empty.png" alt="img">
