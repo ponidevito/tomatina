@@ -41,7 +41,6 @@
 
                     </div>
                     </div>
-                    <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span></div>
 
           </div>
       </ng-container>
@@ -56,8 +55,39 @@
         </ng-container>
           </div>
 
+                <!-- form order -->
+                <form class="form checkout__order order-checkout" [formGroup]="orderForm">
+                  <div class="order-checkout__box" *ngIf="showHolders">
+
+                  <div class="order-checkout__holders" [ngClass]="{ 'hide': !showHolders }">
+                    <div class="order-checkout__title">Прибори</div>
+                    <div class="order-checkout__description">Вкажіть кількість осіб, на яке робите замовлення</div>
+                    <div class="thumb-input-number"> 
+                      <button type="button" class="decrement" (click)="decrementCount()">-</button> 
+                      <input id="things-count" class="product-qty" formControlName="selectedHolders"  value="1"   name="food" readonly="" tabindex="-1" data-min="0"> 
+                      <button type="button" class="increment" (click)="incrementCount()">+</button>
+                    </div>
+                    <div class="order-checkout__price-wrap"> <b>Безкоштовно</b></div>
+                  </div>
+
+
+
+
+                </div>
+                <div class="order-checkout__without-holders"> 
+                  <label class="order-checkout__checkbox" (change)="toggleHoldersVisibility()"> 
+                    <input type="checkbox" name="without_holders"> 
+                    <span>Без приборів та серветок, з любов'ю до навколишнього середовища</span> 
+                  </label>
+                </div>
+                </form>
+
+
+                <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span>
+                </div>
+
           <div class="checkout__actions">
-            <button type="submit" (click)="addForm()" class="checkout__btn" [disabled]="!isCheckboxSelected && foodForm.invalid">Оформити замовлення</button>
+            <button type="submit" (click)="addForm()" class="checkout__btn" >Оформити замовлення</button>
 
           </div> 
           </div>

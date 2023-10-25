@@ -8,7 +8,7 @@ import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 // } from '../../shared/interfaces/food.interface';
 import { OrderService } from 'src/app/shared/services/order/order.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { IOrdersResponse } from 'src/app/shared/interfaces/orders.interface';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -45,11 +45,12 @@ export class CheckoutComponent implements OnInit {
   public ordersArray: Array<IOrdersResponse> = [];
   // form
   public foodForm!: FormGroup;
+  public orderForm!: FormGroup;
 
-  public selectedValue!: string;
+  // public selectedValue!: string;
   public selectedHolders!: string;
-  public selectedInterval!: string;
-  public selectedPickup!: string;
+  // public selectedInterval!: string;
+  // public selectedPickup!: string;
 
   public inAdvance = false;
   public pickup = false;
@@ -62,6 +63,7 @@ export class CheckoutComponent implements OnInit {
     this.orderService.loadBasket();
     this.orderService.updateBasket();
     this.initFoodForm();
+    this.initOrderForm();
     this.loadOrders();
     const productString = this.route.snapshot.queryParamMap.get('product');
     if (productString) {
@@ -125,7 +127,7 @@ export class CheckoutComponent implements OnInit {
           this.user = user.uid;
           this.ordersArray = data as IOrdersResponse[];
           this.spinnerService.hide(); // show spinner
-          this.ordersArray.sort((a, b) => a.count - b.count);
+          // this.ordersArray.sort((a, b) => a.count - b.count);
           this.countOrder();
         }
         this.spinnerService.hide(); // show spinner
@@ -142,26 +144,35 @@ export class CheckoutComponent implements OnInit {
       // selectedHolders: [this.holders[0].value],
       // selectedInterval: [this.times[0].value],
       // selectedPickup: [this.pickups[0].value],
-      date: new Date(),
-      cash: ['cash'],
-      delivery: ['delivery'],
-      inAdvance: [null],
-      firstName: [currentUser.firstName, [Validators.required]],
-      lastName: [currentUser.lastName],
-      phone: [currentUser.phone, [Validators.required]],
-      adress: [
-        currentUser.adress,
-        [Validators.required, Validators.minLength(2)],
-      ],
-      number: [
-        currentUser.number,
-        [Validators.required, Validators.pattern(/^[0-9]*$/)],
-      ],
-      entrance: [null],
-      apartment: [null],
-      callBack: [null],
-      addComment: [null],
-      addCommentKitchen: [null],
+      // date: new Date(),
+      // cash: ['cash'],
+      // delivery: ['delivery'],
+      // inAdvance: [null],
+      // firstName: [currentUser.firstName, [Validators.required]],
+      // lastName: [currentUser.lastName],
+      // phone: [currentUser.phone, [Validators.required]],
+      // adress: [
+      //   currentUser.adress,
+      //   [Validators.required, Validators.minLength(2)],
+      // ],
+      // number: [
+      //   currentUser.number,
+      //   [Validators.required, Validators.pattern(/^[0-9]*$/)],
+      // ],
+      // entrance: [null],
+      // apartment: [null],
+      // callBack: [null],
+      // addComment: [null],
+      // addCommentKitchen: [null],
+    });
+  }
+
+  initOrderForm(): void {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    this.orderForm = this.fb.group({
+      selectedHolders: new FormControl(0),
+      id: this.count + 1,
+      count: this.count + 1,
     });
   }
 
@@ -236,6 +247,58 @@ export class CheckoutComponent implements OnInit {
   }
 
   // This method adds a new order to the Firebase database.
+  // addForm(): void {
+  //   const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
+  //   const productName = products.join(', ');
+  //   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  //   const userUID = currentUser.uid || ''; // set userUID to an empty string if it's undefined or null
+
+  //   const myDate = new Date();
+  //   const day = myDate.getDate().toString().padStart(2, '0');
+  //   const month = (myDate.getMonth() + 1).toString().padStart(2, '0');
+  //   const hours = myDate.getHours().toString().padStart(2, '0');
+  //   const minutes = myDate.getMinutes().toString().padStart(2, '0');
+  //   const date = `${day}.${month}.${hours}.${minutes}`;
+  //   const totalCount = this.orderService.basket.reduce((acc, curr) => {
+  //     return acc + curr.count;
+  //   }, 0);
+
+  //   // if (this.foodForm) {
+  //   //   const formValues = this.foodForm.value;
+  //   //   const newOrder: IOrdersResponse = {
+  //   //     id: this.count + 1,
+  //   //     selectedValue: formValues.selectedValue,
+  //   //     selectedHolders: formValues.selectedHolders,
+  //   //     selectedInterval: formValues.selectedInterval,
+  //   //     selectedPickup: formValues.selectedPickup,
+  //   //     date: date,
+  //   //     cash: formValues.cash,
+  //   //     delivery: formValues.delivery,
+  //   //     inAdvance: formValues.inAdvance,
+  //   //     firstName: formValues.firstName,
+  //   //     lastName: formValues.lastName,
+  //   //     productName: productName,
+  //   //     phone: formValues.phone,
+  //   //     adress: formValues.adress,
+  //   //     number: formValues.number,
+  //   //     entrance: formValues.entrance,
+  //   //     apartment: formValues.apartment,
+  //   //     callBack: formValues.callBack,
+  //   //     addComment: formValues.addComment,
+  //   //     addCommentKitchen: formValues.addCommentKitchen,
+  //   //     count: this.count + 1,
+  //   //     totalSum: this.getTotalSum(),
+  //   //     status: 'в процесі',
+  //   //     productCountNumber: totalCount,
+  //   //     userUID: userUID,
+  //   //   };
+  //   //   // Add the new order to the Firestore database
+  //   //   this.orderService.createFirebase(newOrder as any);
+  //   //   this.clearBasket();
+  //   //   this.toastService.success('Ваше замовлення оформлене');
+  //   // }
+  // }
+
   addForm(): void {
     const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
     const productName = products.join(', ');
@@ -251,41 +314,58 @@ export class CheckoutComponent implements OnInit {
     const totalCount = this.orderService.basket.reduce((acc, curr) => {
       return acc + curr.count;
     }, 0);
+    if (this.orderForm) {
+            const formValuesOrder = this.orderForm.value;
+            const newOrder: IOrdersResponse = {
+              id: this.count + 1,
+              selectedHolders: formValuesOrder.selectedHolders,
+              count: this.count + 1,
+              productName: productName,
+              totalSum: this.getTotalSum(),
+              userUID: userUID,
+            };
+            console.log(newOrder)
 
-    if (this.foodForm) {
-      const formValues = this.foodForm.value;
-      const newOrder: IOrdersResponse = {
-        id: this.count + 1,
-        selectedValue: formValues.selectedValue,
-        selectedHolders: formValues.selectedHolders,
-        selectedInterval: formValues.selectedInterval,
-        selectedPickup: formValues.selectedPickup,
-        date: date,
-        cash: formValues.cash,
-        delivery: formValues.delivery,
-        inAdvance: formValues.inAdvance,
-        firstName: formValues.firstName,
-        lastName: formValues.lastName,
-        productName: productName,
-        phone: formValues.phone,
-        adress: formValues.adress,
-        number: formValues.number,
-        entrance: formValues.entrance,
-        apartment: formValues.apartment,
-        callBack: formValues.callBack,
-        addComment: formValues.addComment,
-        addCommentKitchen: formValues.addCommentKitchen,
-        count: this.count + 1,
-        totalSum: this.getTotalSum(),
-        status: 'в процесі',
-        productCountNumber: totalCount,
-        userUID: userUID,
-      };
-      // Add the new order to the Firestore database
-      this.orderService.createFirebase(newOrder as any);
-      this.clearBasket();
-      this.toastService.success('Ваше замовлення оформлене');
+            // Add the new order to the Firestore database
+            this.orderService.createFirebase(newOrder as any);
+            // this.clearBasket();
+            this.toastService.success('Ваше замовлення оформлене');
+
     }
+    // if (this.foodForm) {
+    //   const formValues = this.foodForm.value;
+    //   const newOrder: IOrdersResponse = {
+    //     id: this.count + 1,
+    //     selectedValue: formValues.selectedValue,
+    //     selectedHolders: formValues.selectedHolders,
+    //     selectedInterval: formValues.selectedInterval,
+    //     selectedPickup: formValues.selectedPickup,
+    //     date: date,
+    //     cash: formValues.cash,
+    //     delivery: formValues.delivery,
+    //     inAdvance: formValues.inAdvance,
+    //     firstName: formValues.firstName,
+    //     lastName: formValues.lastName,
+    //     productName: productName,
+    //     phone: formValues.phone,
+    //     adress: formValues.adress,
+    //     number: formValues.number,
+    //     entrance: formValues.entrance,
+    //     apartment: formValues.apartment,
+    //     callBack: formValues.callBack,
+    //     addComment: formValues.addComment,
+    //     addCommentKitchen: formValues.addCommentKitchen,
+    //     count: this.count + 1,
+    //     totalSum: this.getTotalSum(),
+    //     status: 'в процесі',
+    //     productCountNumber: totalCount,
+    //     userUID: userUID,
+    //   };
+    //   // Add the new order to the Firestore database
+      // this.orderService.createFirebase(newOrder as any);
+    //   this.clearBasket();
+    //   this.toastService.success('Ваше замовлення оформлене');
+    // }
   }
 
   // This method count order
@@ -303,6 +383,8 @@ export class CheckoutComponent implements OnInit {
     this.orderService.updateBasket();
     this.orderService.basket = [];
     this.orderService.changeBasket.next(true);
+        this.orderForm.reset();
+
     // this.foodForm.reset();
     // this.router.navigate(['my-cabinet/order-history']);
   }
@@ -327,6 +409,34 @@ export class CheckoutComponent implements OnInit {
       this.foodForm.updateValueAndValidity();
     }
   }
+
+  incrementCount() {
+    const selectedHoldersControl = this.orderForm.get('selectedHolders');
+    if (selectedHoldersControl) {
+      const currentValue = selectedHoldersControl.value as number;
+      selectedHoldersControl.setValue(currentValue + 1);
+    }
+  }
+  
+  decrementCount() {
+    const selectedHoldersControl = this.orderForm.get('selectedHolders');
+    if (selectedHoldersControl) {
+      const currentValue = selectedHoldersControl.value as number;
+      if (currentValue > 0) {
+        selectedHoldersControl.setValue(currentValue - 1);
+      }
+    }
+  }
+
+
+  showHolders: boolean = true; // Змінна, яка вказує, чи показувати прибори
+
+  // Ваша інша логіка тут
+
+  toggleHoldersVisibility(): void {
+    this.showHolders = !this.showHolders;
+  }
+  
 
   ngOnDestroy(): void {
     this.spinnerService.hide(); // show spinner
