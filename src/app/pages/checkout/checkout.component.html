@@ -64,7 +64,7 @@
                     <div class="order-checkout__description">Вкажіть кількість осіб, на яке робите замовлення</div>
                     <div class="thumb-input-number"> 
                       <button type="button" class="decrement" (click)="decrementCount()">-</button> 
-                      <input id="things-count" class="product-qty" formControlName="selectedHolders"  value="1"   name="food" readonly="" tabindex="-1" data-min="0"> 
+                      <input id="things-count" class="product-qty" formControlName="selectedHolders"  value="1"   name="food"  tabindex="-1" data-min="0"> 
                       <button type="button" class="increment" (click)="incrementCount()">+</button>
                     </div>
                     <div class="order-checkout__price-wrap"> <b>Безкоштовно</b></div>
@@ -74,12 +74,25 @@
 
 
                 </div>
-                <div class="order-checkout__without-holders"> 
-                  <label class="order-checkout__checkbox" (change)="toggleHoldersVisibility()"> 
+                <!-- whithout holders -->
+                <div class="order-checkout__without-holders" (change)="toggleHoldersVisibility()"> 
+                  <label class="order-checkout__checkbox" > 
                     <input type="checkbox" name="without_holders"> 
                     <span>Без приборів та серветок, з любов'ю до навколишнього середовища</span> 
                   </label>
                 </div>
+
+                <!-- package -->
+
+                <div class="checkbox-entry-wrap with-title">
+                  <div class="h5 content-title">Обери пакет</div> 
+                    <label class="order-checkout__checkbox"> 
+                        <input type="radio"  formControlName="freePackage" name="freePackage" value="freePackage" checked=""> <span>безкоштовний пакет</span> 
+                    </label> <br><br> 
+                    <label class="order-checkout__checkbox"> 
+                      <input type="radio"  formControlName="freePackage"  name="freePackage" value="shopper" data-price="10" (change)="updateTotalSum($event)"> <span>брендований шопер по собівартості - 10 грн</span> </label>
+              </div>
+
                 </form>
 
 

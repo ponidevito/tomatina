@@ -704,14 +704,13 @@
     border: 1px solid #ececec;
     border-radius: 6px;
     flex-direction: column;
+
   }
   &__holders {
     padding: 20px 20px 20px 30px;
     width: 100%;
+    animation: fade 0.3s linear;
 
-    &.hide {
-  
-    }
   }
 
   &__title {
@@ -802,7 +801,7 @@
   }
 }
 
-@keyframes fade-show {
+@keyframes fade {
   from {
     opacity: 0;
   }

@@ -34,7 +34,8 @@ export class CheckoutComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private toastService: ToastrService,
-    private spinnerService: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
+    
   ) {}
 
   public count = 0;
@@ -51,7 +52,8 @@ export class CheckoutComponent implements OnInit {
   public selectedHolders!: string;
   // public selectedInterval!: string;
   // public selectedPickup!: string;
-
+  public freePackage!: string;
+  // public includeShopper = false;
   public inAdvance = false;
   public pickup = false;
   public adress = true;
@@ -69,6 +71,19 @@ export class CheckoutComponent implements OnInit {
     if (productString) {
       this.product = JSON.parse(productString);
     }
+
+
+
+    this.orderForm.get('freePackage')?.valueChanges.subscribe((selectedPackage: string) => {
+      if (selectedPackage === 'shopper') {
+        // Add 10 UAH to the total sum when 'брендований шопер' is selected
+        this.totalSum += 10;
+      } else {
+        // Deduct 10 UAH from the total sum when another package is selected
+        this.totalSum -= 10;
+      }
+    });
+
   }
 
   // method count products
@@ -104,18 +119,41 @@ export class CheckoutComponent implements OnInit {
     // this line to stop the event from propagating
     event.stopPropagation();
   }
-  public totalSum!: number;
+  // public totalSum!: number;
+  public totalSum: number = 0; // Initialize totalSum to zero
   // This method calculates the price and quantity of the product and displays the total amount
+  // getTotalSum(): number {
+  //   if (!this.orderService.basket) {
+  //     return 0;
+  //   }
+
+  //   return this.orderService.basket.reduce(
+  //     (total, product) => total + product.price * product.count,
+  //     0
+  //   );
+  // }
+
   getTotalSum(): number {
     if (!this.orderService.basket) {
       return 0;
     }
-
-    return this.orderService.basket.reduce(
+  
+    // Calculate the sum of product prices and add the totalSum
+    const productsTotal = this.orderService.basket.reduce(
       (total, product) => total + product.price * product.count,
       0
     );
+  
+    return productsTotal + this.totalSum; // Include additional cost
   }
+
+
+  
+  
+  
+  
+  
+
 
   // This method retrieves all orders from Firebase and sorts them in count order. It also retrieves and stores the user's "uid" property from local storage and checks that the user and userUID are not null or undefined
   async loadOrders() {
@@ -169,10 +207,13 @@ export class CheckoutComponent implements OnInit {
 
   initOrderForm(): void {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
     this.orderForm = this.fb.group({
       selectedHolders: new FormControl(0),
       id: this.count + 1,
       count: this.count + 1,
+      freePackage: ['freePackage'],
+      // includeShopper:this.includeShopper,
     });
   }
 
@@ -321,6 +362,8 @@ export class CheckoutComponent implements OnInit {
               selectedHolders: formValuesOrder.selectedHolders,
               count: this.count + 1,
               productName: productName,
+              freePackage: formValuesOrder.freePackage,
+              // includeShopper:formValuesOrder.includeShopper,
               totalSum: this.getTotalSum(),
               userUID: userUID,
             };
@@ -436,6 +479,23 @@ export class CheckoutComponent implements OnInit {
   toggleHoldersVisibility(): void {
     this.showHolders = !this.showHolders;
   }
+
+
+  updateTotalSum(event: Event): void {
+    const selectedPackage = (event.target as HTMLInputElement).value;
+  
+    if (selectedPackage === 'shopper') {
+      this.totalSum += 10; // Add 10 UAH for 'брендований шопер'
+    }
+     if (selectedPackage === 'freePackage') {
+      this.totalSum -= 10; // Відняти 10 грн за 'безкоштовний пакет'
+    }
+    else {
+      // Subtract 10 UAH for 'безкоштовний пакет'
+      this.totalSum -= 10;
+    }
+  }
+  
   
 
   ngOnDestroy(): void {

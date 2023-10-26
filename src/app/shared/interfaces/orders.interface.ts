@@ -18,8 +18,11 @@ export interface IOrders {
   // callBack: string;
   // addComment: string;
   // addCommentKitchen: string;
-  count: number,
-  totalSum:number,
+  count: number;
+  totalSum:number;
+  freePackage:string;
+  // includeShopper:string;
+
   // status: string,
   // productCountNumber:number,
   userUID:string
@@ -40,6 +43,8 @@ export interface IOrdersRequest {
 //   lastName:string,
 //   phone: string | number;
   productName: string;
+  freePackage:string;
+  // includeShopper:string;
   count: number;
 //   adress: string;
 //   number: number;
