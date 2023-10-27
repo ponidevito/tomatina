@@ -704,13 +704,11 @@
     border: 1px solid #ececec;
     border-radius: 6px;
     flex-direction: column;
-
   }
   &__holders {
     padding: 20px 20px 20px 30px;
     width: 100%;
     animation: fade 0.3s linear;
-
   }
 
   &__title {
@@ -792,13 +790,117 @@
       }
     }
   }
-  .order-checkout__checkbox input:checked + span:before {
-    border-color: #599921;
+
+  &__package {
+    border-bottom: 1px solid #ececec;
+    padding: 0 0 30px;
+    &:not(:last-child) {
+      margin-bottom: 30px;
+    }
   }
 
-  .order-checkout__checkbox input:checked + span::after {
-    transform: scale(1);
+  &__title {
+    font-size: 18px;
+    color: #2d2c2c;
+    font-weight: 500;
+    position: relative;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 3em;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
   }
+
+  &__package-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__checkbox {
+  }
+
+  &__form-title {
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 20px;
+    line-height: 1.3em;
+    b {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      width: 28px;
+      height: 28px;
+      background-color: #599921;
+      border-radius: 6px;
+      margin-right: 10px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 15px;
+      padding-top: 1px;
+      text-align: center;
+      top: -2px;
+    }
+  }
+
+  &__pay-block {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 30px;
+  }
+
+  &__checkbox-entry-wrap {
+  }
+
+  &__checkbox {
+  }
+
+  &__toogle-block {
+    margin-top: 15px;
+  }
+
+  &__moneychange-input {
+    display: flex;
+    align-items: center;
+    padding: 0 0 20px;
+    gap: 20px;
+    input {
+      outline: none;
+      flex-shrink: 0;
+      margin-bottom: 0;
+      width: 145px;
+      font-size: 16px;
+      height: 54px;
+      color: #2d2c2c;
+      border: 1px solid #ececec;
+      background-color: #fff;
+      line-height: 51px;
+      padding: 0 20px;
+      border-radius: 3px;
+      transition: 0.25s;
+      text-overflow: ellipsis;
+      &:focus {
+        border: 1px solid #599921;
+      }
+    }
+
+  }
+
+  &__text {
+    font-size: 20px;
+    line-height: 1.2em;
+  }
+}
+
+.order-checkout__checkbox input:checked + span:before {
+  border-color: #599921;
+}
+
+.order-checkout__checkbox input:checked + span::after {
+  transform: scale(1);
 }
 
 @keyframes fade {
@@ -818,7 +920,6 @@
     opacity: 0;
   }
 }
-
 
 @keyframes slide-up {
   from {

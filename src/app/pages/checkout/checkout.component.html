@@ -76,7 +76,7 @@
                 </div>
                 <!-- whithout holders -->
                 <div class="order-checkout__without-holders" (change)="toggleHoldersVisibility()"> 
-                  <label class="order-checkout__checkbox" > 
+                  <label class="order-checkout__checkbox"> 
                     <input type="checkbox" name="without_holders"> 
                     <span>Без приборів та серветок, з любов'ю до навколишнього середовища</span> 
                   </label>
@@ -84,14 +84,49 @@
 
                 <!-- package -->
 
-                <div class="checkbox-entry-wrap with-title">
-                  <div class="h5 content-title">Обери пакет</div> 
+                <div class="order-checkout__package">
+                  <div class="order-checkout__title">Обери пакет</div> 
+                  <div class="order-checkout__package-box">
                     <label class="order-checkout__checkbox"> 
                         <input type="radio"  formControlName="freePackage" name="freePackage" value="freePackage" checked=""> <span>безкоштовний пакет</span> 
-                    </label> <br><br> 
+                    </label>
                     <label class="order-checkout__checkbox"> 
-                      <input type="radio"  formControlName="freePackage"  name="freePackage" value="shopper" data-price="10" (change)="updateTotalSum($event)"> <span>брендований шопер по собівартості - 10 грн</span> </label>
-              </div>
+                      <input type="radio"  formControlName="freePackage"  name="freePackage" value="shopper" data-price="10" (change)="updateTotalSum($event)"> <span>брендований шопер по собівартості - 10 грн</span> 
+                    </label>
+                  </div>
+                 </div>
+
+                 <!-- part -->
+
+                 <div class="order-checkout__form-part">
+                  <div class="order-checkout__form-title"><b>3.</b> Інформація про оплату</div>
+                   <div class="order-checkout__pay-block">
+                     <div class="order-checkout__checkbox-entry-wrap"> 
+                      <label class="order-checkout__checkbox"> 
+                        <input type="radio"  name="payment_method" checked="" value="cod">
+                        <span>Оплата готівкою</span> 
+                      </label>
+                    </div>
+                     <div class="order-checkout__toogle-block">
+                        <div class="order-checkout__moneychange-input">
+                           <div class="order-checkout__text">Решта з</div>
+                           <input class="input" type="number" placeholder="Сума" name="user_sum"> 
+                           <label class="order-checkout__checkbox"> 
+                              <input type="checkbox" name="without_rest"><span>Без решти</span> 
+                          </label>
+                        </div>
+                     </div>
+                     <div class="order-checkout__checkbox-entry-wrap"> 
+                      <label class="order-checkout__checkbox"> 
+                        <input type="radio" name="payment_method" value="bacs"> 
+                        <span>Оплата через термінал</span>
+                       </label>
+                      </div>
+                  </div>
+                  <!-- <div class="checkbox-entry-wrap no_call_me" style="display:none"> <label class="checkbox-entry"> <input type="checkbox" name="no_call"><span>Мені можна не телефонувати для підтвердження замовлення</span> </label></div>
+                  <div class="checkbox-entry-wrap qqq"> <label class="checkbox-entry"> <input type="checkbox" name="is_comment" class="toggle-block-control" data-block="3" data-rel="0"><span>Коментар / промокод / інше</span> </label></div>
+                  <div class="toggle-block" data-block="3" data-rel="0"><textarea name="comment" maxlength="499" class="input" placeholder="Ваш коментар" spellcheck="false"></textarea></div>  -->
+               </div>
 
                 </form>
 

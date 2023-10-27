@@ -4,23 +4,26 @@ import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { OrderService } from 'src/app/shared/services/order/order.service';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   constructor(
     private goodsService: GoodsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public orderService: OrderService,
+
   ) {
     this.eventSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.loadGoods();
       }
-      this.selectFilter('Соуси');
     });
   }
 
@@ -33,8 +36,10 @@ export class HomeComponent {
   public categoryName!: string;
 
   ngOnInit(): void {
+    this.orderService.loadBasket();
+    this.orderService.updateBasket();
     this.loadGoods();
-    this.selectFilter('Соуси');
+
   }
 
   // This method downloads products from the server that match a specific category.
@@ -46,6 +51,8 @@ export class HomeComponent {
   //   });
   // }
 
+
+  
   // This method downloads products from the server that match a specific category.
   loadGoods(): void {
     this.activatedRoute.params
@@ -57,7 +64,6 @@ export class HomeComponent {
       )
       .subscribe((data) => {
         this.goodsArray = data as IGoodsResponse[];
-        this.selectFilter('Соуси');
         // this.spinnerService.hide();
       });
   }
@@ -66,21 +72,5 @@ export class HomeComponent {
     this.eventSubscription.unsubscribe();
   }
 
-  // filtered array
-  public filteredData: Array<IGoodsResponse> = [];
 
-  // initialize the variable with "All" value
-  selectedFilter: string = 'Соуси';
-
-  // The selectFilter(filter: string) method filters the goods based on the passed filter parameter.
-  selectFilter(filter: string) {
-    this.selectedFilter = filter; // We update the value of selectedFilter.
-    if (filter === 'Соуси') {
-      this.filteredData = this.goodsArray;
-    } else {
-      this.filteredData = this.goodsArray.filter((product) =>
-        product.name.includes(filter)
-      );
-    }
-  }
 }

@@ -699,7 +699,7 @@ app-admin-goods {
 
 .basket {
   position: fixed;
-  display: block;
+  // display: block;
   top: 165px;
   right: 20px;
   width: 120px;
@@ -721,9 +721,7 @@ app-admin-goods {
       transform: translate(-50%, -50%) rotate(0);
     }
   }
-  &.active{
-    opacity: 1;
-  }
+
   @media (max-width: 1540px) {
     top: 130px;
   }
@@ -734,9 +732,13 @@ app-admin-goods {
     right: 5px;
     top: 135px;
   }
+  &.active{
+    opacity: 1;
+  }
 }
 .basket {
   background-image: none;
+
 }
 
 .basket-green {
@@ -857,4 +859,10 @@ html:not(.touch-screen) *::-webkit-scrollbar {
 html:not(.touch-screen)::-webkit-scrollbar-thumb,
 html:not(.touch-screen) *::-webkit-scrollbar-thumb {
   background: #599921;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
