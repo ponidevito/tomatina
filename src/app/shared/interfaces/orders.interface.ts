@@ -21,6 +21,7 @@ export interface IOrders {
   count: number;
   totalSum:number;
   freePackage:string;
+  cash: string;
   // includeShopper:string;
 
   // status: string,
@@ -44,6 +45,7 @@ export interface IOrdersRequest {
 //   phone: string | number;
   productName: string;
   freePackage:string;
+  cash: string;
   // includeShopper:string;
   count: number;
 //   adress: string;

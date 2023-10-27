@@ -725,20 +725,19 @@ app-admin-goods {
   @media (max-width: 1540px) {
     top: 130px;
   }
-  @include sm{
+  @include sm {
     right: 10px;
   }
-  @include xs{
+  @include xs {
     right: 5px;
     top: 135px;
   }
-  &.active{
+  &.active {
     opacity: 1;
   }
 }
 .basket {
   background-image: none;
-
 }
 
 .basket-green {
@@ -865,4 +864,12 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.mb-15 {
+  margin-bottom: 15px;
+}
+
+.mt-15 {
+  margin-top: 15px;
 }

@@ -747,8 +747,6 @@
   &__checkbox {
     display: inline-block;
     cursor: pointer;
-    margin: 0;
-    padding: 0;
     min-width: 30px;
     min-height: 20px;
 
@@ -856,17 +854,19 @@
   }
 
   &__checkbox {
+
   }
 
   &__toogle-block {
-    margin-top: 15px;
+    animation: fade 0.3s linear;
   }
 
   &__moneychange-input {
     display: flex;
     align-items: center;
-    padding: 0 0 20px;
+    // padding: 0 0 20px;
     gap: 20px;
+
     input {
       outline: none;
       flex-shrink: 0;
@@ -889,9 +889,19 @@
 
   }
 
+  &__moneychange-box{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    &:not(:last-child){
+      margin-bottom: 15px
+    }
+  }
+
   &__text {
     font-size: 20px;
     line-height: 1.2em;
+    color: #6d6d6d;
   }
 }
 

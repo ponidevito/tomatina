@@ -100,25 +100,27 @@
 
                  <div class="order-checkout__form-part">
                   <div class="order-checkout__form-title"><b>3.</b> Інформація про оплату</div>
-                   <div class="order-checkout__pay-block">
+                   <div class="order-checkout__pay-block" *ngIf="showHolders">
                      <div class="order-checkout__checkbox-entry-wrap"> 
-                      <label class="order-checkout__checkbox"> 
-                        <input type="radio"  name="payment_method" checked="" value="cod">
+                      <label class="order-checkout__checkbox mb-15" (change)="togglePayVisibility('gotivka')"> 
+                        <input type="radio" formControlName="cash" name="cash"  value="gotivka" >
                         <span>Оплата готівкою</span> 
                       </label>
                     </div>
-                     <div class="order-checkout__toogle-block">
+                     <div class="order-checkout__toogle-block" *ngIf="showPay">
                         <div class="order-checkout__moneychange-input">
+                          <div class="order-checkout__moneychange-box" *ngIf="withoutRest">
                            <div class="order-checkout__text">Решта з</div>
                            <input class="input" type="number" placeholder="Сума" name="user_sum"> 
-                           <label class="order-checkout__checkbox"> 
+                          </div>
+                           <label class="order-checkout__checkbox mb-15" (change)="toggleRestVisibility()"> 
                               <input type="checkbox" name="without_rest"><span>Без решти</span> 
                           </label>
                         </div>
                      </div>
-                     <div class="order-checkout__checkbox-entry-wrap"> 
+                     <div class="order-checkout__checkbox-entry-wrap" (change)="togglePayVisibility('card')"> 
                       <label class="order-checkout__checkbox"> 
-                        <input type="radio" name="payment_method" value="bacs"> 
+                        <input type="radio" formControlName="cash" name="cash" value="card" > 
                         <span>Оплата через термінал</span>
                        </label>
                       </div>

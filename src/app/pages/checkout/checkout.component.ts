@@ -53,6 +53,7 @@ export class CheckoutComponent implements OnInit {
   // public selectedInterval!: string;
   // public selectedPickup!: string;
   public freePackage!: string;
+  cash: string = 'gotivka';
   // public includeShopper = false;
   public inAdvance = false;
   public pickup = false;
@@ -213,6 +214,7 @@ export class CheckoutComponent implements OnInit {
       id: this.count + 1,
       count: this.count + 1,
       freePackage: ['freePackage'],
+      cash: new FormControl('gotivka')
       // includeShopper:this.includeShopper,
     });
   }
@@ -363,6 +365,7 @@ export class CheckoutComponent implements OnInit {
               count: this.count + 1,
               productName: productName,
               freePackage: formValuesOrder.freePackage,
+              cash:formValuesOrder.cash,
               // includeShopper:formValuesOrder.includeShopper,
               totalSum: this.getTotalSum(),
               userUID: userUID,
@@ -478,6 +481,19 @@ export class CheckoutComponent implements OnInit {
 
   toggleHoldersVisibility(): void {
     this.showHolders = !this.showHolders;
+  }
+
+  public showPay: boolean = true;
+
+  togglePayVisibility(option: string): void {
+    this.showPay = option === 'gotivka';
+    this.withoutRest = true;
+  }
+
+  public withoutRest: boolean = true;
+
+  toggleRestVisibility(): void {
+    this.withoutRest = !this.withoutRest;
   }
 
 
