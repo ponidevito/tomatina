@@ -16,14 +16,15 @@ export interface IOrders {
   // entrance: string;
   // apartment: string;
   // callBack: string;
-  // addComment: string;
+  addComment: string;
   // addCommentKitchen: string;
   count: number;
   totalSum:number;
   freePackage:string;
   cash: string;
   withoutRest: string;
-  remainingSum:string | number;
+  remainingSum:number | null;
+  noCall:string;
   // includeShopper:string;
 
   // status: string,
@@ -49,15 +50,16 @@ export interface IOrdersRequest {
   freePackage:string;
   cash: string;
   withoutRestFrom: string;
-  remainingSum:string | number;
+  remainingSum:number | null;
   // includeShopper:string;
   count: number;
+  noCall:string;
 //   adress: string;
 //   number: number;
 //   entrance: string;
 //   apartment: string;
 //   callBack: string;
-//   addComment: string;
+  addComment: string;
 //   addCommentKitchen: string,
   totalSum:number,
 //   status: string,

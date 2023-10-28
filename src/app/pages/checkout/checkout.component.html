@@ -125,10 +125,19 @@
                        </label>
                       </div>
                   </div>
-                  <!-- <div class="checkbox-entry-wrap no_call_me" style="display:none"> <label class="checkbox-entry"> <input type="checkbox" name="no_call"><span>Мені можна не телефонувати для підтвердження замовлення</span> </label></div>
-                  <div class="checkbox-entry-wrap qqq"> <label class="checkbox-entry"> <input type="checkbox" name="is_comment" class="toggle-block-control" data-block="3" data-rel="0"><span>Коментар / промокод / інше</span> </label></div>
-                  <div class="toggle-block" data-block="3" data-rel="0"><textarea name="comment" maxlength="499" class="input" placeholder="Ваш коментар" spellcheck="false"></textarea></div>  -->
-               </div>
+                  <div class="order-checkout__comment">
+                  <div class="order-checkout__checkbox-entry-wrap" > 
+                     <label class="order-checkout__checkbox"> 
+                        <input type="checkbox"  formControlName="noCall" name="no_call"><span>Мені можна не телефонувати для підтвердження замовлення</span> </label>
+                    </div>
+                  <div class="order-checkout__checkbox-entry-wrap "> 
+                    <label class="order-checkout__checkbox" (change)="toggleTextAreaVisibility()"> 
+                      <input type="checkbox" name="is_comment"><span>Коментар / промокод / інше</span>
+                    </label>
+                    </div>
+                  <div class="order-checkout__toggle-block" *ngIf="showTextArea"><textarea formControlName="addComment" name="comment" maxlength="499" class="order-checkout__textarea" placeholder="Ваш коментар"></textarea></div>
+                </div>
+                </div>
 
                 </form>
 
@@ -137,7 +146,7 @@
                 </div>
 
           <div class="checkout__actions">
-            <button type="submit" (click)="addForm()" class="checkout__btn" >Оформити замовлення</button>
+            <button type="submit" (click)="addForm()" class="checkout__btn btn btn-primary" >Оформити замовлення</button>
 
           </div> 
           </div>

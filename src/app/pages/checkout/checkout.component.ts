@@ -57,6 +57,7 @@ export class CheckoutComponent implements OnInit {
   public freePackage!: string;
   public cash: string = 'gotivka';
   public withoutRestFrom!: string;
+  public noCall!: string;
   // public includeShopper = false;
   public inAdvance = false;
   public pickup = false;
@@ -243,6 +244,9 @@ console.log(this.remainingSum)
       cash: new FormControl('gotivka'),
       withoutRestFrom: this.withoutRestFrom,
       remainingSum:this.remainingSum,
+      noCall:this.noCall,
+      addComment: [null],
+
       // includeShopper:this.includeShopper,
     });
   }
@@ -396,7 +400,10 @@ console.log(this.remainingSum)
               freePackage: formValuesOrder.freePackage,
               cash:formValuesOrder.cash,
               withoutRestFrom: formValuesOrder.withoutRestFrom,
-              remainingSum:this.remainingSum,
+              remainingSum:this.remainingSum || null,
+              noCall: formValuesOrder.noCall || null,
+               addComment: formValuesOrder.addComment,
+
               // includeShopper:formValuesOrder.includeShopper,
               totalSum: this.getTotalSum(),
               userUID: userUID,
@@ -520,15 +527,8 @@ console.log(this.remainingSum)
     this.showPay = option === 'gotivka';
     this.withoutRest = true;
     this.orderForm.get('withoutRestFrom')?.setValue(false);
+    this.orderForm.get('remainingSum')?.patchValue(null);
   }
-
-  
-
-  
-
-
-
-
 
   public withoutRest: boolean = true;
 
@@ -553,6 +553,13 @@ console.log(this.remainingSum)
       // Subtract 10 UAH for 'безкоштовний пакет'
       this.totalSum -= 10;
     }
+  }
+
+  public showTextArea: boolean = false;
+
+  toggleTextAreaVisibility(): void {
+    this.showTextArea = !this.showTextArea;
+    // this.remainingSum = 0;
   }
   
   
