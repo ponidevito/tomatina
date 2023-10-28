@@ -111,10 +111,10 @@
                         <div class="order-checkout__moneychange-input">
                           <div class="order-checkout__moneychange-box" *ngIf="withoutRest">
                            <div class="order-checkout__text">Решта з</div>
-                           <input class="input" type="number" placeholder="Сума" name="user_sum"> 
+                           <input class="input" type="number"  formControlName="remainingSum" (input)="calculateRemaining($event)" placeholder="Сума" name="user_sum"> 
                           </div>
                            <label class="order-checkout__checkbox mb-15" (change)="toggleRestVisibility()"> 
-                              <input type="checkbox" name="without_rest"><span>Без решти</span> 
+                              <input type="checkbox" formControlName="withoutRestFrom" value="bez reshti" name="without_rest"><span>Без решти</span> 
                           </label>
                         </div>
                      </div>

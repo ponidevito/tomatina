@@ -22,6 +22,8 @@ export interface IOrders {
   totalSum:number;
   freePackage:string;
   cash: string;
+  withoutRest: string;
+  remainingSum:string | number;
   // includeShopper:string;
 
   // status: string,
@@ -46,6 +48,8 @@ export interface IOrdersRequest {
   productName: string;
   freePackage:string;
   cash: string;
+  withoutRestFrom: string;
+  remainingSum:string | number;
   // includeShopper:string;
   count: number;
 //   adress: string;

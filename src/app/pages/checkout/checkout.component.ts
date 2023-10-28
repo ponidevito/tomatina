@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy,ElementRef } from '@angular/core';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 // import {
 //   Food,
@@ -27,6 +27,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
   ],
 })
 export class CheckoutComponent implements OnInit {
+
+
   public maxDate: Date = new Date();
   constructor(
     public orderService: OrderService,
@@ -53,7 +55,8 @@ export class CheckoutComponent implements OnInit {
   // public selectedInterval!: string;
   // public selectedPickup!: string;
   public freePackage!: string;
-  cash: string = 'gotivka';
+  public cash: string = 'gotivka';
+  public withoutRestFrom!: string;
   // public includeShopper = false;
   public inAdvance = false;
   public pickup = false;
@@ -122,24 +125,31 @@ export class CheckoutComponent implements OnInit {
   }
   // public totalSum!: number;
   public totalSum: number = 0; // Initialize totalSum to zero
-  // This method calculates the price and quantity of the product and displays the total amount
+
+
   // getTotalSum(): number {
   //   if (!this.orderService.basket) {
   //     return 0;
   //   }
-
-  //   return this.orderService.basket.reduce(
+  
+  //   // Calculate the sum of product prices and add the totalSum
+  //   const productsTotal = this.orderService.basket.reduce(
   //     (total, product) => total + product.price * product.count,
   //     0
   //   );
+  
+  //   return productsTotal + this.totalSum; // Include additional cost
   // }
+
+
+  remainingSum!: number ;
 
   getTotalSum(): number {
     if (!this.orderService.basket) {
       return 0;
     }
   
-    // Calculate the sum of product prices and add the totalSum
+    // Calculate the sum of product prices
     const productsTotal = this.orderService.basket.reduce(
       (total, product) => total + product.price * product.count,
       0
@@ -147,12 +157,28 @@ export class CheckoutComponent implements OnInit {
   
     return productsTotal + this.totalSum; // Include additional cost
   }
+  
+// calculateRemaining(enteredValue: string): void {
+//     // Отримання значення, введеного користувачем
+//     const enteredSum = parseFloat(enteredValue) || 0;
 
+//     // Обчислення решти тут, наприклад:
+//     // const remaining = основна_сума - enteredSum;
+//     const remaining = this.getTotalSum() - enteredSum;
+//     // Оновлення значення в вашій формі (якщо потрібно)
 
-  
-  
-  
-  
+// }
+calculateRemaining(event: Event): void {
+  const enteredValue = (event.target as HTMLInputElement).value;
+  const parsedValue = parseFloat(enteredValue) || 0;
+      // const remaining = основна_сума - enteredSum;
+    const remaining = this.getTotalSum() - parsedValue;
+    this.remainingSum = remaining
+console.log(this.remainingSum)
+  // Тут ви можете робити операції з отриманим значенням
+  // Наприклад, оновлення моделі або виклик функції, яка вираховує решту.
+}
+
   
 
 
@@ -214,7 +240,9 @@ export class CheckoutComponent implements OnInit {
       id: this.count + 1,
       count: this.count + 1,
       freePackage: ['freePackage'],
-      cash: new FormControl('gotivka')
+      cash: new FormControl('gotivka'),
+      withoutRestFrom: this.withoutRestFrom,
+      remainingSum:this.remainingSum,
       // includeShopper:this.includeShopper,
     });
   }
@@ -359,6 +387,7 @@ export class CheckoutComponent implements OnInit {
     }, 0);
     if (this.orderForm) {
             const formValuesOrder = this.orderForm.value;
+            const enteredValue = formValuesOrder.user_sum;
             const newOrder: IOrdersResponse = {
               id: this.count + 1,
               selectedHolders: formValuesOrder.selectedHolders,
@@ -366,6 +395,8 @@ export class CheckoutComponent implements OnInit {
               productName: productName,
               freePackage: formValuesOrder.freePackage,
               cash:formValuesOrder.cash,
+              withoutRestFrom: formValuesOrder.withoutRestFrom,
+              remainingSum:this.remainingSum,
               // includeShopper:formValuesOrder.includeShopper,
               totalSum: this.getTotalSum(),
               userUID: userUID,
@@ -488,13 +519,25 @@ export class CheckoutComponent implements OnInit {
   togglePayVisibility(option: string): void {
     this.showPay = option === 'gotivka';
     this.withoutRest = true;
+    this.orderForm.get('withoutRestFrom')?.setValue(false);
   }
+
+  
+
+  
+
+
+
+
 
   public withoutRest: boolean = true;
 
   toggleRestVisibility(): void {
     this.withoutRest = !this.withoutRest;
+    // this.remainingSum = 0;
   }
+
+
 
 
   updateTotalSum(event: Event): void {
