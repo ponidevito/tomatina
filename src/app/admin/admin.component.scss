@@ -27,6 +27,7 @@
 .admin {
   @include lg {
     width: 100%;
+    z-index: 8;
   }
   &__body {
     margin-bottom: 20px;

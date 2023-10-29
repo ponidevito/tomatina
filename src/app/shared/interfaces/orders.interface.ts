@@ -4,12 +4,14 @@ export interface IOrders {
   selectedHolders: string;
   // selectedInterval: string;
   // selectedPickup: string;
-  // date: string;
+  date: string;
   productName: string;
   // cash: string;
   // delivery: string;
   // inAdvance: string;
   // firstName: string;
+  // lastName:string,
+
   // phone: string | number;
   // adress: string;
   // number: number;
@@ -26,6 +28,9 @@ export interface IOrders {
   remainingSum:number | null;
   noCall:string;
   // includeShopper:string;
+  fullName: string;
+  status: string,
+  phone:number;
 
   // status: string,
   // productCountNumber:number,
@@ -39,12 +44,12 @@ export interface IOrdersRequest {
   selectedHolders: string;
 //   selectedInterval: string;
 //   selectedPickup: string;
-//   date: string;
+  date: string;
 //   cash: string;
 //   delivery: string;
 //   inAdvance: string;
   // firstName: string;
-//   lastName:string,
+  // lastName:string,
 //   phone: string | number;
   productName: string;
   freePackage:string;
@@ -54,6 +59,9 @@ export interface IOrdersRequest {
   // includeShopper:string;
   count: number;
   noCall:string;
+  fullName: string;
+  status: string,
+phone:number;
 //   adress: string;
 //   number: number;
 //   entrance: string;

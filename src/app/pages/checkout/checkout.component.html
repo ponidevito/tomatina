@@ -19,10 +19,8 @@
             <input type="text" class="checkout__input input-contact" formControlName="phone"  mask="(000) 000-00-00" prefix="+38" [class.error-input]="isInvalid('phone')" [class.valid-input]="isValid('phone')">
             <input type="email" class="checkout__input input-contact email-input" formControlName="email" placeholder="Email, щоб отримати копію замовлення">
           </div>
-
+          <div class="order-checkout__form-title"><b>2.</b>Інформація про доставку</div>
             <div class="order-checkout__box-pickup">
-
-            <div class="order-checkout__form-title"><b>2.</b>Інформація про доставку</div>
             <label class="order-checkout__checkbox"> 
               <input  type="radio" name="delivery_method"  checked="" value="local_pickup"> <span>Самовивіз </span> 
             </label>

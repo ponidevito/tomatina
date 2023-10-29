@@ -521,6 +521,12 @@ app-admin-goods {
   }
 }
 
+app-admin-order{
+  @include md {
+    width: 100%;
+  }
+}
+
 // animated progress
 
 .animated-progress {

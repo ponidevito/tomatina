@@ -1,0 +1,52 @@
+<div class="admin-order order">
+    <div class="order__container">
+        <div class="order__items">
+                            <!-- table -->
+                            <table class="table table-order table-global"> 
+                                <thead>
+                                    <tr class="tr-top  table-order__tr-top">
+                                    <th>№</th>
+                                    <th>Ім'я та прізвище</th>
+                                    <th >Дата та час</th>
+                                    <th>Телефон</th>
+                                    <th>Сума</th>
+                                    <th>Статус</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let order of ordersArray  ;index as i;">
+                                        <tr>
+                                            <td><b>№ {{order.count}}</b> </td>
+                                             <td>{{ order.fullName }}</td> 
+                                            <td>{{ order.date }}</td>                                              
+                                            <td>{{ order.phone }}</td>
+
+                                            <td><b>{{order.totalSum}}</b>&nbsp;грн</td>
+                                            <td class="table-global__actions">
+                                            <button type="button" class="order-order__button table-global__button" (click)="onOrderComplete(order.id.toString())" [disabled]="order.status === 'виконано'">Виконано
+                                            </button>
+                                            <button type="button" class="order-order__button table-global__button"  (click)="onOrderCanceled(order.id.toString())" [disabled]="order.status === 'скасовано'">Скасувати
+                                            </button>
+                                            </td>
+                                        </tr>
+                                        <tr >
+                                            <td></td>
+                                            <td>{{order.productName}}</td>
+                                            <td></td>
+                                            <!-- <td>{{order.productCountNumber}} шт.</td> -->
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                       </ng-container>
+                            <ng-container *ngIf="!ordersArray || ordersArray.length === 0">
+                                <div class=" table-order__empty table-global__empty">Немає доданих категорій</div>
+                              </ng-container> 
+                                </tbody>
+
+
+
+                         </table> 
+        </div>
+    </div>
+    
+</div>

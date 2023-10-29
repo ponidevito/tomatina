@@ -194,7 +194,7 @@ console.log(this.remainingSum)
           this.user = user.uid;
           this.ordersArray = data as IOrdersResponse[];
           this.spinnerService.hide(); // show spinner
-          // this.ordersArray.sort((a, b) => a.count - b.count);
+          this.ordersArray.sort((a, b) => a.count - b.count);
           this.countOrder();
         }
         this.spinnerService.hide(); // show spinner
@@ -215,8 +215,8 @@ console.log(this.remainingSum)
       // cash: ['cash'],
       // delivery: ['delivery'],
       // inAdvance: [null],
-      firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/), Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/), Validators.minLength(2)]],
+      firstName: [currentUser.firstName, [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/), Validators.minLength(2)]],
+      lastName: [currentUser.lastName, [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/), Validators.minLength(2)]],
       phone: [currentUser.phone, [Validators.required]],
       email:[null],
       // phone: [currentUser.phone, [Validators.required]],
@@ -498,6 +498,8 @@ console.log(this.remainingSum)
         addComment: formValuesOrder.addComment,
         totalSum: this.getTotalSum(),
         userUID: userUID,
+        status: 'в процесі',
+
       };
   
       // Додайте дані з другої форми

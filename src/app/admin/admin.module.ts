@@ -5,7 +5,7 @@ import { AdminComponent } from '../admin/admin.component';
 // import { AdminActionsComponent } from '../admin/admin-actions/admin-actions.component';
 import { AdminCategoryComponent } from '../admin/admin-category/admin-category.component';
 import { AdminGoodsComponent } from '../admin/admin-goods/admin-goods.component';
-// import { AdminOrderComponent } from '../admin/admin-order/admin-order.component';
+import { AdminOrderComponent } from '../admin/admin-order/admin-order.component';
 import { SharedModule } from '../shared/shared.module';
 
 
@@ -17,7 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     // AdminActionsComponent,
     AdminCategoryComponent,
     AdminGoodsComponent,
-    // AdminOrderComponent
+    AdminOrderComponent
   ],
   imports: [
     CommonModule,

@@ -252,17 +252,14 @@
       transition: 0.35s;
     }
     &:hover::before {
-      background: #b5d8f7;
+      background: #599921;
     }
     &:hover::after {
       top: -4px;
-      background: #b5d8f7;
+      background: #599921;
     }
   }
   &__total {
-    // position: absolute;
-    // right: 15px;
-    // bottom: 10px;
     display: flex;
     justify-content: flex-end;
     color: #252525;
@@ -744,7 +741,7 @@
     border: 1px solid #ececec;
     border-radius: 6px;
     flex-direction: column;
-    @include xs{
+    @include xs {
       padding: 5px;
     }
   }
@@ -752,7 +749,7 @@
     padding: 20px 20px 20px 30px;
     width: 100%;
     animation: fade 0.3s linear;
-    @include xs{
+    @include xs {
       padding: 10px;
     }
   }
@@ -785,7 +782,7 @@
     padding: 30px 0;
     border-bottom: 1px solid #ececec;
     margin-bottom: 15px;
-    @include xs{
+    @include xs {
       padding: 15px 0;
     }
   }
@@ -840,6 +837,12 @@
     padding: 0 0 30px;
     &:not(:last-child) {
       margin-bottom: 30px;
+      @include xs {
+        margin-bottom: 20px;
+      }
+    }
+    @include xs {
+      padding: 0 0 10px;
     }
   }
 
@@ -855,7 +858,7 @@
     max-height: 3em;
     &:not(:last-child) {
       margin-bottom: 20px;
-      @include xs{
+      @include xs {
         margin-bottom: 10px;
       }
     }
@@ -891,6 +894,9 @@
       text-align: center;
       top: -2px;
     }
+    @include xs {
+      // margin-bottom: 0;
+    }
   }
 
   &__pay-block {
@@ -912,9 +918,11 @@
   &__moneychange-input {
     display: flex;
     align-items: center;
-    // padding: 0 0 20px;
     gap: 20px;
-
+    @include xs {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
     input {
       outline: none;
       flex-shrink: 0;
@@ -942,6 +950,9 @@
     gap: 20px;
     &:not(:last-child) {
       margin-bottom: 15px;
+      @include xs{
+        margin-bottom: 10px;
+      }
     }
   }
 
