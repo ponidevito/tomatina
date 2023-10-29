@@ -873,3 +873,9 @@ input::-webkit-inner-spin-button {
 .mt-15 {
   margin-top: 15px;
 }
+
+//  button disabled
+button:disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}

@@ -9,16 +9,57 @@
         <div class="checkout__items">
           <div class="checkout__item">
             <form class="checkout__formFood" [formGroup]="foodForm"  >
+              <div class="order-checkout__box-contact">
+              <div class="order-checkout__form-title"><b>1.</b>Контактні дані</div>
+              <div class="checkout__input-box">
+                <input type="text" class="checkout__input" formControlName="firstName" name="firstName"  placeholder="Ваше ім'я*" [class.error-input]="isInvalid('firstName')" [class.valid-input]="isValid('firstName')">
+                <input type="text" class="checkout__input" formControlName="lastName" name="lastName"  placeholder="Ваше Прізвище*"  [class.error-input]="isInvalid('lastName')" [class.valid-input]="isValid('lastName')">
 
+            </div>
+            <input type="text" class="checkout__input input-contact" formControlName="phone"  mask="(000) 000-00-00" prefix="+38" [class.error-input]="isInvalid('phone')" [class.valid-input]="isValid('phone')">
+            <input type="email" class="checkout__input input-contact email-input" formControlName="email" placeholder="Email, щоб отримати копію замовлення">
+          </div>
+
+            <div class="order-checkout__box-pickup">
+
+            <div class="order-checkout__form-title"><b>2.</b>Інформація про доставку</div>
+            <label class="order-checkout__checkbox"> 
+              <input  type="radio" name="delivery_method"  checked="" value="local_pickup"> <span>Самовивіз </span> 
+            </label>
+            <!-- select -->
+
+            <mat-form-field style="margin-bottom: -1.25em" class="checkout__adress-select"  appearance="outline">
+              <mat-select  formControlName="selectedPickup" name="pickup">
+              <mat-option  *ngFor="let adress of pickups" [value]="adress.value" [disabled]="adress.disabled">
+                {{adress.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <!-- time -->
+
+        <div class="checkout__input-box">
+          <mat-form-field style="margin-bottom: -1.25em" class="example-full-width checkout__input-date" appearance="outline">
+            <!-- <mat-label>Дата доставки</mat-label> -->
+            <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker"  formControlName="date" >
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker [max]="maxDate"></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field style="margin-bottom: -1.25em" class="checkout__food-select"  appearance="outline">
+            <mat-select formControlName="selectedInterval" name="interval">
+            <mat-option  *ngFor="let time of times"  [value]="time.value" >
+              {{time.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
+      </div>
+
+
+        </div>
 
             </form>
 
-            <div class="checkout__map map-checkout">
-              <div class="map-checkout__map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4325.453004906748!2d24.01251778183582!3d49.8625643484255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473addae674cfd1d%3A0xa8962158c408d4fc!2z0L_RgNC-0YHQv9C10LrRgiDQkifRj9GH0LXRgdC70LDQstCwINCn0L7RgNC90L7QstC-0LvQsCwgOTUsINCb0YzQstGW0LIsINCb0YzQstGW0LLRgdGM0LrQsCDQvtCx0LvQsNGB0YLRjCwgNzkwMDA!5e0!3m2!1suk!2sua!4v1682593399022!5m2!1suk!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                </iframe> 
-              </div>
-             </div>  
+ 
           </div>
 
           <div class="checkout__item">
@@ -31,14 +72,15 @@
                       <h5 class="checkout__title-buy" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]">{{product.name}}</h5>
                       <div class="checkout__box">
                         <div class="checkout__summa">{{ product.price * product.count }} <span>грн</span></div>
+
+                        <div class="checkout__box-wrap">
                         <div class="thumb-input-number">
                           <button type="button" class="decrement" (click)="productCount(product, false)">-</button>
                           <input [value]="product.count" readonly="" class="product-qty" tabindex="-1" max="999">
                           <button type="button" class="increment" (click)="productCount(product, true)">+</button>
                        </div>
-                      
                       <button class="checkout__remove"  (click)="removeProduct(product, $event)"><div class="checkout__trash"></div></button>
-
+                    </div>
                     </div>
                     </div>
 
@@ -146,7 +188,7 @@
                 </div>
 
           <div class="checkout__actions">
-            <button type="submit" (click)="addForm()" class="checkout__btn btn btn-primary" >Оформити замовлення</button>
+            <button type="submit" (click)="addForm()" [disabled]="foodForm.invalid" class="checkout__btn btn btn-primary" >Оформити замовлення</button>
 
           </div> 
           </div>

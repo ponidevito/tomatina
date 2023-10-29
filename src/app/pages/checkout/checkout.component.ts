@@ -12,6 +12,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { IOrdersResponse } from 'src/app/shared/interfaces/orders.interface';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ITimes, Pickup } from 'src/app/shared/interfaces/adressDelivery.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -52,8 +53,8 @@ export class CheckoutComponent implements OnInit {
 
   // public selectedValue!: string;
   public selectedHolders!: string;
-  // public selectedInterval!: string;
-  // public selectedPickup!: string;
+  public selectedInterval!: string;
+  public selectedPickup!: string;
   public freePackage!: string;
   public cash: string = 'gotivka';
   public withoutRestFrom!: string;
@@ -206,16 +207,18 @@ console.log(this.remainingSum)
   initFoodForm(): void {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.foodForm = this.fb.group({
-      // selectedValue: [this.foods[0].value],
+      selectedPickup: [this.pickups[0].value],
       // selectedHolders: [this.holders[0].value],
-      // selectedInterval: [this.times[0].value],
+      selectedInterval: [this.times[0].value],
       // selectedPickup: [this.pickups[0].value],
-      // date: new Date(),
+      date: new Date(),
       // cash: ['cash'],
       // delivery: ['delivery'],
       // inAdvance: [null],
-      // firstName: [currentUser.firstName, [Validators.required]],
-      // lastName: [currentUser.lastName],
+      firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/), Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/), Validators.minLength(2)]],
+      phone: [currentUser.phone, [Validators.required]],
+      email:[null],
       // phone: [currentUser.phone, [Validators.required]],
       // adress: [
       //   currentUser.adress,
@@ -246,20 +249,29 @@ console.log(this.remainingSum)
       remainingSum:this.remainingSum,
       noCall:this.noCall,
       addComment: [null],
-
-      // includeShopper:this.includeShopper,
     });
   }
 
-  // This is an array of Food
-  // foods: Food[] = [
-  //   { value: '1', viewValue: '1' },
-  //   { value: '2', viewValue: '2' },
-  //   { value: '3', viewValue: '3' },
-  //   { value: '4', viewValue: '4' },
-  //   { value: '5', viewValue: '5' },
-  //   { value: '6 + 15 грн', viewValue: '6 + 15 грн' },
-  // ];
+  isInvalid(field: string) {
+    return this.foodForm.get(field)?.invalid && (this.foodForm.get(field)?.dirty || this.foodForm.get(field)?.touched);
+  }
+
+  isValid(field: string) {
+    return this.foodForm.get(field)?.valid && this.foodForm.get(field)?.dirty;
+  }
+
+  // This is an array of Adress
+  pickups: Pickup[] = [
+    {
+      value: 'Ресторан за адресою',
+      viewValue: 'Ресторан за адресою',
+      disabled: true,
+    },
+    { value: 'ТРЦ Victoria Gardens, Кульпарківська, 226 А', viewValue: 'ТРЦ Victoria Gardens, Кульпарківська, 226 А' },
+    { value: 'СТРЦ Spartak, Мазепи, 1Б', viewValue: 'СТРЦ Spartak, Мазепи, 1Б' },
+    { value: 'ТРЦ Forum Lviv, Під Дубом, 7Б', viewValue: 'ТРЦ Forum Lviv, Під Дубом, 7Б' },
+    { value: 'ТРЦ King Cross, Стрийська, 30', viewValue: 'ТРЦ King Cross, Стрийська, 30' },
+  ];
 
   // This is an array of Holders
   // holders: Holders[] = [
@@ -272,14 +284,19 @@ console.log(this.remainingSum)
   //   { value: '1', viewValue: '1' },
   // ];
   // This is an array of Times
-  // times: ITimes[] = [
-  //   {
-  //     value: 'Виберіть часовий інтервал',
-  //     viewValue: 'Виберіть часовий інтервал',
-  //   },
-  //   { value: '11:00-11:15', viewValue: '11:00-11:15' },
-  //   { value: '11:15-11:30', viewValue: '11:15-11:30' },
-  // ];
+  times: ITimes[] = [
+    {
+      value: 'Виберіть часовий інтервал',
+      viewValue: 'Виберіть часовий інтервал',
+    },
+    { value: '12:41 - 12:51', viewValue: '12:41 - 12:51' },
+    { value: '12:51 - 13:01', viewValue: '12:51 - 13:01' },
+    { value: '13:01 - 13:11', viewValue: '13:01 - 13:11' },
+    { value: '13:11 - 13:21', viewValue: '13:11 - 13:21' },
+    { value: '13:21 - 13:31', viewValue: '13:21 - 13:31' },
+    { value: '13:31 - 13:41', viewValue: '13:31 - 13:41' },
+    { value: '14:01 - 14:11', viewValue: '14:01 - 14:11' },
+  ];
 
   // This is an array of Pickups
   // pickups: IPickups[] = [
@@ -374,6 +391,74 @@ console.log(this.remainingSum)
   //   // }
   // }
 
+  // addForm(): void {
+  //   const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
+  //   const productName = products.join(', ');
+  //   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  //   const userUID = currentUser.uid || ''; // set userUID to an empty string if it's undefined or null
+
+  //   const myDate = new Date();
+  //   const day = myDate.getDate().toString().padStart(2, '0');
+  //   const month = (myDate.getMonth() + 1).toString().padStart(2, '0');
+  //   const hours = myDate.getHours().toString().padStart(2, '0');
+  //   const minutes = myDate.getMinutes().toString().padStart(2, '0');
+  //   const date = `${day}.${month}.${hours}.${minutes}`;
+  //   const totalCount = this.orderService.basket.reduce((acc, curr) => {
+  //     return acc + curr.count;
+  //   }, 0);
+  //   if (this.orderForm) {
+  //           const formValuesOrder = this.orderForm.value;
+  //           const enteredValue = formValuesOrder.user_sum;
+  //           const newOrder: IOrdersResponse = {
+  //             id: this.count + 1,
+  //             selectedHolders: formValuesOrder.selectedHolders,
+  //             count: this.count + 1,
+  //             productName: productName,
+  //             freePackage: formValuesOrder.freePackage,
+  //             cash:formValuesOrder.cash,
+  //             withoutRestFrom: formValuesOrder.withoutRestFrom,
+  //             remainingSum:this.remainingSum || null,
+  //             noCall: formValuesOrder.noCall || null,
+  //             addComment: formValuesOrder.addComment,
+  //             // firstName: formValuesOrder.firstName,
+
+  //             // includeShopper:formValuesOrder.includeShopper,
+  //             totalSum: this.getTotalSum(),
+  //             userUID: userUID,
+  //           };
+  //           console.log(newOrder)
+
+  //           // Add the new order to the Firestore database
+  //           this.orderService.createFirebase(newOrder as any);
+  //           // this.clearBasket();
+  //           this.toastService.success('Ваше замовлення оформлене');
+
+  //   }
+  //   if (this.foodForm) {
+  //     const formValues = this.foodForm.value;
+  //     const newAdressOrder: IAdressResponse = {
+  //       firstName: formValues.firstName,
+  //     };
+  //     // Add the new order to the Firestore database
+  //     this.orderService.createFirebase(newAdressOrder as any);
+  //     // this.clearBasket();
+  //     // this.toastService.success('Ваше замовлення оформлене');
+  //   }
+  //       // Отримання значень з обох форм
+  //       const dataFromFormFirst = this.orderForm.value;
+  //       const dataFromFormSecond = this.foodForm.value;    
+  //       const combinedData = { ...dataFromFormFirst, ...dataFromFormSecond };
+  //       console.log('Об\'єднані дані:', combinedData);
+
+
+
+
+  //   this.clearBasket();
+  //   this.toastService.success('Ваше замовлення оформлене');
+  // }
+
+  // This method count order
+ 
   addForm(): void {
     const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
     const productName = products.join(', ');
@@ -389,70 +474,59 @@ console.log(this.remainingSum)
     const totalCount = this.orderService.basket.reduce((acc, curr) => {
       return acc + curr.count;
     }, 0);
-    if (this.orderForm) {
-            const formValuesOrder = this.orderForm.value;
-            const enteredValue = formValuesOrder.user_sum;
-            const newOrder: IOrdersResponse = {
-              id: this.count + 1,
-              selectedHolders: formValuesOrder.selectedHolders,
-              count: this.count + 1,
-              productName: productName,
-              freePackage: formValuesOrder.freePackage,
-              cash:formValuesOrder.cash,
-              withoutRestFrom: formValuesOrder.withoutRestFrom,
-              remainingSum:this.remainingSum || null,
-              noCall: formValuesOrder.noCall || null,
-               addComment: formValuesOrder.addComment,
-
-              // includeShopper:formValuesOrder.includeShopper,
-              totalSum: this.getTotalSum(),
-              userUID: userUID,
-            };
-            console.log(newOrder)
-
-            // Add the new order to the Firestore database
-            this.orderService.createFirebase(newOrder as any);
-            // this.clearBasket();
-            this.toastService.success('Ваше замовлення оформлене');
-
+    if (this.orderForm && this.foodForm) {
+      const formValuesOrder = this.orderForm.value;
+      const formValuesFood = this.foodForm.value;
+  
+      const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
+      const productName = products.join(', ');
+  
+      const totalCount = this.orderService.basket.reduce((acc, curr) => {
+        return acc + curr.count;
+      }, 0);
+  
+      const newOrder: any = {
+        // Додайте дані з першої форми
+        selectedHolders: formValuesOrder.selectedHolders,
+        count: this.count + 1,
+        productName: productName,
+        freePackage: formValuesOrder.freePackage,
+        cash: formValuesOrder.cash,
+        withoutRestFrom: formValuesOrder.withoutRestFrom,
+        remainingSum: this.remainingSum || null,
+        noCall: formValuesOrder.noCall || null,
+        addComment: formValuesOrder.addComment,
+        totalSum: this.getTotalSum(),
+        userUID: userUID,
+      };
+  
+      // Додайте дані з другої форми
+      newOrder.fullName = formValuesFood.firstName + ' ' + formValuesFood.lastName;
+      newOrder.phone = formValuesFood.phone;
+      newOrder.email = formValuesFood.email;
+      newOrder.selectedPickup = formValuesFood.selectedPickup;
+      newOrder.date = date;
+      newOrder.selectedInterval = formValuesFood.selectedInterval;
+  
+      // Відправлення комбінованих даних на Firebase
+      this.orderService.createFirebase(newOrder);
+      console.log(newOrder)
+      // this.clearBasket();
+      // this.toastService.success('Ваше замовлення оформлене');
     }
-    // if (this.foodForm) {
-    //   const formValues = this.foodForm.value;
-    //   const newOrder: IOrdersResponse = {
-    //     id: this.count + 1,
-    //     selectedValue: formValues.selectedValue,
-    //     selectedHolders: formValues.selectedHolders,
-    //     selectedInterval: formValues.selectedInterval,
-    //     selectedPickup: formValues.selectedPickup,
-    //     date: date,
-    //     cash: formValues.cash,
-    //     delivery: formValues.delivery,
-    //     inAdvance: formValues.inAdvance,
-    //     firstName: formValues.firstName,
-    //     lastName: formValues.lastName,
-    //     productName: productName,
-    //     phone: formValues.phone,
-    //     adress: formValues.adress,
-    //     number: formValues.number,
-    //     entrance: formValues.entrance,
-    //     apartment: formValues.apartment,
-    //     callBack: formValues.callBack,
-    //     addComment: formValues.addComment,
-    //     addCommentKitchen: formValues.addCommentKitchen,
-    //     count: this.count + 1,
-    //     totalSum: this.getTotalSum(),
-    //     status: 'в процесі',
-    //     productCountNumber: totalCount,
-    //     userUID: userUID,
-    //   };
-    //   // Add the new order to the Firestore database
-      // this.orderService.createFirebase(newOrder as any);
-    //   this.clearBasket();
-    //   this.toastService.success('Ваше замовлення оформлене');
-    // }
-  }
 
-  // This method count order
+
+
+    this.clearBasket();
+    this.toastService.success('Ваше замовлення оформлене');
+  }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   countOrder(): void {
     this.orderService.getAllFirebase().subscribe((data) => {
       this.count = data.length;
@@ -467,7 +541,10 @@ console.log(this.remainingSum)
     this.orderService.updateBasket();
     this.orderService.basket = [];
     this.orderService.changeBasket.next(true);
-        this.orderForm.reset();
+    this.orderForm.reset();
+    this.foodForm.reset();
+    this.router.navigate(['/']);
+
 
     // this.foodForm.reset();
     // this.router.navigate(['my-cabinet/order-history']);

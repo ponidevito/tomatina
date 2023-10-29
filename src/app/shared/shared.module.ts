@@ -51,7 +51,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ...MATERIAL,
     FormsModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
+
   ],
   exports: [
     ...MATERIAL,

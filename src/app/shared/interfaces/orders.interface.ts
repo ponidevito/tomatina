@@ -43,7 +43,7 @@ export interface IOrdersRequest {
 //   cash: string;
 //   delivery: string;
 //   inAdvance: string;
-//   firstName: string;
+  // firstName: string;
 //   lastName:string,
 //   phone: string | number;
   productName: string;
