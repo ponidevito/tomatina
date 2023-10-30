@@ -9,6 +9,7 @@ import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { GoodsService } from 'src/app/shared/services/goods/goods.service';
 import { OrderService } from 'src/app/shared/services/order/order.service';
 import { Router } from '@angular/router';
+import { CategoryService } from '../../shared/services/category/category.service';
 
 
 
@@ -27,6 +28,8 @@ export class HeaderComponent implements OnInit {
     private goodsService: GoodsService,
     public orderService: OrderService,
     public router: Router,
+    public categoryService: CategoryService,
+
 
 
 
@@ -287,5 +290,8 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  onMenuSelect(category: string) {
+    this.categoryService.setSelectedCategory(category);
+  }
 
 }

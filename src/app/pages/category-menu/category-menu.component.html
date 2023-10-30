@@ -4,8 +4,8 @@
         <div class="categories-menu">
             <div class="category-title">healthy &amp; tasty menu</div>
                 <ul class="categories-list">
-                    <li class="categories-list-item " [class.active]="categoryName === 'special-edition'"><a [routerLink]="[ '/category-menu/special-edition' ]" >Special Edition</a></li>
-                    <li class="categories-list-item " [class.active]="categoryName === 'healthy'"><a  [routerLink]="[ '/category-menu/healthy' ]">healthy & tasty menu</a></li>
+                    <li class="categories-list-item " [class.active]="categoryName === 'special-edition'"><a [routerLink]="[ '/category-menu/special-edition' ]" (click)="changeSelectedCategory('special-edition')">Special Edition</a></li>
+                    <li class="categories-list-item " [class.active]="categoryName === 'healthy'"><a  [routerLink]="[ '/category-menu/healthy' ]" (click)="changeSelectedCategory('healthy')">healthy & tasty menu</a></li>
                     <li class="categories-list-item " [class.active]="categoryName === 'combo'"><a  [routerLink]="[ '/category-menu/combo' ]" >Комбо меню</a></li>
                     <li class="categories-list-item  " [class.active]="categoryName === 'snidanky'"><a [routerLink]="[ '/category-menu/snidanky' ]">Сніданки до 18:00</a></li>
                     <li class="categories-list-item  " [class.active]="categoryName === 'salaty-pasty'"><a [routerLink]="[ '/category-menu/salaty-pasty' ]">Салати пасти</a></li>
@@ -19,7 +19,15 @@
                     <li class="categories-list-item  " [class.active]="categoryName === 'drinks'"><a [routerLink]="[ '/category-menu/drinks' ]">Напої</a></li>            
                 </ul>
                 
+            <!-- select -->
 
+            <mat-form-field style="margin-bottom: -1.25em" class="categories-menu__menu-select"  appearance="outline">
+               <mat-select  name="menu" [formControl]="selectedCategoryControl" (selectionChange)="onCategorySelect($event)">
+               <mat-option  *ngFor="let item of menu" [value]="item.value" >
+                 {{item.viewValue}}
+               </mat-option>
+             </mat-select>
+           </mat-form-field>
 
         </div>
          <div class="row product-row filters-row isotop-row">

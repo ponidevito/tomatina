@@ -74,14 +74,14 @@
                              <a href="javascript:void(0)"  class="menu__link menu" (click)="openSubMenu($event)">МЕНЮ</a>
                              <ul class="menu__submenu" [ngClass]="{'active': isSubMenu}">
                                 <li  class="menu__show-submenu menu__submenu-item">
-                                   <a [routerLink]="[ 'category-menu/healthy' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
+                                   <a [routerLink]="[ 'category-menu/healthy' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect();onMenuSelect('healthy')">
                                       <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsalmon-salat-boul.webp.pagespeed.ic.julA0vK2aP.webp" alt="healthy">
                                       </div>
                                       <span>healthy &amp; tasty menu</span>
                                    </a>
                                 </li>
                                 <li  class="menu__show-submenu menu__submenu-item">
-                                   <a [routerLink]="[ 'category-menu/special-edition' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect()">
+                                   <a [routerLink]="[ 'category-menu/special-edition' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect();onMenuSelect('special-edition')">
                                       <div class="menu__submenu-imgs"><img src="https://www.tomatina.ua/wp-content/uploads/2023/08/xproshuto-dynya-site.webp.pagespeed.ic.wzEws5hrTd.webp" alt="special-edition">
                                       </div>
                                       <span>Special Edition</span>

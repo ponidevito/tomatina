@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy,OnInit } from '@angular/core';
 import { GoodsService } from '../../shared/services/goods/goods.service';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
@@ -6,19 +6,27 @@ import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order/order.service';
 import { CookieService } from 'ngx-cookie-service';
+import { IMenu } from 'src/app/shared/interfaces/menu-select.interface';
+import { FormControl } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
+import { CategoryService } from '../../shared/services/category/category.service';
+
 
 @Component({
   selector: 'app-category-menu',
   templateUrl: './category-menu.component.html',
   styleUrls: ['./category-menu.component.scss'],
 })
-export class CategoryMenuComponent {
+export class CategoryMenuComponent implements OnInit,OnDestroy {
   constructor(
     private goodsService: GoodsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private orderService: OrderService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    public categoryService: CategoryService,
+
+    
   ) {
     this.eventSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -26,7 +34,16 @@ export class CategoryMenuComponent {
       }
       // this.selectFilter('Соуси');
     });
+
+    this.categoryService.getSelectedCategory().subscribe((selectedCategory: string) => {
+      // Отримано оновлену категорію
+      this.selectedCategory = selectedCategory;
+      this.selectedCategoryControl.setValue(selectedCategory);
+      // Викликати інші методи або логіку, яку вам потрібно виконати після отримання нової категорії
+    });
   }
+
+
 
   private eventSubscription!: Subscription;
 
@@ -38,8 +55,13 @@ export class CategoryMenuComponent {
 
   ngOnInit(): void {
     this.loadGoods();
+    const selectedCategoryValue = this.selectedCategoryControl.value;
 
-    // // Перевірити наявність збереженого стану корзини в localStorage
+    if (selectedCategoryValue !== null) {
+      this.changeSelectedCategory(selectedCategoryValue); // Викличте зміну значення
+  
+      // Решта вашого коду
+    }
     // Перевірити наявність збереженого стану корзини в localStorage
     const savedBasket = localStorage.getItem('basket');
     if (savedBasket) {
@@ -72,6 +94,8 @@ export class CategoryMenuComponent {
         // this.spinnerService.hide();
       });
   }
+
+
 
   proteins: number = 45;
   fats: number = 48;
@@ -119,6 +143,39 @@ export class CategoryMenuComponent {
       JSON.stringify(this.orderService.getCartItems())
     );
   }
+
+  selectedCategoryControl = new FormControl('special-edition');
+
+  menu: IMenu[] = [
+    // {
+    //   value: 'special-edition',
+    //   viewValue: 'Special Edition',
+    // },
+    { value: 'special-edition', viewValue: 'Special Edition' },
+    { value: 'healthy', viewValue: 'Healthy & tasty menu' },
+    { value: '13:01 - 13:11', viewValue: '13:01 - 13:11' },
+    { value: '13:11 - 13:21', viewValue: '13:11 - 13:21' },
+    { value: '13:21 - 13:31', viewValue: '13:21 - 13:31' },
+    { value: '13:31 - 13:41', viewValue: '13:31 - 13:41' },
+    { value: '14:01 - 14:11', viewValue: '14:01 - 14:11' },
+  ];
+
+
+  onCategorySelect(event: MatSelectChange) {
+    const route = event.value;
+    console.log('Обрана категорія:', route);
+    console.log('Обрана категорія FormControl:', this.selectedCategoryControl.value);
+    this.selectedCategoryControl.setValue(route); // Оновіть значення у FormControl
+    this.router.navigate(['/category-menu', route]);
+  }
+
+  selectedCategory: string = 'special-edition';
+  changeSelectedCategory(category: string) {
+    this.selectedCategoryControl.setValue(category);
+  }
+
+
+
 
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();

@@ -16,7 +16,7 @@ import {
   docData,
 } from '@angular/fire/firestore';
 import { DocumentData, collection } from '@firebase/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,14 @@ export class CategoryService {
   constructor(private http: HttpClient,private afs: Firestore) {
     this.categoriesCollection = collection(this.afs, 'categories');
   }
+  private selectedCategorySubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  getSelectedCategory(): Observable<string> {
+    return this.selectedCategorySubject.asObservable();
+  }
 
+  setSelectedCategory(category: string): void {
+    this.selectedCategorySubject.next(category);
+  }
 
   // ========== firebase ======// 
 
