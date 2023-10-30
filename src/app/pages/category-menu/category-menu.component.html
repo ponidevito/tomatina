@@ -6,17 +6,17 @@
                 <ul class="categories-list">
                     <li class="categories-list-item " [class.active]="categoryName === 'special-edition'"><a [routerLink]="[ '/category-menu/special-edition' ]" (click)="changeSelectedCategory('special-edition')">Special Edition</a></li>
                     <li class="categories-list-item " [class.active]="categoryName === 'healthy'"><a  [routerLink]="[ '/category-menu/healthy' ]" (click)="changeSelectedCategory('healthy')">healthy & tasty menu</a></li>
-                    <li class="categories-list-item " [class.active]="categoryName === 'combo'"><a  [routerLink]="[ '/category-menu/combo' ]" >Комбо меню</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'snidanky'"><a [routerLink]="[ '/category-menu/snidanky' ]">Сніданки до 18:00</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'salaty-pasty'"><a [routerLink]="[ '/category-menu/salaty-pasty' ]">Салати пасти</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'salat-boul'"><a [routerLink]="[ '/category-menu/salat-boul' ]">Салат боули</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'salaty'"><a [routerLink]="[ '/category-menu/salaty' ]">Салати</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'fresh-rol'"><a [routerLink]="[ '/category-menu/fresh-rol' ]">Фреш-роли</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'supy'"><a [routerLink]="[ '/category-menu/supy' ]">Супи</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'zapikanky'"><a [routerLink]="[ '/category-menu/zapikanky' ]">Запіканки</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'deserty'"><a [routerLink]="[ '/category-menu/deserty' ]">Десерти</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'smuzi'"><a [routerLink]="[ '/category-menu/smuzi' ]">Смузі</a></li>
-                    <li class="categories-list-item  " [class.active]="categoryName === 'drinks'"><a [routerLink]="[ '/category-menu/drinks' ]">Напої</a></li>            
+                    <li class="categories-list-item " [class.active]="categoryName === 'combo'"><a  [routerLink]="[ '/category-menu/combo' ]" (click)="changeSelectedCategory('combo')">Комбо меню</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'snidanky'"><a [routerLink]="[ '/category-menu/snidanky' ]" (click)="changeSelectedCategory('snidanky')">Сніданки до 18:00</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'salaty-pasty'"><a [routerLink]="[ '/category-menu/salaty-pasty' ]" (click)="changeSelectedCategory('salaty-pasty')">Салати пасти</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'salat-boul'"><a [routerLink]="[ '/category-menu/salat-boul' ]" (click)="changeSelectedCategory('salat-boul')">Салат боули</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'salaty'"><a [routerLink]="[ '/category-menu/salaty' ]" (click)="changeSelectedCategory('salaty')">Салати</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'fresh-rol'"><a [routerLink]="[ '/category-menu/fresh-rol' ]" (click)="changeSelectedCategory('fresh-rol')">Фреш-роли</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'supy'"><a [routerLink]="[ '/category-menu/supy' ]" (click)="changeSelectedCategory('supy')">Супи</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'zapikanky'"><a [routerLink]="[ '/category-menu/zapikanky' ]" (click)="changeSelectedCategory('zapikanky')">Запіканки</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'deserty'"><a [routerLink]="[ '/category-menu/deserty' ]" (click)="changeSelectedCategory('deserty')">Десерти</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'smuzi'"><a [routerLink]="[ '/category-menu/smuzi' ]" (click)="changeSelectedCategory('smuzi')">Смузі</a></li>
+                    <li class="categories-list-item  " [class.active]="categoryName === 'drinks'"><a [routerLink]="[ '/category-menu/drinks' ]" (click)="changeSelectedCategory('drinks')">Напої</a></li>            
                 </ul>
                 
             <!-- select -->
@@ -73,7 +73,7 @@
                         </div>
                      </div> 
                      <div class="floating_buttons">
-                        <button class="btn btn-grey fast-order">Швидке замовлення</button>
+                        <button class="btn btn-grey fast-order" [routerLink]="[ '/checkout' ]" (click)="addToBasket(product)">Швидке замовлення</button>
                      </div>
                   </div>
                   <div class="product_title-wrap">

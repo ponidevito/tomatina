@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from 'src/app/shared/modals/login/login.component';
 import { DeliveryModalComponent } from '../../shared/modals/delivery-modal/delivery-modal.component';
@@ -10,6 +10,7 @@ import { GoodsService } from 'src/app/shared/services/goods/goods.service';
 import { OrderService } from 'src/app/shared/services/order/order.service';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../shared/services/category/category.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -19,7 +20,10 @@ import { CategoryService } from '../../shared/services/category/category.service
   styleUrls: ['./header.component.scss'],
 
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit,OnDestroy {
+
+  subscription: Subscription;
+
   constructor(
     private elRef: ElementRef,
     private dialog: MatDialog,
@@ -30,11 +34,10 @@ export class HeaderComponent implements OnInit {
     public router: Router,
     public categoryService: CategoryService,
 
+  ) {
+    this.subscription = new Subscription(); // Це можна винести в окремий рядок
 
-
-
-
-  ) {}
+  }
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
@@ -73,7 +76,9 @@ export class HeaderComponent implements OnInit {
 
   public goodsArray: Array<IGoodsResponse> = [];
   public totalSum!: number;
+  
 
+  selectedCategory: string = 'special-edition';
 
   // burger menu
   burger() {
@@ -94,6 +99,10 @@ export class HeaderComponent implements OnInit {
     this.checkUpdatesUserLogin();
     this.totalSum = this.getTotalSum();
 
+    this.subscription = this.categoryService.selectedCategory$.subscribe((category: string) => {
+      this.selectedCategory = category;
+      // Отримано нову категорію - виконати додаткові дії тут
+    });
   }
 
     // This method calculates the price and quantity of the product and displays the total amount
@@ -292,6 +301,16 @@ export class HeaderComponent implements OnInit {
 
   onMenuSelect(category: string) {
     this.categoryService.setSelectedCategory(category);
+    localStorage.setItem('selectedCategory', category); // Зберегти значення в localStorage
+
+    
   }
 
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscription.unsubscribe();
+
+  }
 }

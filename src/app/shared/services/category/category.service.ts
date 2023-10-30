@@ -31,6 +31,8 @@ export class CategoryService {
     this.categoriesCollection = collection(this.afs, 'categories');
   }
   private selectedCategorySubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public selectedCategory$: Observable<string> = this.selectedCategorySubject.asObservable();
+  
   getSelectedCategory(): Observable<string> {
     return this.selectedCategorySubject.asObservable();
   }

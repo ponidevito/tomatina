@@ -57,11 +57,20 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
     this.loadGoods();
     const selectedCategoryValue = this.selectedCategoryControl.value;
 
-    if (selectedCategoryValue !== null) {
-      this.changeSelectedCategory(selectedCategoryValue); // Викличте зміну значення
+    // if (selectedCategoryValue !== null) {
+    //   this.changeSelectedCategory(selectedCategoryValue); // Викличте зміну значення
   
-      // Решта вашого коду
+    //   // Решта вашого коду
+    // }
+
+
+
+    const savedCategory = localStorage.getItem('selectedCategory');
+    if (savedCategory) {
+      this.selectedCategory = savedCategory;
+      this.changeSelectedCategory(this.selectedCategory);
     }
+
     // Перевірити наявність збереженого стану корзини в localStorage
     const savedBasket = localStorage.getItem('basket');
     if (savedBasket) {
@@ -147,17 +156,19 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
   selectedCategoryControl = new FormControl('special-edition');
 
   menu: IMenu[] = [
-    // {
-    //   value: 'special-edition',
-    //   viewValue: 'Special Edition',
-    // },
     { value: 'special-edition', viewValue: 'Special Edition' },
     { value: 'healthy', viewValue: 'Healthy & tasty menu' },
-    { value: '13:01 - 13:11', viewValue: '13:01 - 13:11' },
-    { value: '13:11 - 13:21', viewValue: '13:11 - 13:21' },
-    { value: '13:21 - 13:31', viewValue: '13:21 - 13:31' },
-    { value: '13:31 - 13:41', viewValue: '13:31 - 13:41' },
-    { value: '14:01 - 14:11', viewValue: '14:01 - 14:11' },
+    { value: 'combo', viewValue: 'Комбо меню' },
+    { value: 'snidanky', viewValue: 'Сніданки' },
+    { value: 'salaty-pasty', viewValue: 'Салати пасти' },
+    { value: 'salat-boul', viewValue: 'Салат боули' },
+    { value: 'salaty', viewValue: 'Салати' },
+    { value: 'fresh-rol', viewValue: 'Фреш-роли' },
+    { value: 'supy', viewValue: 'Супи' },
+    { value: 'zapikanky', viewValue: 'Запіканки' },
+    { value: 'deserty', viewValue: 'Десерти' },
+    { value: 'smuzi', viewValue: 'Смузі' },
+    { value: 'drinks', viewValue: 'Напої' }
   ];
 
 
@@ -166,12 +177,21 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
     console.log('Обрана категорія:', route);
     console.log('Обрана категорія FormControl:', this.selectedCategoryControl.value);
     this.selectedCategoryControl.setValue(route); // Оновіть значення у FormControl
+    localStorage.setItem('selectedCategory', route); // Зберегти значення в localStorage
+
     this.router.navigate(['/category-menu', route]);
   }
 
   selectedCategory: string = 'special-edition';
+
+  // changeSelectedCategory(category: string) {
+  //   this.selectedCategoryControl.setValue(category);
+  // }
+
   changeSelectedCategory(category: string) {
+    this.selectedCategory = category;
     this.selectedCategoryControl.setValue(category);
+    localStorage.setItem('selectedCategory', category); // Зберегти значення в localStorage
   }
 
 

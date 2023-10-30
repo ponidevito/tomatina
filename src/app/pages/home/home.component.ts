@@ -39,7 +39,19 @@ export class HomeComponent implements OnInit{
     this.orderService.loadBasket();
     this.orderService.updateBasket();
     this.loadGoods();
-
+    // Перевірити наявність збереженого стану корзини в localStorage
+    const savedBasket = localStorage.getItem('basket');
+    if (savedBasket) {
+      const basketItems = JSON.parse(savedBasket);
+      this.orderService.setCartItems(basketItems);
+      this.orderService.showCartIcon();
+    } else {
+      if (this.orderService.count > 0) {
+        this.orderService.showCartIcon();
+      } else {
+        this.orderService.hideCartIcon();
+      }
+    }
   }
 
   // This method downloads products from the server that match a specific category.
