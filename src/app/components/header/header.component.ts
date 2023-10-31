@@ -11,6 +11,7 @@ import { OrderService } from 'src/app/shared/services/order/order.service';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { Subscription } from 'rxjs';
+import { PhoneComponent } from 'src/app/shared/modals/phone/phone.component';
 
 
 
@@ -305,6 +306,11 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
     
   }
+
+    //  open modal
+    openDialog() {
+      this.dialog.open(PhoneComponent);
+    }
 
 
   ngOnDestroy(): void {
