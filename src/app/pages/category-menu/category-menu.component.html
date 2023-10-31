@@ -30,10 +30,9 @@
            </mat-form-field>
 
         </div>
-         <div class="row product-row filters-row isotop-row">
+         <div class="categories-menu__row">
          <ng-container *ngFor="let product of  goodsArray">
-            <div class="col-sm-6 col-lg-4 col-xl-3 product__column">
-                
+            <div class="product__column">
                <div class="product js-product">
                   <div class="product_image-wrap">
                      <a class="product_image">
@@ -88,7 +87,7 @@
                      <span *ngIf="product.ingredients && product.ingredients.length > 120">...</span>
 
                   </div>
-                   <div class="product_controls ">
+                   <div class="product_controls">
                      <div class="thumb-input-number">
                         <button type="button" class="decrement" (click)="productCount(product, false)">-</button>
                         <input [value]="product.count" readonly="" class="product-qty" tabindex="-1" max="999">

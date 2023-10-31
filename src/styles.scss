@@ -107,6 +107,9 @@ body {
     border-radius: 6px;
     padding: 18px 30px;
   }
+  &.btn-small {
+    padding: 10px 15px;
+  }
 }
 
 .btn-grey {
@@ -831,7 +834,11 @@ app-admin-order{
       background-color: #599921;
       color: #fff;
     }
+    &.btn-small {
+      padding: 10px 15px;
+    }
   }
+
   input {
     width: 50px;
     height: 26px;
