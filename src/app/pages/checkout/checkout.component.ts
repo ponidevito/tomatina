@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy,ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 // import {
 //   Food,
@@ -8,11 +8,19 @@ import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 // } from '../../shared/interfaces/food.interface';
 import { OrderService } from 'src/app/shared/services/order/order.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { IOrdersResponse } from 'src/app/shared/interfaces/orders.interface';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ITimes, Pickup } from 'src/app/shared/interfaces/adressDelivery.interface';
+import {
+  ITimes,
+  Pickup,
+} from 'src/app/shared/interfaces/adressDelivery.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -28,8 +36,6 @@ import { ITimes, Pickup } from 'src/app/shared/interfaces/adressDelivery.interfa
   ],
 })
 export class CheckoutComponent implements OnInit {
-
-
   public maxDate: Date = new Date();
   constructor(
     public orderService: OrderService,
@@ -37,8 +43,7 @@ export class CheckoutComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private toastService: ToastrService,
-    private spinnerService: NgxSpinnerService,
-    
+    private spinnerService: NgxSpinnerService
   ) {}
 
   public count = 0;
@@ -66,6 +71,7 @@ export class CheckoutComponent implements OnInit {
   public addComment = false;
   public addCommentKitchen = false;
   public isCheckboxSelected = false;
+
   ngOnInit(): void {
     this.spinnerService.show(); // show spinner
     this.orderService.loadBasket();
@@ -78,18 +84,17 @@ export class CheckoutComponent implements OnInit {
       this.product = JSON.parse(productString);
     }
 
-
-
-    this.orderForm.get('freePackage')?.valueChanges.subscribe((selectedPackage: string) => {
-      if (selectedPackage === 'shopper') {
-        // Add 10 UAH to the total sum when 'брендований шопер' is selected
-        this.totalSum += 10;
-      } else {
-        // Deduct 10 UAH from the total sum when another package is selected
-        this.totalSum -= 10;
-      }
-    });
-
+    this.orderForm
+      .get('freePackage')
+      ?.valueChanges.subscribe((selectedPackage: string) => {
+        if (selectedPackage === 'shopper') {
+          // Add 10 UAH to the total sum when 'брендований шопер' is selected
+          this.totalSum += 10;
+        } else {
+          // Deduct 10 UAH from the total sum when another package is selected
+          this.totalSum -= 10;
+        }
+      });
   }
 
   // method count products
@@ -129,60 +134,28 @@ export class CheckoutComponent implements OnInit {
   public totalSum: number = 0; // Initialize totalSum to zero
 
 
-  // getTotalSum(): number {
-  //   if (!this.orderService.basket) {
-  //     return 0;
-  //   }
-  
-  //   // Calculate the sum of product prices and add the totalSum
-  //   const productsTotal = this.orderService.basket.reduce(
-  //     (total, product) => total + product.price * product.count,
-  //     0
-  //   );
-  
-  //   return productsTotal + this.totalSum; // Include additional cost
-  // }
-
-
-  remainingSum!: number ;
+  remainingSum!: number;
 
   getTotalSum(): number {
     if (!this.orderService.basket) {
       return 0;
     }
-  
+
     // Calculate the sum of product prices
     const productsTotal = this.orderService.basket.reduce(
       (total, product) => total + product.price * product.count,
       0
     );
-  
+
     return productsTotal + this.totalSum; // Include additional cost
   }
-  
-// calculateRemaining(enteredValue: string): void {
-//     // Отримання значення, введеного користувачем
-//     const enteredSum = parseFloat(enteredValue) || 0;
 
-//     // Обчислення решти тут, наприклад:
-//     // const remaining = основна_сума - enteredSum;
-//     const remaining = this.getTotalSum() - enteredSum;
-//     // Оновлення значення в вашій формі (якщо потрібно)
-
-// }
-calculateRemaining(event: Event): void {
-  const enteredValue = (event.target as HTMLInputElement).value;
-  const parsedValue = parseFloat(enteredValue) || 0;
-      // const remaining = основна_сума - enteredSum;
+  calculateRemaining(event: Event): void {
+    const enteredValue = (event.target as HTMLInputElement).value;
+    const parsedValue = parseFloat(enteredValue) || 0;
     const remaining = this.getTotalSum() - parsedValue;
-    this.remainingSum = remaining
-console.log(this.remainingSum)
-  // Тут ви можете робити операції з отриманим значенням
-  // Наприклад, оновлення моделі або виклик функції, яка вираховує решту.
-}
-
-  
-
+    this.remainingSum = remaining;
+  }
 
   // This method retrieves all orders from Firebase and sorts them in count order. It also retrieves and stores the user's "uid" property from local storage and checks that the user and userUID are not null or undefined
   async loadOrders() {
@@ -208,31 +181,26 @@ console.log(this.remainingSum)
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.foodForm = this.fb.group({
       selectedPickup: [this.pickups[0].value],
-      // selectedHolders: [this.holders[0].value],
       selectedInterval: [this.times[0].value],
-      // selectedPickup: [this.pickups[0].value],
       date: new Date(),
-      // cash: ['cash'],
-      // delivery: ['delivery'],
-      // inAdvance: [null],
-      firstName: [currentUser.firstName, [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/), Validators.minLength(2)]],
-      lastName: [currentUser.lastName, [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/), Validators.minLength(2)]],
+      firstName: [
+        currentUser.firstName,
+        [
+          Validators.required,
+          Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/),
+          Validators.minLength(2),
+        ],
+      ],
+      lastName: [
+        currentUser.lastName,
+        [
+          Validators.required,
+          Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/),
+          Validators.minLength(2),
+        ],
+      ],
       phone: [currentUser.phone, [Validators.required]],
-      email:[null],
-      // phone: [currentUser.phone, [Validators.required]],
-      // adress: [
-      //   currentUser.adress,
-      //   [Validators.required, Validators.minLength(2)],
-      // ],
-      // number: [
-      //   currentUser.number,
-      //   [Validators.required, Validators.pattern(/^[0-9]*$/)],
-      // ],
-      // entrance: [null],
-      // apartment: [null],
-      // callBack: [null],
-      // addComment: [null],
-      // addCommentKitchen: [null],
+      email: [null],
     });
   }
 
@@ -246,14 +214,17 @@ console.log(this.remainingSum)
       freePackage: ['freePackage'],
       cash: new FormControl('gotivka'),
       withoutRestFrom: this.withoutRestFrom,
-      remainingSum:this.remainingSum,
-      noCall:this.noCall,
+      remainingSum: this.remainingSum,
+      noCall: this.noCall,
       addComment: [null],
     });
   }
 
   isInvalid(field: string) {
-    return this.foodForm.get(field)?.invalid && (this.foodForm.get(field)?.dirty || this.foodForm.get(field)?.touched);
+    return (
+      this.foodForm.get(field)?.invalid &&
+      (this.foodForm.get(field)?.dirty || this.foodForm.get(field)?.touched)
+    );
   }
 
   isValid(field: string) {
@@ -267,22 +238,25 @@ console.log(this.remainingSum)
       viewValue: 'Ресторан за адресою',
       disabled: true,
     },
-    { value: 'ТРЦ Victoria Gardens, Кульпарківська, 226 А', viewValue: 'ТРЦ Victoria Gardens, Кульпарківська, 226 А' },
-    { value: 'СТРЦ Spartak, Мазепи, 1Б', viewValue: 'СТРЦ Spartak, Мазепи, 1Б' },
-    { value: 'ТРЦ Forum Lviv, Під Дубом, 7Б', viewValue: 'ТРЦ Forum Lviv, Під Дубом, 7Б' },
-    { value: 'ТРЦ King Cross, Стрийська, 30', viewValue: 'ТРЦ King Cross, Стрийська, 30' },
+    {
+      value: 'ТРЦ Victoria Gardens, Кульпарківська, 226 А',
+      viewValue: 'ТРЦ Victoria Gardens, Кульпарківська, 226 А',
+    },
+    {
+      value: 'СТРЦ Spartak, Мазепи, 1Б',
+      viewValue: 'СТРЦ Spartak, Мазепи, 1Б',
+    },
+    {
+      value: 'ТРЦ Forum Lviv, Під Дубом, 7Б',
+      viewValue: 'ТРЦ Forum Lviv, Під Дубом, 7Б',
+    },
+    {
+      value: 'ТРЦ King Cross, Стрийська, 30',
+      viewValue: 'ТРЦ King Cross, Стрийська, 30',
+    },
   ];
 
-  // This is an array of Holders
-  // holders: Holders[] = [
-  //   {
-  //     value: 'Навчальні тримачі',
-  //     viewValue: 'Навчальні тримачі',
-  //     disabled: true,
-  //   },
-  //   { value: '0', viewValue: '0' },
-  //   { value: '1', viewValue: '1' },
-  // ];
+
   // This is an array of Times
   times: ITimes[] = [
     {
@@ -298,16 +272,7 @@ console.log(this.remainingSum)
     { value: '14:01 - 14:11', viewValue: '14:01 - 14:11' },
   ];
 
-  // This is an array of Pickups
-  // pickups: IPickups[] = [
-  //   {
-  //     value: 'Оберіть адресу самовивозу',
-  //     viewValue: 'Оберіть адресу самовивозу',
-  //     disabled: true,
-  //   },
-  //   { value: 'Чорновола 95', viewValue: 'Чорновола 95' },
-  //   { value: 'Володимира Великого 10Б', viewValue: 'Володимира Великого 10Б' },
-  // ];
+
 
   // This method contains a date filter
   myFilter = (d: Date | null): boolean => {
@@ -446,19 +411,16 @@ console.log(this.remainingSum)
   //   }
   //       // Отримання значень з обох форм
   //       const dataFromFormFirst = this.orderForm.value;
-  //       const dataFromFormSecond = this.foodForm.value;    
+  //       const dataFromFormSecond = this.foodForm.value;
   //       const combinedData = { ...dataFromFormFirst, ...dataFromFormSecond };
   //       console.log('Об\'єднані дані:', combinedData);
-
-
-
 
   //   this.clearBasket();
   //   this.toastService.success('Ваше замовлення оформлене');
   // }
 
   // This method count order
- 
+
   addForm(): void {
     const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
     const productName = products.join(', ');
@@ -477,14 +439,14 @@ console.log(this.remainingSum)
     if (this.orderForm && this.foodForm) {
       const formValuesOrder = this.orderForm.value;
       const formValuesFood = this.foodForm.value;
-  
+
       const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
       const productName = products.join(', ');
-  
+
       const totalCount = this.orderService.basket.reduce((acc, curr) => {
         return acc + curr.count;
       }, 0);
-  
+
       const newOrder: any = {
         // Додайте дані з першої форми
         selectedHolders: formValuesOrder.selectedHolders,
@@ -499,36 +461,26 @@ console.log(this.remainingSum)
         totalSum: this.getTotalSum(),
         userUID: userUID,
         status: 'в процесі',
-
       };
-  
+
       // Додайте дані з другої форми
-      newOrder.fullName = formValuesFood.firstName + ' ' + formValuesFood.lastName;
+      newOrder.fullName =
+        formValuesFood.firstName + ' ' + formValuesFood.lastName;
       newOrder.phone = formValuesFood.phone;
       newOrder.email = formValuesFood.email;
       newOrder.selectedPickup = formValuesFood.selectedPickup;
       newOrder.date = date;
       newOrder.selectedInterval = formValuesFood.selectedInterval;
-  
+
       // Відправлення комбінованих даних на Firebase
       this.orderService.createFirebase(newOrder);
-      console.log(newOrder)
-      // this.clearBasket();
-      // this.toastService.success('Ваше замовлення оформлене');
+      console.log(newOrder);
     }
-
-
 
     this.clearBasket();
     this.toastService.success('Ваше замовлення оформлене');
   }
- 
- 
- 
- 
- 
- 
- 
+
   countOrder(): void {
     this.orderService.getAllFirebase().subscribe((data) => {
       this.count = data.length;
@@ -546,7 +498,6 @@ console.log(this.remainingSum)
     this.orderForm.reset();
     this.foodForm.reset();
     this.router.navigate(['/']);
-
 
     // this.foodForm.reset();
     // this.router.navigate(['my-cabinet/order-history']);
@@ -580,7 +531,7 @@ console.log(this.remainingSum)
       selectedHoldersControl.setValue(currentValue + 1);
     }
   }
-  
+
   decrementCount() {
     const selectedHoldersControl = this.orderForm.get('selectedHolders');
     if (selectedHoldersControl) {
@@ -590,7 +541,6 @@ console.log(this.remainingSum)
       }
     }
   }
-
 
   showHolders: boolean = true; // Змінна, яка вказує, чи показувати прибори
 
@@ -616,19 +566,15 @@ console.log(this.remainingSum)
     // this.remainingSum = 0;
   }
 
-
-
-
   updateTotalSum(event: Event): void {
     const selectedPackage = (event.target as HTMLInputElement).value;
-  
+
     if (selectedPackage === 'shopper') {
       this.totalSum += 10; // Add 10 UAH for 'брендований шопер'
     }
-     if (selectedPackage === 'freePackage') {
+    if (selectedPackage === 'freePackage') {
       this.totalSum -= 10; // Відняти 10 грн за 'безкоштовний пакет'
-    }
-    else {
+    } else {
       // Subtract 10 UAH for 'безкоштовний пакет'
       this.totalSum -= 10;
     }
@@ -640,8 +586,6 @@ console.log(this.remainingSum)
     this.showTextArea = !this.showTextArea;
     // this.remainingSum = 0;
   }
-  
-  
 
   ngOnDestroy(): void {
     this.spinnerService.hide(); // show spinner

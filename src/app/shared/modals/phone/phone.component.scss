@@ -31,7 +31,6 @@
   }
 }
 .mdc-dialog__actions {
-  padding: 0px 24px;
   justify-content: center;
 }
 
@@ -54,12 +53,13 @@
   width: 20px;
   height: 20px;
   background-color: transparent;
+  outline: none;
   svg {
     transition: 0.35s;
   }
   &:hover {
     svg {
-      fill: #b5d8f7;
+      fill: #599921;
     }
   }
 }
@@ -81,11 +81,12 @@
   font-weight: bold;
   padding: 16px 22px;
   border-radius: 10px;
-  color: #252525;
-  border: 2px solid #b5d8f7;
-  background: #b5d8f7;
+  color: #ffffff;
+  border: 2px solid #599921;
+  background: #599921;
   &:hover {
     background: transparent;
+    color: #000;
   }
 }
 
@@ -103,6 +104,9 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  &:not(:last-child){
+    margin-bottom: 22px;
+  }
 }
 .mat-dialog-rate__adress-select {
   width: 50%;
@@ -145,11 +149,29 @@
   transition: background 0.25s linear;
   margin-right: 10px;
 }
-.select-love {
-}
+
+
 .select-icon {
+  background-image: url(//www.tomatina.ua/wp-content/themes/tomatina/img/icons/love-icon.svg);
 }
-.icon-love {
+
+/* Зображення при наведенні на будь-яке серце */
+.select-icon .hovered {
+  background-image: url(//www.tomatina.ua/wp-content/themes/tomatina/img/icons/love-empty-icon.svg);
+  /* інші стилі */
 }
-.icon-love-empty {
+
+.mat-mdc-option {
+  font-size: 14px;
+  min-height: 40px;
+  padding: 0px 10px;
+}
+
+mat-mdc-form-field-textarea-control {
+  display: none;
+}
+
+
+.file-name {
+  margin-left: 1rem; /* or whatever margin you require */
 }
