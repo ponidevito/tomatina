@@ -1,11 +1,5 @@
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
-// import {
-//   Food,
-//   Holders,
-//   IPickups,
-//   ITimes,
-// } from '../../shared/interfaces/food.interface';
 import { OrderService } from 'src/app/shared/services/order/order.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
@@ -303,122 +297,7 @@ export class CheckoutComponent implements OnInit {
     this.addCommentKitchen = !this.addCommentKitchen;
   }
 
-  // This method adds a new order to the Firebase database.
-  // addForm(): void {
-  //   const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
-  //   const productName = products.join(', ');
-  //   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-  //   const userUID = currentUser.uid || ''; // set userUID to an empty string if it's undefined or null
-
-  //   const myDate = new Date();
-  //   const day = myDate.getDate().toString().padStart(2, '0');
-  //   const month = (myDate.getMonth() + 1).toString().padStart(2, '0');
-  //   const hours = myDate.getHours().toString().padStart(2, '0');
-  //   const minutes = myDate.getMinutes().toString().padStart(2, '0');
-  //   const date = `${day}.${month}.${hours}.${minutes}`;
-  //   const totalCount = this.orderService.basket.reduce((acc, curr) => {
-  //     return acc + curr.count;
-  //   }, 0);
-
-  //   // if (this.foodForm) {
-  //   //   const formValues = this.foodForm.value;
-  //   //   const newOrder: IOrdersResponse = {
-  //   //     id: this.count + 1,
-  //   //     selectedValue: formValues.selectedValue,
-  //   //     selectedHolders: formValues.selectedHolders,
-  //   //     selectedInterval: formValues.selectedInterval,
-  //   //     selectedPickup: formValues.selectedPickup,
-  //   //     date: date,
-  //   //     cash: formValues.cash,
-  //   //     delivery: formValues.delivery,
-  //   //     inAdvance: formValues.inAdvance,
-  //   //     firstName: formValues.firstName,
-  //   //     lastName: formValues.lastName,
-  //   //     productName: productName,
-  //   //     phone: formValues.phone,
-  //   //     adress: formValues.adress,
-  //   //     number: formValues.number,
-  //   //     entrance: formValues.entrance,
-  //   //     apartment: formValues.apartment,
-  //   //     callBack: formValues.callBack,
-  //   //     addComment: formValues.addComment,
-  //   //     addCommentKitchen: formValues.addCommentKitchen,
-  //   //     count: this.count + 1,
-  //   //     totalSum: this.getTotalSum(),
-  //   //     status: 'в процесі',
-  //   //     productCountNumber: totalCount,
-  //   //     userUID: userUID,
-  //   //   };
-  //   //   // Add the new order to the Firestore database
-  //   //   this.orderService.createFirebase(newOrder as any);
-  //   //   this.clearBasket();
-  //   //   this.toastService.success('Ваше замовлення оформлене');
-  //   // }
-  // }
-
-  // addForm(): void {
-  //   const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
-  //   const productName = products.join(', ');
-  //   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-  //   const userUID = currentUser.uid || ''; // set userUID to an empty string if it's undefined or null
-
-  //   const myDate = new Date();
-  //   const day = myDate.getDate().toString().padStart(2, '0');
-  //   const month = (myDate.getMonth() + 1).toString().padStart(2, '0');
-  //   const hours = myDate.getHours().toString().padStart(2, '0');
-  //   const minutes = myDate.getMinutes().toString().padStart(2, '0');
-  //   const date = `${day}.${month}.${hours}.${minutes}`;
-  //   const totalCount = this.orderService.basket.reduce((acc, curr) => {
-  //     return acc + curr.count;
-  //   }, 0);
-  //   if (this.orderForm) {
-  //           const formValuesOrder = this.orderForm.value;
-  //           const enteredValue = formValuesOrder.user_sum;
-  //           const newOrder: IOrdersResponse = {
-  //             id: this.count + 1,
-  //             selectedHolders: formValuesOrder.selectedHolders,
-  //             count: this.count + 1,
-  //             productName: productName,
-  //             freePackage: formValuesOrder.freePackage,
-  //             cash:formValuesOrder.cash,
-  //             withoutRestFrom: formValuesOrder.withoutRestFrom,
-  //             remainingSum:this.remainingSum || null,
-  //             noCall: formValuesOrder.noCall || null,
-  //             addComment: formValuesOrder.addComment,
-  //             // firstName: formValuesOrder.firstName,
-
-  //             // includeShopper:formValuesOrder.includeShopper,
-  //             totalSum: this.getTotalSum(),
-  //             userUID: userUID,
-  //           };
-  //           console.log(newOrder)
-
-  //           // Add the new order to the Firestore database
-  //           this.orderService.createFirebase(newOrder as any);
-  //           // this.clearBasket();
-  //           this.toastService.success('Ваше замовлення оформлене');
-
-  //   }
-  //   if (this.foodForm) {
-  //     const formValues = this.foodForm.value;
-  //     const newAdressOrder: IAdressResponse = {
-  //       firstName: formValues.firstName,
-  //     };
-  //     // Add the new order to the Firestore database
-  //     this.orderService.createFirebase(newAdressOrder as any);
-  //     // this.clearBasket();
-  //     // this.toastService.success('Ваше замовлення оформлене');
-  //   }
-  //       // Отримання значень з обох форм
-  //       const dataFromFormFirst = this.orderForm.value;
-  //       const dataFromFormSecond = this.foodForm.value;
-  //       const combinedData = { ...dataFromFormFirst, ...dataFromFormSecond };
-  //       console.log('Об\'єднані дані:', combinedData);
-
-  //   this.clearBasket();
-  //   this.toastService.success('Ваше замовлення оформлене');
-  // }
-
+ 
   // This method count order
 
   addForm(): void {

@@ -3,6 +3,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Street } from '../../interfaces/adressDelivery.interface';
 import { ImageService } from 'src/app/shared/services/image/image.service';
+import { IReviewResponse } from '../../interfaces/reviews.interface';
+import { ReviewService } from '../../services/review/review.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-phone',
@@ -11,9 +16,12 @@ import { ImageService } from 'src/app/shared/services/image/image.service';
 })
 export class PhoneComponent implements OnInit {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { message: string },
+    @Inject(MAT_DIALOG_DATA) public data: {  message: string },
     private fb: FormBuilder,
     private ImageService: ImageService,
+    private reviewService: ReviewService,
+    private dialogRef: MatDialogRef<PhoneComponent>,
+    private toastService: ToastrService,
 
   ) {}
 
@@ -23,6 +31,9 @@ export class PhoneComponent implements OnInit {
   public lastName!: string;
   public review!: string | number;
 
+  public reviewsArray: Array<IReviewResponse> = [];
+
+
   public isUploaded = false;
   // progress bar
   uploadPercent: number = 0;
@@ -30,16 +41,19 @@ export class PhoneComponent implements OnInit {
 
   ngOnInit(): void {
     this.initReviewForm();
+    // this.loadReviews();
   }
 
   initReviewForm(): void {
     this.reviewForm = this.fb.group({
-      firstName: this.firstName,
-      lastName: this.lastName,
-      selectedStreet: [this.streets[0].value],
-      rating: [''],
+      firstName: [null, Validators.required],
+      lastName: [null, Validators.required],
+      selectedStreet: [this.streets[0].value, Validators.required],
+      rating: ['', Validators.required],
+      email:[null],
       review: this.review,
-      fileUpload: new FormControl()
+      fileUpload: new FormControl(),
+      image: [null],
     });
   }
 
@@ -125,14 +139,23 @@ export class PhoneComponent implements OnInit {
       );
     }
 
-
+    // loadReviews(): void {
+    //   this.reviewService.getAllFirebase().subscribe((data) => {
+    //     console.log(data)
+    //     this.reviewsArray = data as IReviewResponse[];
+    //   });
+    // }
 
   addForm(): void {
+
+    this.reviewService.createFirebase(this.reviewForm.value).then(() => {
+      this.toastService.success('Відгук доданий!');
+    });
     // Отримайте значення форми і відправте їх на сервер або обробіть якщо потрібно
-    console.log(this.reviewForm.value); // Приклад виводу даних у консоль
     this.reviewForm.reset();
     this.isUploaded = false;
     this.uploadPercent = 0;
+    this.dialogRef.close();
     // Ваш код для відправки даних
   }
 

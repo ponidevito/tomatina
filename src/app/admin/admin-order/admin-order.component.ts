@@ -15,7 +15,6 @@ export class AdminOrderComponent implements OnInit {
     private toastService: ToastrService
   ) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-console.log(currentUser.firstName)
   }
 
   // orders array

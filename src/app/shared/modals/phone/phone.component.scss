@@ -5,7 +5,7 @@
   width: 680px;
   padding: 60px 70px 70px;
   overflow: hidden;
-  @include md {
+  @include lg {
     max-width: 100%;
     width: 100%;
     padding: 50px 15px 45px 15px;
@@ -29,9 +29,15 @@
     display: flex;
     align-items: center;
   }
+
 }
 .mdc-dialog__actions {
   justify-content: center;
+}
+.file-upload {
+  &:not(:last-child){
+    margin-bottom: 20px;
+  }
 }
 
 .mat-dialog-subtitle {
@@ -94,22 +100,36 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  @include sm {
+    flex-wrap: wrap;
+  }
 }
 
 .mat-mdc-form-field {
   width: 100%;
+  &.mat-first {
+    @include sm {
+      margin-bottom: -1.25em;
+    }
+  }
 }
 
 .mat-dialog-rate__box {
   display: flex;
   align-items: center;
   gap: 20px;
-  &:not(:last-child){
+  &:not(:last-child) {
     margin-bottom: 22px;
+  }
+  @include sm {
+    flex-wrap: wrap;
   }
 }
 .mat-dialog-rate__adress-select {
   width: 50%;
+  @include sm {
+    width: 100%;
+  }
 }
 
 .rate-services {
@@ -150,7 +170,6 @@
   margin-right: 10px;
 }
 
-
 .select-icon {
   background-image: url(//www.tomatina.ua/wp-content/themes/tomatina/img/icons/love-icon.svg);
 }
@@ -171,7 +190,13 @@ mat-mdc-form-field-textarea-control {
   display: none;
 }
 
-
 .file-name {
   margin-left: 1rem; /* or whatever margin you require */
+}
+
+::ng-deep {
+  .cdk-overlay-pane {
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+  }
 }

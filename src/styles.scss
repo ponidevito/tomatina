@@ -892,3 +892,11 @@ button:disabled {
   pointer-events: none;
   opacity: 0.6;
 }
+
+
+::ng-deep {
+  .cdk-overlay-pane {
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+  }
+}
