@@ -10,6 +10,10 @@
     width: 100%;
     padding: 50px 15px 45px 15px;
   }
+  @include sm{
+    padding: 30px 15px 25px 15px;
+
+  }
 }
 .mdc-dialog__title {
   text-align: center;

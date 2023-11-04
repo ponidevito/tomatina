@@ -23,11 +23,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('../app/pages/category-menu/category-menu.module').then((m) => m.CategoryMenuModule),
   },
-  // {
-  //   path: 'product/:category',
-  //   loadChildren: () =>
-  //     import('../app/pages/category-menu/category-menu.module').then((m) => m.CategoryMenuModule),
-  // },
+
   {
     path: 'home',
     loadChildren: () =>

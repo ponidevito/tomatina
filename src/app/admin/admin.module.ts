@@ -7,6 +7,7 @@ import { AdminCategoryComponent } from '../admin/admin-category/admin-category.c
 import { AdminGoodsComponent } from '../admin/admin-goods/admin-goods.component';
 import { AdminOrderComponent } from '../admin/admin-order/admin-order.component';
 import { SharedModule } from '../shared/shared.module';
+import { AdminReviewsComponent } from './admin-reviews/admin-reviews.component';
 
 
 
@@ -17,7 +18,8 @@ import { SharedModule } from '../shared/shared.module';
     // AdminActionsComponent,
     AdminCategoryComponent,
     AdminGoodsComponent,
-    AdminOrderComponent
+    AdminOrderComponent,
+    AdminReviewsComponent
   ],
   imports: [
     CommonModule,
