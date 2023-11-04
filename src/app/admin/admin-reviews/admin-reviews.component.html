@@ -5,14 +5,28 @@
                             <table class="table table-reviews table-global"> 
                                 <thead>
                                     <tr class="tr-top  table-reviews__tr-top">
-                                    <th>№</th>
-                                    <th>Ім'я та прізвище</th>
-                                    <th >Дата та час</th>
-                                    <th>Телефон</th>
-                                    <th>Сума</th>
-                                    <th>Статус</th>
-                                </tr>
+                                        <th>№</th>
+                                        <th>Ім'я та прізвище</th>
+                                        <th>Дата та час</th>
+                                        <th>Email</th>
+                                        <th>Дія</th>
+                                    </tr>
                                 </thead>
+                                <tbody>
+                                        <ng-container *ngFor="let item of adminRewiewsArray;index as i">
+                                    <tr>
+                                        <td>{{ item.count }}</td>
+                                        <td>{{ item.firstName }}  {{ item.lastName}}</td>
+                                        <td>{{ item.date }}</td>
+                                        <td>{{ item.email }}</td>
+
+                                    </tr>
+                                    <tr class="tr-textarea">
+                                        <td><textarea  style="width: 100%;">{{ item.review }}</textarea></td>
+                                    </tr>
+                                        </ng-container>
+                                </tbody>
+
                             </table> 
         </div>
     </div>

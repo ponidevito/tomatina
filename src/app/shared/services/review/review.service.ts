@@ -33,8 +33,8 @@ export class ReviewService {
     return addDoc(this.ordersCollection, order);
   }
 
-  // updateFirebase(order: IGoodsRequest, id: string) {
-  //   const ordersDocumentReference = doc(this.afs, `orders/${id}`);
-  //   return updateDoc(ordersDocumentReference, { ...order });
-  // }
+  updateFirebase(order: IReviewResponse, id: string) {
+    const ordersDocumentReference = doc(this.afs, `orders/${id}`);
+    return updateDoc(ordersDocumentReference, { ...order });
+  }
 }

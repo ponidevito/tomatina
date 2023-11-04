@@ -350,7 +350,6 @@ export class CheckoutComponent implements OnInit {
       newOrder.selectedPickup = formValuesFood.selectedPickup;
       newOrder.date = date;
       newOrder.selectedInterval = formValuesFood.selectedInterval;
-
       // Відправлення комбінованих даних на Firebase
       this.orderService.createFirebase(newOrder);
       console.log(newOrder);

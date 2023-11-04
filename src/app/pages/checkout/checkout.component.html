@@ -38,7 +38,6 @@
 
         <div class="checkout__input-box">
           <mat-form-field style="margin-bottom: -1.25em" class="example-full-width checkout__input-date" appearance="outline">
-            <!-- <mat-label>Дата доставки</mat-label> -->
             <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker"  formControlName="date" >
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker [max]="maxDate"></mat-datepicker>

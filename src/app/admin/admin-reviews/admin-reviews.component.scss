@@ -39,6 +39,23 @@
     }
   }
 }
+.tr-textarea {
+  padding: 10px 0px;
+  grid-template-columns:
+   auto;
+   height: 100px;
+   td {
+    height: 100%;
+   }
+   textarea {
+    resize: none;
+    outline: none;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.68);
+    font-family: inherit;
+    height: 100%;
+   }
+}
 tr {
   display: grid;
   grid-template-columns:

@@ -1,13 +1,17 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Street } from '../../interfaces/adressDelivery.interface';
 import { ImageService } from 'src/app/shared/services/image/image.service';
 import { IReviewResponse } from '../../interfaces/reviews.interface';
 import { ReviewService } from '../../services/review/review.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
   selector: 'app-phone',
@@ -16,15 +20,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PhoneComponent implements OnInit {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {  message: string },
+    @Inject(MAT_DIALOG_DATA) public data: { message: string },
     private fb: FormBuilder,
     private ImageService: ImageService,
     private reviewService: ReviewService,
     private dialogRef: MatDialogRef<PhoneComponent>,
-    private toastService: ToastrService,
-
+    private toastService: ToastrService
   ) {}
 
+  public count = 0;
   public reviewForm!: FormGroup;
   public selectedStreet!: string;
   public firstName!: string;
@@ -33,7 +37,6 @@ export class PhoneComponent implements OnInit {
 
   public reviewsArray: Array<IReviewResponse> = [];
 
-
   public isUploaded = false;
   // progress bar
   uploadPercent: number = 0;
@@ -41,23 +44,44 @@ export class PhoneComponent implements OnInit {
 
   ngOnInit(): void {
     this.initReviewForm();
-    // this.loadReviews();
+    this.loadReviews();
   }
 
   initReviewForm(): void {
     this.reviewForm = this.fb.group({
+      id: this.count + 1,
+      count: this.count + 1,
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       selectedStreet: [this.streets[0].value, Validators.required],
       rating: ['', Validators.required],
-      email:[null],
+      email: [null],
+      date: this.formatDateWithSpaces(),
       review: this.review,
       fileUpload: new FormControl(),
       image: [null],
     });
   }
 
+  loadReviews(): void {
+    this.reviewService.getAllFirebase().subscribe((data) => {
+      this.reviewsArray = data as IReviewResponse[]; // Додайте нові відгуки на початок масиву
+      this.reviewsArray.sort((a, b) => b.count - a.count);
+      this.countOrder();
+    });
+  }
 
+  formatDateWithSpaces(): string {
+    const myDate = new Date();
+    const day = myDate.getDate().toString().padStart(2, '0');
+    const month = (myDate.getMonth() + 1).toString().padStart(2, '0');
+    const hours = myDate.getHours().toString().padStart(2, '0');
+    const minutes = myDate.getMinutes().toString().padStart(2, '0');
+    const date = `${day}.${month}. ${hours}.${minutes}`;
+    const [dayMonth, hoursMinutes] = date.split(' ');
+    const [dayl, monthl] = dayMonth.split('.');
+    return `${dayl}.${monthl}. ${hoursMinutes}`;
+  }
 
   streets: Street[] = [
     {
@@ -125,30 +149,42 @@ export class PhoneComponent implements OnInit {
     }
   }
 
-    // delete image from storage
-    deleteImage(): void {
-      this.ImageService.deleteUploadFile(this.valueByControl('image')).then(
-        () => {
-          console.log('File deleted');
-          this.isUploaded = false;
-          this.uploadPercent = 0;
-          this.reviewForm.patchValue({
-            image: null,
-          });
-        }
-      );
-    }
+  // delete image from storage
+  deleteImage(): void {
+    this.ImageService.deleteUploadFile(this.valueByControl('image')).then(
+      () => {
+        console.log('File deleted');
+        this.isUploaded = false;
+        this.uploadPercent = 0;
+        this.reviewForm.patchValue({
+          image: null,
+        });
+      }
+    );
+  }
 
-    // loadReviews(): void {
-    //   this.reviewService.getAllFirebase().subscribe((data) => {
-    //     console.log(data)
-    //     this.reviewsArray = data as IReviewResponse[];
-    //   });
-    // }
+
+  countOrder(): void {
+    this.reviewService.getAllFirebase().subscribe((data) => {
+      this.count = data.length;
+    });
+  }
 
   addForm(): void {
-
-    this.reviewService.createFirebase(this.reviewForm.value).then(() => {
+    const formValuesReviews = this.reviewForm.value;
+    const newOrder: any = {
+      count: this.count + 1,
+      firstName: formValuesReviews.firstName,
+      lastName: formValuesReviews.lastName,
+      selectedStreet: formValuesReviews.selectedStreet,
+      rating: formValuesReviews.rating,
+      email: formValuesReviews.email,
+      date: this.formatDateWithSpaces(),
+      review: formValuesReviews.review,
+      // fileUpload: new FormControl(),
+      image: formValuesReviews.image,
+    };
+    this.reviewService.createFirebase(newOrder).then(() => {
       this.toastService.success('Відгук доданий!');
     });
     // Отримайте значення форми і відправте їх на сервер або обробіть якщо потрібно
@@ -159,8 +195,8 @@ export class PhoneComponent implements OnInit {
     // Ваш код для відправки даних
   }
 
-    // This method returns the value of a field in the form by its name.
-    valueByControl(control: string): string {
-      return this.reviewForm.get(control)?.value;
-    }
+  // This method returns the value of a field in the form by its name.
+  valueByControl(control: string): string {
+    return this.reviewForm.get(control)?.value;
+  }
 }
