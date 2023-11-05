@@ -1,0 +1,17 @@
+<div class="admin-wrapper">
+    <div class="admin-wrapper__container">
+        <div class="admin">
+                <div class="admin__body">
+                    <ul class="admin__list">
+                        <li class="admin__item"><a [routerLink]="[ '/my-cabinet/user' ]"  routerLinkActive="active"  class="admin__link ">Особисті дані</a></li>
+                        <li class="admin__item"><a [routerLink]="[ '/my-cabinet/order-history' ]" routerLinkActive="active" class="admin__link">Історія замовлень</a></li>
+                        <li class="admin__item"><a [routerLink]="[ '/my-cabinet/change-password' ]" routerLinkActive="active" class="admin__link">Зміна паролю</a></li>
+                    </ul>
+                    <div class="admin__action">
+                        <button type="button" (click)="logout()" class="admin__button">ВИХІД</button>
+                    </div>
+                </div>
+        </div>
+<router-outlet ></router-outlet>
+</div>
+</div>

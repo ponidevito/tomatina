@@ -1,0 +1,36 @@
+<section class="order-history">
+    <div class="order-history__container">
+        <table class="order-history__table table-global">
+            <thead>
+                <tr class="tr-top  table-global__tr-top">
+                <th>№ Замовлення</th>
+                <th >Дата та час</th>
+                <th>Адреса</th>
+                <th>Сума</th>
+                <th>Статус</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+               <ng-container *ngFor="let order of ordersArray ;index as i;">
+                <tr  *ngIf="order.userUID === user">
+                    <td><b>№ {{order.count}}</b> </td>
+                    <td>{{ order.date }}</td>
+                    <ng-template #pickup>{{ order.selectedHolders }}</ng-template> 
+                    <td><b>{{order.totalSum}}</b>&nbsp;грн</td>
+                    <td class="order-history__status" [ngClass]="{'green': order.status === 'виконано', 'red': order.status === 'скасовано'}">{{order.status}}</td>
+                    <button type="button" class="order-history__button table-global__button" (click)="duplicateOrder(order.id)"[disabled]="isDuplicateOrderInProgress" >Повторити</button>
+
+                </tr>
+                <tr *ngIf="order.userUID === user">
+                    <td></td>
+                    <td>{{order.productName}}</td>
+                    <td>Прибори:&nbsp;{{ order.selectedHolders }}</td>
+                    <td></td>
+                </tr>
+               </ng-container>
+               
+            </tbody>
+        </table>
+    </div>
+</section>

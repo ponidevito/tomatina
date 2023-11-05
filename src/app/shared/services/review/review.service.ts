@@ -19,22 +19,28 @@ import { IReviewResponse } from '../../interfaces/reviews.interface';
 })
 export class ReviewService {
 
-  private ordersCollection!: CollectionReference<DocumentData>;
+  private reviewsCollection!: CollectionReference<DocumentData>;
 
   constructor(public afs: Firestore) {
-    this.ordersCollection = collection(this.afs, 'reviews');
+    this.reviewsCollection = collection(this.afs, 'reviews');
   }
 
   getAllFirebase() {
-    return collectionData(this.ordersCollection, { idField: 'id' });
+    return collectionData(this.reviewsCollection, { idField: 'id' });
   }
 
-  createFirebase(order: IReviewResponse) {
-    return addDoc(this.ordersCollection, order);
+  createFirebase(review: IReviewResponse) {
+    return addDoc(this.reviewsCollection, review);
   }
 
-  updateFirebase(order: IReviewResponse, id: string) {
-    const ordersDocumentReference = doc(this.afs, `orders/${id}`);
-    return updateDoc(ordersDocumentReference, { ...order });
+  updateFirebase(review: IReviewResponse, id: string) {
+    const reviewsDocumentReference = doc(this.afs, `reviews/${id}`);
+    return updateDoc(reviewsDocumentReference, { ...review });
+  }
+
+  
+  deleteFirebase(id: string) {
+    const reviewDocumentReference = doc(this.afs, `reviews/${id}`);
+    return deleteDoc(reviewDocumentReference);
   }
 }

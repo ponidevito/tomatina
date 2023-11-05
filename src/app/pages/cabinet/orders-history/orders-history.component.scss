@@ -1,0 +1,130 @@
+@import "../../../../styles.scss";
+
+.order-history {
+  &__status {
+    color: rgb(163 67 67 / 68%);
+    position: relative;
+    padding-left: 10px;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 5px;
+      height: 5px;
+      border-radius: 50px;
+      background-color: rgb(163 67 67 / 68%);
+      transform: translate(-50%, 0);
+    }
+    &.green {
+      color: #63ed71;
+      &.order-history__status::before {
+        background-color: #63ed71;
+      }
+    }
+    &.red {
+      color: rgb(245, 32, 32);
+      &.order-history__status::before {
+        background-color: rgb(245, 32, 32);
+      }
+    }
+  }
+}
+.table-global {
+  tbody {
+    @include md {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+    }
+  }
+  @include md {
+    display: flex;
+    flex-direction: unset;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 0px;
+  }
+  @include sm {
+    justify-content: space-between;
+  }
+  &__tr-top {
+    display: grid;
+    grid-template-columns:
+      minmax(auto, 200px) minmax(auto, 140px) minmax(auto, 230px)
+      minmax(auto, 100px) minmax(auto, 100px) minmax(auto, 100px);
+    gap: 30px;
+    border-bottom: 2px solid #599921;
+    padding: 25px 0px;
+    align-items: center;
+    @media (max-width: 1200px) {
+      gap: 20px;
+    }
+    @include md {
+      padding: 0;
+      gap: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      border-bottom: unset;
+    }
+  }
+}
+tr {
+  display: grid;
+  grid-template-columns:
+    minmax(auto, 200px) minmax(auto, 140px) minmax(auto, 230px)
+    minmax(auto, 100px) minmax(auto, 100px) minmax(auto, 100px);
+  gap: 30px;
+  // border-bottom: 2px solid #599921;
+  padding: 25px 0px;
+  align-items: center;
+  &:not(:first-child) {
+    border-top: 1px solid lightgray;
+    @include md {
+      border-top: unset;
+    }
+  }
+  @include lg {
+    padding: 10px 0px;
+  }
+  @include md {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-bottom: unset;
+    padding: 0;
+  }
+}
+td,
+th {
+  display: flex;
+  min-width: 80px;
+  @include md {
+    min-width: unset;
+    min-height: 50px;
+    align-items: center;
+    text-align: start;
+  }
+}
+th {
+  font-size: 18px;
+  @include lg {
+    font-size: 16px;
+  }
+}
+td {
+  min-width: 80px;
+  font-size: 16px;
+  color: rgb(0 0 0 / 68%);
+
+  img {
+    @include md {
+      height: 40px;
+      object-fit: contain;
+    }
+  }
+  @include md {
+    justify-content: center;
+  }
+}

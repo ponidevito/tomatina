@@ -14,15 +14,22 @@
                                 </thead>
                                 <tbody>
                                         <ng-container *ngFor="let item of adminRewiewsArray;index as i">
-                                    <tr>
-                                        <td>{{ item.count }}</td>
+                                    <tr class="tr-reviews">
+                                        <td><b>{{ item.count }}</b></td>
                                         <td>{{ item.firstName }}  {{ item.lastName}}</td>
                                         <td>{{ item.date }}</td>
                                         <td>{{ item.email }}</td>
+                                        <td><button class=" table-reviews__button table-global__button" (click)="deleteReviews(item)">Видалити</button></td>
 
                                     </tr>
                                     <tr class="tr-textarea">
                                         <td><textarea  style="width: 100%;">{{ item.review }}</textarea></td>
+                                        <td>Рейтинг &nbsp;<b>{{ item.rating }}</b></td>
+                                        <td>{{ item.selectedStreet }}</td>
+                                        <td><img [src]="item.image"  class="image" height="100px">
+                                            <ng-container *ngIf="!item.image || item.image.length === 0">
+                                                <div class=" table-reviews__empty table-global__empty">Пусто</div>
+                                              </ng-container></td>
                                     </tr>
                                         </ng-container>
                                 </tbody>

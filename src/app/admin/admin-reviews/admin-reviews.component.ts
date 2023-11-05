@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  IReview,
-  IReviewResponse,
-} from 'src/app/shared/interfaces/reviews.interface';
+import { IReviewResponse } from 'src/app/shared/interfaces/reviews.interface';
 import { ReviewService } from '../../shared/services/review/review.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-reviews',
@@ -11,7 +9,10 @@ import { ReviewService } from '../../shared/services/review/review.service';
   styleUrls: ['./admin-reviews.component.scss'],
 })
 export class AdminReviewsComponent implements OnInit {
-  constructor(public reviewService: ReviewService) {}
+  constructor(
+    public reviewService: ReviewService,
+    private toastService: ToastrService
+  ) {}
 
   public adminRewiewsArray: Array<IReviewResponse> = [];
 
@@ -25,4 +26,14 @@ export class AdminReviewsComponent implements OnInit {
       this.adminRewiewsArray.sort((a, b) => b.count - a.count);
     });
   }
+
+  // delete goods
+  deleteReviews(review: IReviewResponse): void {
+    this.reviewService.deleteFirebase(review.id as string).then(() => {
+      this.loadReviews();
+      console.log('ffff');
+      this.toastService.success('Продукт видалений');
+    });
+  }
+
 }

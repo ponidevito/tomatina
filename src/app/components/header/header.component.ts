@@ -169,16 +169,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   autoCloseTimer: any;
 
-  // openSubMenu() {
-  //   this.isSubMenu=!this.isSubMenu;
-    
-  //   if (this.autoCloseTimer) {
-  //     clearTimeout(this.autoCloseTimer);
-  //   }
-  //   this.autoCloseTimer = setTimeout(() => {
-  //     this.isSubMenu = false;
-  //   }, 20000);
-  // }
+
 
   openSubMenu(event: Event) {
     event.preventDefault();

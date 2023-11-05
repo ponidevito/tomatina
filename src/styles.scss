@@ -521,6 +521,35 @@ app-admin-order {
   }
 }
 
+app-admin-reviews {
+  @include md {
+    width: 100%;
+  }
+}
+
+app-cabinet-user {
+  @include lg {
+    margin: 0 auto;
+  }
+  @include md {
+    width: 100%;
+  }
+}
+app-orders-history {
+  @include md {
+    width: 100%;
+  }
+}
+
+app-change-password {
+  @include lg {
+    margin: 0 auto;
+  }
+  @include xs {
+    width: 100%;
+  }
+}
+
 // animated progress
 
 .animated-progress {

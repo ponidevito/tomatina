@@ -19,7 +19,7 @@
     display: grid;
     grid-template-columns:
       minmax(auto, 50px) minmax(auto, 200px) minmax(auto, 130px)
-      minmax(auto, 200px) minmax(auto, 100px) minmax(auto, 100px);
+      minmax(auto, 200px) minmax(auto, auto);
     gap: 30px;
     border-bottom: 2px solid #599921;
     padding: 25px 0px;
@@ -37,15 +37,34 @@
       gap: 20px;
       border-bottom: unset;
     }
+    th{
+      &:last-child{
+        justify-content: center;
+       }
+    }
+  }
+  .tr-reviews{
+    grid-template-columns: minmax(auto, 50px) minmax(auto, 200px) minmax(auto, 130px) minmax(auto, 200px) minmax(auto, auto);
+    td{
+      &:last-child{
+        justify-content: center;
+       }
+    }
+  }
+  &__empty{
+    font-size: 16px;
+
   }
 }
 .tr-textarea {
   padding: 10px 0px;
-  grid-template-columns:
-   auto;
-   height: 100px;
+  grid-template-columns: minmax(auto, 300px) minmax(auto, 100px) minmax(auto, auto) minmax(auto, auto);
+  height: 100%;
    td {
     height: 100%;
+    &:last-child{
+      justify-content: end;
+     }
    }
    textarea {
     resize: none;
@@ -55,6 +74,14 @@
     font-family: inherit;
     height: 100%;
    }
+   .image{
+    cursor: pointer;
+    transition: .3s ease;
+    &:hover{
+      transform: scale(2.0);
+    }
+   }
+
 }
 tr {
   display: grid;

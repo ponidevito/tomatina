@@ -127,7 +127,6 @@ export class CheckoutComponent implements OnInit {
   // public totalSum!: number;
   public totalSum: number = 0; // Initialize totalSum to zero
 
-
   remainingSum!: number;
 
   getTotalSum(): number {
@@ -250,7 +249,6 @@ export class CheckoutComponent implements OnInit {
     },
   ];
 
-
   // This is an array of Times
   times: ITimes[] = [
     {
@@ -265,8 +263,6 @@ export class CheckoutComponent implements OnInit {
     { value: '13:31 - 13:41', viewValue: '13:31 - 13:41' },
     { value: '14:01 - 14:11', viewValue: '14:01 - 14:11' },
   ];
-
-
 
   // This method contains a date filter
   myFilter = (d: Date | null): boolean => {
@@ -297,35 +293,82 @@ export class CheckoutComponent implements OnInit {
     this.addCommentKitchen = !this.addCommentKitchen;
   }
 
- 
   // This method count order
 
-  addForm(): void {
-    const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
-    const productName = products.join(', ');
-    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    const userUID = currentUser.uid || ''; // set userUID to an empty string if it's undefined or null
+  // addForm(): void {
+  //   const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
+  //   const productName = products.join(', ');
+  //   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+  //   const userUID = currentUser.uid || ''; // set userUID to an empty string if it's undefined or null
 
+  //   const myDate = new Date();
+  //   const day = myDate.getDate().toString().padStart(2, '0');
+  //   const month = (myDate.getMonth() + 1).toString().padStart(2, '0');
+  //   const hours = myDate.getHours().toString().padStart(2, '0');
+  //   const minutes = myDate.getMinutes().toString().padStart(2, '0');
+  //   const date = `${day}.${month}.${hours}.${minutes}`;
+  //   const totalCount = this.orderService.basket.reduce((acc, curr) => {
+  //     return acc + curr.count;
+  //   }, 0);
+  //   if (this.orderForm && this.foodForm) {
+  //     const formValuesOrder = this.orderForm.value;
+  //     const formValuesFood = this.foodForm.value;
+
+  //     const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
+  //     const productName = products.join(', ');
+
+  //     const totalCount = this.orderService.basket.reduce((acc, curr) => {
+  //       return acc + curr.count;
+  //     }, 0);
+
+  //     const newOrder: any = {
+  //       // Додайте дані з першої форми
+  //       selectedHolders: formValuesOrder.selectedHolders,
+  //       count: this.count + 1,
+  //       productName: productName,
+  //       freePackage: formValuesOrder.freePackage,
+  //       cash: formValuesOrder.cash,
+  //       withoutRestFrom: formValuesOrder.withoutRestFrom,
+  //       remainingSum: this.remainingSum || null,
+  //       noCall: formValuesOrder.noCall || null,
+  //       addComment: formValuesOrder.addComment,
+  //       totalSum: this.getTotalSum(),
+  //       userUID: userUID,
+  //       status: 'в процесі',
+  //     };
+
+  //     // Додайте дані з другої форми
+  //     newOrder.fullName =
+  //       formValuesFood.firstName + ' ' + formValuesFood.lastName;
+  //     newOrder.phone = formValuesFood.phone;
+  //     newOrder.email = formValuesFood.email;
+  //     newOrder.selectedPickup = formValuesFood.selectedPickup;
+  //     newOrder.date = date;
+  //     newOrder.selectedInterval = formValuesFood.selectedInterval;
+  //     // Відправлення комбінованих даних на Firebase
+  //     this.orderService.createFirebase(newOrder);
+  //     console.log(newOrder);
+  //   }
+
+  //   this.clearBasket();
+  //   this.toastService.success('Ваше замовлення оформлене');
+  // }
+
+  addForm(): void {
     const myDate = new Date();
     const day = myDate.getDate().toString().padStart(2, '0');
     const month = (myDate.getMonth() + 1).toString().padStart(2, '0');
     const hours = myDate.getHours().toString().padStart(2, '0');
     const minutes = myDate.getMinutes().toString().padStart(2, '0');
     const date = `${day}.${month}.${hours}.${minutes}`;
-    const totalCount = this.orderService.basket.reduce((acc, curr) => {
-      return acc + curr.count;
-    }, 0);
+    const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
+    const productName = products.join(', ');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const userUID = currentUser.uid || ''; // set userUID to an empty string if it's undefined or null
+
     if (this.orderForm && this.foodForm) {
       const formValuesOrder = this.orderForm.value;
       const formValuesFood = this.foodForm.value;
-
-      const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
-      const productName = products.join(', ');
-
-      const totalCount = this.orderService.basket.reduce((acc, curr) => {
-        return acc + curr.count;
-      }, 0);
-
       const newOrder: any = {
         // Додайте дані з першої форми
         selectedHolders: formValuesOrder.selectedHolders,
@@ -341,8 +384,6 @@ export class CheckoutComponent implements OnInit {
         userUID: userUID,
         status: 'в процесі',
       };
-
-      // Додайте дані з другої форми
       newOrder.fullName =
         formValuesFood.firstName + ' ' + formValuesFood.lastName;
       newOrder.phone = formValuesFood.phone;
@@ -350,13 +391,24 @@ export class CheckoutComponent implements OnInit {
       newOrder.selectedPickup = formValuesFood.selectedPickup;
       newOrder.date = date;
       newOrder.selectedInterval = formValuesFood.selectedInterval;
-      // Відправлення комбінованих даних на Firebase
-      this.orderService.createFirebase(newOrder);
-      console.log(newOrder);
-    }
 
-    this.clearBasket();
-    this.toastService.success('Ваше замовлення оформлене');
+      // Перевірка наявності числових значень 'count' та знаходження максимального значення
+      const counts = this.ordersArray
+        .filter((item) => !isNaN(item.count))
+        .map((item) => item.count);
+
+      // Обчислення максимального значення 'count' для нового відгуку
+      const maxCount = counts.length > 0 ? Math.max(...counts) : 0;
+      newOrder.count = maxCount + 1;
+
+      this.orderService.createFirebase(newOrder).then(() => {
+        this.toastService.success('Замовлення оформлене!');
+      });
+
+      this.clearBasket();
+      this.orderForm.reset();
+      // Закриття діалогу або інші дії
+    }
   }
 
   countOrder(): void {

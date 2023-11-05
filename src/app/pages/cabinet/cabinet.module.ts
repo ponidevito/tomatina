@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { CabinetComponent } from '../../pages/cabinet/cabinet.component';
 import { CabinetUserComponent } from '../../pages/cabinet/cabinet-user/cabinet-user.component';
 import { OrdersHistoryComponent } from '../../pages/cabinet/orders-history/orders-history.component';
-import { HeaderRoutingModule } from '../header/header-routing.module';
+import { CabinetRoutingModule } from '../../pages/cabinet/cabinet-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-import { ChangePasswordComponent } from '../../pages/cabinet/change-password/change-password.component';
-
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -18,9 +17,8 @@ import { ChangePasswordComponent } from '../../pages/cabinet/change-password/cha
   ],
   imports: [
     CommonModule,
-    HeaderRoutingModule,
+    CabinetRoutingModule,
     SharedModule
   ]
 })
-export class HeaderModule { }
-
+export class CabinetModule { }

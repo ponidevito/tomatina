@@ -9,7 +9,7 @@ export interface IReview {
     fileUpload: string,
     image: string,
     date: string,
-    count: number;
+    count: number | string;
 
   }
   

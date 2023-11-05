@@ -38,6 +38,14 @@ const routes: Routes = [
         (m) => m.CheckoutModule
       ),
   },
+  {
+    path: 'my-cabinet',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('../app/components/header/header.module').then(
+        (m) => m.HeaderModule
+      ),
+  },
     { path: '', pathMatch: 'full', redirectTo: 'home' },
 
 
