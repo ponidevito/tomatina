@@ -15,6 +15,8 @@ export interface IOrders {
   status: string;
   phone: number;
   userUID: string;
+  productCountNumber:number,
+
 }
 
 export interface IOrdersRequest {
@@ -33,6 +35,8 @@ export interface IOrdersRequest {
   addComment: string;
   totalSum: number;
   userUID: string;
+  productCountNumber:number,
+
 }
 
 export interface IOrdersResponse extends IOrdersRequest {

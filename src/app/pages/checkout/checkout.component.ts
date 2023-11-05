@@ -365,6 +365,9 @@ export class CheckoutComponent implements OnInit {
     const productName = products.join(', ');
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const userUID = currentUser.uid || ''; // set userUID to an empty string if it's undefined or null
+    const totalCount = this.orderService.basket.reduce((acc, curr) => {
+      return acc + curr.count;
+    }, 0);
 
     if (this.orderForm && this.foodForm) {
       const formValuesOrder = this.orderForm.value;
@@ -382,6 +385,7 @@ export class CheckoutComponent implements OnInit {
         addComment: formValuesOrder.addComment,
         totalSum: this.getTotalSum(),
         userUID: userUID,
+        productCountNumber: totalCount,
         status: 'в процесі',
       };
       newOrder.fullName =

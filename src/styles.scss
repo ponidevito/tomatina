@@ -493,12 +493,9 @@ body {
 
 .main {
   flex: 1 1 auto;
-  padding-top: 150px;
+  padding-top: 117px;
   @include lg {
     padding: 115px 0px 0px 0px;
-  }
-  @include sm {
-    // padding: 77px 0px 0px 0px;
   }
 }
 

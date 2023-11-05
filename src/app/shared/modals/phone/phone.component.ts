@@ -45,6 +45,12 @@ export class PhoneComponent implements OnInit {
   ngOnInit(): void {
     this.initReviewForm();
     this.loadReviews();
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    this.reviewForm.patchValue({
+      firstName: currentUser.firstName,
+      lastName: currentUser.lastName,
+      email: currentUser.email,
+    });
   }
 
   initReviewForm(): void {
@@ -55,7 +61,7 @@ export class PhoneComponent implements OnInit {
       lastName: [null, Validators.required],
       selectedStreet: [this.streets[0].value, Validators.required],
       rating: ['', Validators.required],
-      email: [null],
+      email: [null, [Validators.required, Validators.email]],
       date: this.formatDateWithSpaces(),
       review: this.review,
       fileUpload: new FormControl(),
