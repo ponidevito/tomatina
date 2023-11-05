@@ -405,6 +405,9 @@ export class CheckoutComponent implements OnInit {
         this.toastService.success('Замовлення оформлене!');
       });
 
+      console.log('Current user ID:', userUID); // Перевірте значення userUID в консолі
+console.log('New order:', newOrder); 
+
       this.clearBasket();
       this.orderForm.reset();
       // Закриття діалогу або інші дії

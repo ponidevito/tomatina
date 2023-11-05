@@ -1,0 +1,42 @@
+<div class="mat-wrapper mat-modal">
+    <button mat-button mat-dialog-close class="mat-modal__close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
+      <h2 mat-dialog-title class="mat-modal__title">Зареєструватись</h2>  
+      <form [formGroup]="regForm" class="mat-modal__form" >
+      <mat-dialog-content class="mat-modal__content">
+        <div class="mat-modal__box">
+           <mat-form-field appearance="outline" class="mat-modal__field">
+             <input matInput placeholder="Ваше ім'я" formControlName="firstName" type="text">
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="mat-modal__field">
+                <input matInput placeholder="Ваше прізвище" formControlName="lastName"  type="text">
+              </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="phone" mask="(000) 000-00-00" prefix="+38"   type="text">
+              </mat-form-field>
+            <mat-form-field appearance="outline">
+                <input matInput placeholder="Ваш емейл" formControlName="email" type="email">
+              </mat-form-field>
+              <div class="mat-modal__box">
+                <mat-form-field appearance="outline" class="mat-modal__field">
+                  <input (input)="checkConfirmedPassword()" matInput placeholder="Ваш пароль" formControlName="password" type="password">
+                   </mat-form-field>
+                   <mat-form-field appearance="outline" class="mat-modal__field">
+                     <input (input)="checkConfirmedPassword()" matInput placeholder="Повторіть пароль" formControlName="repitePassword" type="password">
+                   </mat-form-field>
+                 </div>
+                 <mat-error *ngIf="checkVisibilityError('repitePassword', 'matchError')">Confirmed password is required</mat-error>
+          </mat-dialog-content>
+          <mat-dialog-actions class="mat-modal__actions" >
+            <button  type="submit" class="mat-modal__register" [disabled]="regForm.invalid" (click)="registerUser()">ЗАРЕЄСТРУВАТИСЬ</button>
+           <div class="mat-modal__actions-box">   
+            <span>Вже зареєстровані?</span>
+            <a  class="mat-modal__button" (click)=" openLoginModal();closeDialog()" >Увійти</a>
+        </div> 
+          </mat-dialog-actions>
+      </form> 
+  </div>
+
+  
+
+  

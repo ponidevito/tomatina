@@ -46,6 +46,13 @@ const routes: Routes = [
         (m) => m.HeaderModule
       ),
   },
+  {
+    path: 'registration',
+    loadChildren: () =>
+      import('../app/shared/modals/registration/registration.module').then(
+        (m) => m.RegistrationModule
+      ),
+  },
     { path: '', pathMatch: 'full', redirectTo: 'home' },
 
 

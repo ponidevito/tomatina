@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { IOrdersResponse } from 'src/app/shared/interfaces/orders.interface';
 import { OrderService } from 'src/app/shared/services/order/order.service';
+
 import 'firebase/compat/firestore';
 import { DatePipe } from '@angular/common';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
-import { catchError, first, of, switchMap } from 'rxjs';
+import { BehaviorSubject, catchError, first, of, switchMap } from 'rxjs';
+import { ILogin } from 'src/app/shared/interfaces/account.interface';
 
 @Component({
   selector: 'app-orders-history',
@@ -12,7 +14,12 @@ import { catchError, first, of, switchMap } from 'rxjs';
   styleUrls: ['./orders-history.component.scss'],
 })
 export class OrdersHistoryComponent implements OnInit {
-  constructor(public orderService: OrderService) {}
+
+  constructor(public orderService: OrderService,
+    ) {    
+    
+    }
+  
 
   public ordersArray: Array<IOrdersResponse> = [];
   public goods!: IGoodsResponse;
@@ -22,6 +29,7 @@ export class OrdersHistoryComponent implements OnInit {
     this.orderService.loadBasket();
     this.orderService.updateBasket();
     this.getTotalSum();
+
   }
 
   public user!: string;
@@ -36,6 +44,7 @@ export class OrdersHistoryComponent implements OnInit {
           this.user = user.uid;
           this.ordersArray = data as IOrdersResponse[];
           this.ordersArray.sort((a, b) => b.count - a.count);
+          console.log(user.uid)
         }
       });
     } catch (error) {
@@ -43,6 +52,14 @@ export class OrdersHistoryComponent implements OnInit {
     }
   }
 
+
+
+  
+
+  
+
+
+  
   // get total sum
 
   getTotalSum(): number {

@@ -30,10 +30,11 @@
     }
     &:hover {
       svg {
-        fill: #599921;
+        fill: #b5d8f7;
       }
     }
   }
+
   &__title {
     color: #252525;
     font-weight: bold;
@@ -54,14 +55,30 @@
     }
   }
 
+  &__box {
+    display: flex;
+    gap: 15px;
+    @include sm {
+      flex-wrap: wrap;
+      gap: 0px;
+    }
+  }
+  &__field {
+    @include sm {
+      width: 100%;
+    }
+  }
+
   &__actions {
+    display: flex;
+    flex-direction: column;
     padding: 8px 25px;
     @include sm {
       padding: 0px;
     }
   }
 
-  &__button {
+  &__register {
     width: 100%;
     display: inline-block;
     text-align: center;
@@ -74,9 +91,9 @@
     font-weight: bold;
     padding: 16px 24px;
     border-radius: 10px;
-    color: #ffffff;
-    border: 2px solid #599921;
-    background-color: #599921;
+    color: #252525;
+    border: 2px solid #b5d8f7;
+    background-color: #b5d8f7;
     &:not(:last-child) {
       margin-bottom: 30px;
       @include sm {
@@ -85,7 +102,6 @@
     }
     &:hover {
       background-color: transparent;
-      color: #000;
     }
     @include sm {
       padding: 14px 15px;
@@ -95,15 +111,21 @@
       line-height: 18px;
     }
   }
-  &__register {
-    display: inline-flex;
-    margin-left: auto;
-    position: relative;
-    font-weight: bold;
-    transition: 0.35s;
-    color: #252525;
-    font-size: 16px;
+
+  &__actions-box {
+    display: flex;
+    gap: 15px;
+    span {
+      color: #5a5a5a;
+    }
+  }
+
+  &__button {
     cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    transition: 0.35s;
+    position: relative;
     &::before {
       content: "";
       position: absolute;
@@ -112,12 +134,12 @@
       right: 0;
       height: 2px;
       width: 0;
-      background: #599921;
+      background: #b5d8f7;
       -webkit-transition: all 0.35s ease-out;
       transition: all 0.35s ease-out;
     }
     &:hover {
-      color: #599921;
+      color: #b5d8f7;
     }
     &:hover::before {
       width: 100%;

@@ -119,4 +119,6 @@ export class OrderService {
     const goodsDocumentReference = doc(this.afs, `orders/${id}`);
     return deleteDoc(goodsDocumentReference);
   }
+
+
 }

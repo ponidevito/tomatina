@@ -13,7 +13,8 @@
             </thead>
             <tbody>
                <ng-container *ngFor="let order of ordersArray ;index as i;">
-                <tr  *ngIf="order.userUID === user">
+                <ng-container *ngIf="order.userUID === user">
+                <tr  >
                     <td><b>№ {{order.count}}</b> </td>
                     <td>{{ order.date }}</td>
                     <ng-template #pickup>{{ order.selectedHolders }}</ng-template> 
@@ -22,12 +23,13 @@
                     <button type="button" class="order-history__button table-global__button" (click)="duplicateOrder(order.id)"[disabled]="isDuplicateOrderInProgress" >Повторити</button>
 
                 </tr>
-                <tr *ngIf="order.userUID === user">
+                <tr >
                     <td></td>
                     <td>{{order.productName}}</td>
                     <td>Прибори:&nbsp;{{ order.selectedHolders }}</td>
                     <td></td>
                 </tr>
+            </ng-container>
                </ng-container>
                
             </tbody>

@@ -12,7 +12,7 @@ import { AccountService } from 'src/app/shared/services/account/account.service'
 
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { doc, docData, Firestore, getDoc } from '@angular/fire/firestore';
-// import { RegistrationComponent } from '../../modal/registration/registration.component';
+import { RegistrationComponent } from '../registration/registration.component';
 
 import { ToastrService } from 'ngx-toastr';
 import {
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     public auth: Auth,
     private afs: Firestore,
     public toastr: ToastrService,
-    // private dialogRef: MatDialogRef<RegistrationComponent>,
+    private dialogRef: MatDialogRef<RegistrationComponent>,
     private loginDialogRef: MatDialogRef<LoginComponent>
   ) {
     if (this.currentUserSubject) {
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initAuthForm();
     localStorage.getItem('currentUser') || '{}';
-    console.log(    localStorage.getItem('userRole') || '{}')
+    // console.log(    localStorage.getItem('userRole') || '{}')
   }
 
   initAuthForm(): void {
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   // Open the registration modal dialog
   openModalRegistration() {
-    // this.dialog.open(RegistrationComponent);
+    this.dialog.open(RegistrationComponent);
   }
 
   //  close dialog
