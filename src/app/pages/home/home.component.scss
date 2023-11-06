@@ -6,11 +6,18 @@
   &__container {
   }
 
+  &__top{
+    margin: 60px 0px 45px 0px;
+  }
+
   &__items {
   }
 
   &__bg {
-    height: 100vh;
+    height: calc(100vh - 50px - 100px);
+    @media (max-width: 1540px) {
+      height: calc(100vh - 50px - 64px);
+    }
     @include lg {
       height: 360px;
     }
@@ -35,4 +42,35 @@
       display: block;
     }
   }
+  &__row {
+  }
+
+  &__column {
+  }
+}
+
+
+.column-menu {
+
+  &__product {
+
+    &_image-wrap {
+    }
+
+    &_image {
+    }
+
+    &_title {
+    }
+  }
+
+  &__img {
+  }
+
+  &__title-wrap {
+  }
+}
+.h5 {
+}
+.medium {
 }

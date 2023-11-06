@@ -323,7 +323,7 @@
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
     padding: 10px 9px 10px 10px;
     margin-top: 30px;
-    top: 151px;
+    top: 150px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #f5f5f5;
@@ -344,7 +344,7 @@
       width: 90%;
     }
     @include xs {
-      top: 126px;
+      top: 125px;
       width: 100%;
     }
   }

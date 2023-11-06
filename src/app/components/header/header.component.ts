@@ -253,8 +253,6 @@ export class HeaderComponent implements OnInit,OnDestroy {
   navigateToCatalog() {
     this.showModalCart = false;
     this.layerCart = false;
-    // this.basketHeight = false;
-    // this.layerBig = false;
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('lockModal');
 
@@ -305,8 +303,6 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
 
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
     this.subscription.unsubscribe();
 
   }

@@ -4,9 +4,25 @@
         <div class="home__bg-image home__bg-image-mobile"></div>
     </div>
     <div class="home__container">
-        <div class="home__items">
+        <div class="home__top top">
+            <h3 class="top__title title">Наше <span>меню</span></h3>
+        </div>
+        <div class="home__row">
 
-
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product_image-wrap"> 
+                        <a class="column-menu__product_image" [routerLink]="[ '/category-menu/healthy' ]" routerLinkActive="route-active" > 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsalmon-salat-boul.webp.pagespeed.ic.julA0vK2aP.webp" alt=""> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product_title"> 
+                            <a class="h5 medium" href="">HEALTHY & TASTY MENU</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

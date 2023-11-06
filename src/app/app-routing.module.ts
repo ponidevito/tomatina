@@ -17,13 +17,6 @@ const routes: Routes = [
       ),
   },
 
-
-  {
-    path: 'category-menu/:category',
-    loadChildren: () =>
-      import('../app/pages/category-menu/category-menu.module').then((m) => m.CategoryMenuModule),
-  },
-
   {
     path: 'home',
     loadChildren: () =>
@@ -31,6 +24,17 @@ const routes: Routes = [
         (m) => m.HomeModule
       ),
   },
+
+  {
+    path: 'category-menu/:category',
+    loadChildren: () =>
+      import('../app/pages/category-menu/category-menu.module').then((m) => m.CategoryMenuModule),
+  },
+
+
+
+ 
+  
   {
     path: 'checkout',
     loadChildren: () =>

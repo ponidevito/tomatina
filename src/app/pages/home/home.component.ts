@@ -5,6 +5,8 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order/order.service';
+import { CategoryService } from '../../shared/services/category/category.service';
+
 
 
 @Component({
@@ -13,11 +15,16 @@ import { OrderService } from 'src/app/shared/services/order/order.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit{
+  subscription: Subscription;
+  selectedCategory: string = 'special-edition';
+
+  
   constructor(
     private goodsService: GoodsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public orderService: OrderService,
+    public categoryService: CategoryService,
 
   ) {
     this.eventSubscription = this.router.events.subscribe((event) => {
@@ -25,6 +32,8 @@ export class HomeComponent implements OnInit{
         this.loadGoods();
       }
     });
+    this.subscription = new Subscription(); // Це можна винести в окремий рядок
+
   }
 
   private eventSubscription!: Subscription;
@@ -52,33 +61,29 @@ export class HomeComponent implements OnInit{
         this.orderService.hideCartIcon();
       }
     }
+    this.subscription = this.categoryService.selectedCategory$.subscribe((category: string) => {
+      this.selectedCategory = category;
+      // Отримано нову категорію - виконати додаткові дії тут
+    });
   }
 
   // This method downloads products from the server that match a specific category.
-  // loadGoods(): void {
-  //   this.goodsService.getAllFirebase().subscribe((data) => {
-  //     this.goodsArray = data as IGoodsResponse[];
-  //     this.selectFilter('Соуси');
-  //     // this.spinnerService.hide(); // show spinner
-  //   });
-  // }
+  loadGoods(): void {
+    this.goodsService.getAllFirebase().subscribe((data) => {
+      this.goodsArray = data as IGoodsResponse[];
+      // this.spinnerService.hide(); // show spinner
+    });
+  }
 
 
   
-  // This method downloads products from the server that match a specific category.
-  loadGoods(): void {
-    this.activatedRoute.params
-      .pipe(
-        switchMap((params) => {
-          this.categoryName = params['category'];
-          return this.goodsService.getAllByCategoryFirebase(this.categoryName);
-        })
-      )
-      .subscribe((data) => {
-        this.goodsArray = data as IGoodsResponse[];
-        // this.spinnerService.hide();
-      });
+  onMenuSelect(category: string) {
+    this.categoryService.setSelectedCategory(category);
+    localStorage.setItem('selectedCategory', category); // Зберегти значення в localStorage
+
+    
   }
+
 
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();

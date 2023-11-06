@@ -75,6 +75,21 @@ body {
   overflow: hidden;
 }
 
+// title top
+.top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    font-size: 34px;
+    line-height: 1.2em;
+    color: #2d2c2c;
+  }
+  span {
+    color: #599921;
+  }
+}
+
 .btn {
   display: inline-block;
   vertical-align: bottom;
@@ -493,8 +508,8 @@ body {
 
 .main {
   flex: 1 1 auto;
-  padding-top: 117px;
-  @include lg {
+  padding-top: 151px;
+  @media (max-width: 1540px) {
     padding: 115px 0px 0px 0px;
   }
 }
