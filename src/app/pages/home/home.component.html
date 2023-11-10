@@ -12,17 +12,194 @@
             <div class="home__column column-menu">
                 <div class="column-menu__product">
                     <div class="column-menu__product-image-wrap"> 
-                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/healthy' ]" routerLinkActive="route-active" > 
-                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsalmon-salat-boul.webp.pagespeed.ic.julA0vK2aP.webp" alt=""> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/healthy' ]" routerLinkActive="route-active" (click)="onMenuSelect('healthy')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsalmon-salat-boul.webp.pagespeed.ic.julA0vK2aP.webp" alt="image-menu"> 
                         </a>
                     </div>
                     <div class="column-menu__title-wrap">
                         <div class="column-menu__product-title"> 
-                            <a class="column-menu__link" href="">HEALTHY & TASTY MENU</a>
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/healthy' ]" routerLinkActive="route-active" (click)="onMenuSelect('healthy')">HEALTHY & TASTY MENU</a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/combo' ]" routerLinkActive="route-active" (click)="onMenuSelect('combo')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/09/x635fe339-1dcc-4d5b-8173-b854e4fd28b0.png.pagespeed.ic.ik9mKJAO2w.png" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/combo' ]" routerLinkActive="route-active" (click)="onMenuSelect('combo')">Комбо меню</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/snidanky' ]" routerLinkActive="route-active" (click)="onMenuSelect('snidanky')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsyrnyky-z-lososem-ta-avokado.webp.pagespeed.ic.T95rsNx159.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/snidanky' ]" routerLinkActive="route-active" (click)="onMenuSelect('snidanky')">Сніданки до 18:00</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/salaty-pasty' ]" routerLinkActive="route-active" (click)="onMenuSelect('salaty-pasty')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsoba-z-moreproduktamy.webp.pagespeed.ic.2WeXArocI5.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/salaty-pasty' ]" routerLinkActive="route-active" (click)="onMenuSelect('salaty-pasty')">Салати пасти</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        <div class="home__row">
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/salat-boul' ]" routerLinkActive="route-active" (click)="onMenuSelect('salat-boul')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xbif-salat-boul.webp.pagespeed.ic.XZcUu7oGA6.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/salat-boul' ]" routerLinkActive="route-active" (click)="onMenuSelect('salat-boul')">Салат боули</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/salaty' ]" routerLinkActive="route-active" (click)="onMenuSelect('salaty')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xgrand-czezar.webp.pagespeed.ic.xSONy4vCRb.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/salaty' ]" routerLinkActive="route-active" (click)="onMenuSelect('salaty')">Салати</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/fresh-rol' ]" routerLinkActive="route-active" (click)="onMenuSelect('fresh-rol')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xfresh-proshuto-rol.webp.pagespeed.ic.Q9HKFHl0qI.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/fresh-rol' ]" routerLinkActive="route-active" (click)="onMenuSelect('fresh-rol')">Фреш-роли</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/supy' ]" routerLinkActive="route-active" (click)="onMenuSelect('supy')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xshpynatnyj-krem-sup.webp.pagespeed.ic.Yd1U2zJdr3.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/supy' ]" routerLinkActive="route-active" (click)="onMenuSelect('supy')">Супи</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="home__row">
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/zapikanky' ]" routerLinkActive="route-active" (click)="onMenuSelect('zapikanky')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xsyrna-zapikanka-z-polunychnym-dzhemom.webp.pagespeed.ic.FAtgA3QNHw.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/zapikanky' ]" routerLinkActive="route-active" (click)="onMenuSelect('zapikanky')">Запіканки</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/deserty' ]" routerLinkActive="route-active" (click)="onMenuSelect('deserty')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xmango-chyzkejk-z-syru-filadelfiya.webp.pagespeed.ic.pm4Ij0YCJV.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/deserty' ]" routerLinkActive="route-active" (click)="onMenuSelect('deserty')">Десерти</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/smuzi' ]" routerLinkActive="route-active" (click)="onMenuSelect('smuzi')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xavogrin.webp.pagespeed.ic.fRofpQHMU9.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/smuzi' ]" routerLinkActive="route-active" (click)="onMenuSelect('smuzi')">Смузі</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="home__column column-menu">
+                <div class="column-menu__product">
+                    <div class="column-menu__product-image-wrap"> 
+                        <a class="column-menu__product-image" [routerLink]="[ '/category-menu/drinks' ]" routerLinkActive="route-active" (click)="onMenuSelect('drinks')"> 
+                            <img class="column-menu__img" src="https://www.tomatina.ua/wp-content/uploads/2023/06/xmango-chia.webp.pagespeed.ic.eEn_yC7rai.webp" alt="image-menu"> 
+                        </a>
+                    </div>
+                    <div class="column-menu__title-wrap">
+                        <div class="column-menu__product-title"> 
+                            <a class="column-menu__link" [routerLink]="[ '/category-menu/drinks' ]" routerLinkActive="route-active" (click)="onMenuSelect('drinks')">Напої</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
     </div>
 </section>
