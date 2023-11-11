@@ -84,6 +84,12 @@ export class HomeComponent implements OnInit{
     
   }
 
+  public isExpanded = false;
+
+  toggleReadMore() {
+    this.isExpanded = !this.isExpanded;
+  }
+
 
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
