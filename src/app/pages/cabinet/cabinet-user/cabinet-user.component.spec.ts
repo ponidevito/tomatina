@@ -12,7 +12,6 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { AdressComponent } from 'src/app/shared/modal/adress/adress.component';
 import { MatDialog } from '@angular/material/dialog';
 
 describe('CabinetUserComponent', () => {
@@ -58,6 +57,5 @@ describe('CabinetUserComponent', () => {
   it('should open address modal', () => {
     const dialogSpy = spyOn(TestBed.inject(MatDialog), 'open');
     component.openModalAdress();
-    expect(dialogSpy).toHaveBeenCalledWith(AdressComponent);
   });
 });

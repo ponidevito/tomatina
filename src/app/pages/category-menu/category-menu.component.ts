@@ -3,13 +3,15 @@ import { GoodsService } from '../../shared/services/goods/goods.service';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order/order.service';
 import { CookieService } from 'ngx-cookie-service';
 import { IMenu } from 'src/app/shared/interfaces/menu-select.interface';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { CategoryService } from '../../shared/services/category/category.service';
+import { FavoriteService } from '../../shared/services/favorite/favorite.service';
+
 
 
 @Component({
@@ -18,6 +20,8 @@ import { CategoryService } from '../../shared/services/category/category.service
   styleUrls: ['./category-menu.component.scss'],
 })
 export class CategoryMenuComponent implements OnInit,OnDestroy {
+
+  favorites$: Observable<any[]> = new Observable<any[]>; // Значення за замовчуванням
   constructor(
     private goodsService: GoodsService,
     private activatedRoute: ActivatedRoute,
@@ -25,6 +29,8 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
     private orderService: OrderService,
     private cookieService: CookieService,
     public categoryService: CategoryService,
+    public FavoriteService: FavoriteService,
+
 
     
   ) {
@@ -32,6 +38,7 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
       if (event instanceof NavigationEnd) {
         this.loadGoods();
       }
+      
       // this.selectFilter('Соуси');
     });
 
@@ -56,10 +63,10 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.loadGoods();
     const selectedCategoryValue = this.selectedCategoryControl.value;
-
+    this.favorites$ = this.FavoriteService.getAllFirebase();
     // if (selectedCategoryValue !== null) {
     //   this.changeSelectedCategory(selectedCategoryValue); // Викличте зміну значення
-  
+
     //   // Решта вашого коду
     // }
 
@@ -184,15 +191,25 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
 
   selectedCategory: string = 'special-edition';
 
-  // changeSelectedCategory(category: string) {
-  //   this.selectedCategoryControl.setValue(category);
-  // }
 
   changeSelectedCategory(category: string) {
     this.selectedCategory = category;
     this.selectedCategoryControl.setValue(category);
     localStorage.setItem('selectedCategory', category); // Зберегти значення в localStorage
   }
+
+  isClicked: boolean = false;
+  // у вашому компоненті
+  clickedProducts: Set<string | number> = new Set<string | number>();
+
+
+
+addToFavorites(product: any) {
+  console.log('Додано/видалено з улюбленого:', product);
+
+  this.FavoriteService.createFirebase(product);
+
+}
 
 
 

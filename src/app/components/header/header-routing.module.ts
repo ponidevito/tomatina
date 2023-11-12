@@ -5,6 +5,7 @@ import { CabinetUserComponent } from '../../pages/cabinet/cabinet-user/cabinet-u
 import { OrdersHistoryComponent } from '../../pages/cabinet/orders-history/orders-history.component';
 import { ChangePasswordComponent } from '../../pages/cabinet/change-password/change-password.component';
 import { CabinetComponent } from 'src/app/pages/cabinet/cabinet.component';
+import { FavoritesComponent } from '../../pages/cabinet/favorites/favorites.component';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'user', component: CabinetUserComponent },
       { path: 'order-history', component: OrdersHistoryComponent },
       { path: 'change-password', component: ChangePasswordComponent },
+      { path: 'favorites', component: FavoritesComponent },
     ],
   },
   { path: '', pathMatch: 'full', redirectTo: 'home' },

@@ -11,7 +11,7 @@ import {
   DocumentData,
   collection,
 } from '@angular/fire/firestore';
-import 'firebase/firestore';
+// import 'firebase/firestore';
 import { IReviewResponse } from '../../interfaces/reviews.interface';
 
 @Injectable({

@@ -286,6 +286,11 @@
   -o-transition: 0.25s;
   transition: 0.25s;
   background-color: transparent;
+  &.clicked {
+  background-image: url(//www.tomatina.ua/wp-content/themes/tomatina/img/icons/love-icon.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
 }
 
 .info-main {

@@ -31,10 +31,6 @@ const routes: Routes = [
       import('../app/pages/category-menu/category-menu.module').then((m) => m.CategoryMenuModule),
   },
 
-
-
- 
-  
   {
     path: 'checkout',
     loadChildren: () =>
