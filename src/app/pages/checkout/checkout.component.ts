@@ -295,63 +295,7 @@ export class CheckoutComponent implements OnInit {
 
   // This method count order
 
-  // addForm(): void {
-  //   const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
-  //   const productName = products.join(', ');
-  //   const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-  //   const userUID = currentUser.uid || ''; // set userUID to an empty string if it's undefined or null
-
-  //   const myDate = new Date();
-  //   const day = myDate.getDate().toString().padStart(2, '0');
-  //   const month = (myDate.getMonth() + 1).toString().padStart(2, '0');
-  //   const hours = myDate.getHours().toString().padStart(2, '0');
-  //   const minutes = myDate.getMinutes().toString().padStart(2, '0');
-  //   const date = `${day}.${month}.${hours}.${minutes}`;
-  //   const totalCount = this.orderService.basket.reduce((acc, curr) => {
-  //     return acc + curr.count;
-  //   }, 0);
-  //   if (this.orderForm && this.foodForm) {
-  //     const formValuesOrder = this.orderForm.value;
-  //     const formValuesFood = this.foodForm.value;
-
-  //     const products = this.orderService.basket.map((item) => item.name); // Створення масиву назв продуктів
-  //     const productName = products.join(', ');
-
-  //     const totalCount = this.orderService.basket.reduce((acc, curr) => {
-  //       return acc + curr.count;
-  //     }, 0);
-
-  //     const newOrder: any = {
-  //       // Додайте дані з першої форми
-  //       selectedHolders: formValuesOrder.selectedHolders,
-  //       count: this.count + 1,
-  //       productName: productName,
-  //       freePackage: formValuesOrder.freePackage,
-  //       cash: formValuesOrder.cash,
-  //       withoutRestFrom: formValuesOrder.withoutRestFrom,
-  //       remainingSum: this.remainingSum || null,
-  //       noCall: formValuesOrder.noCall || null,
-  //       addComment: formValuesOrder.addComment,
-  //       totalSum: this.getTotalSum(),
-  //       userUID: userUID,
-  //       status: 'в процесі',
-  //     };
-
-  //     // Додайте дані з другої форми
-  //     newOrder.fullName =
-  //       formValuesFood.firstName + ' ' + formValuesFood.lastName;
-  //     newOrder.phone = formValuesFood.phone;
-  //     newOrder.email = formValuesFood.email;
-  //     newOrder.selectedPickup = formValuesFood.selectedPickup;
-  //     newOrder.date = date;
-  //     newOrder.selectedInterval = formValuesFood.selectedInterval;
-  //     // Відправлення комбінованих даних на Firebase
-  //     this.orderService.createFirebase(newOrder);
-  //     console.log(newOrder);
-  //   }
-
-  //   this.clearBasket();
-  //   this.toastService.success('Ваше замовлення оформлене');
+ 
   // }
 
   addForm(): void {

@@ -1,5 +1,6 @@
 import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 import { ClickOutsideModule } from 'ng-click-outside';
 
@@ -17,6 +18,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { PhoneComponent } from '../app/shared/modals/phone/phone.component';
+import { FavoritesComponent } from '../app/pages/cabinet/favorites/favorites.component';
+
 
 
 
@@ -34,7 +37,7 @@ import { DatePipe } from '@angular/common';
     HeaderComponent,
     FooterComponent,
     CheckoutComponent,
-    PhoneComponent,
+    PhoneComponent,FavoritesComponent
 
   ],
   imports: [
@@ -49,7 +52,7 @@ import { DatePipe } from '@angular/common';
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     HttpClientModule,
-    
+    CommonModule
     
 
   ],

@@ -69,7 +69,14 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
 
     //   // Решта вашого коду
     // }
+    this.clickedProducts = new Set<string | number>();
 
+    this.loadFavoriteGoods()
+    const favoritesString = localStorage.getItem('favorites');
+    if (favoritesString) {
+      const favoritesArray = JSON.parse(favoritesString);
+      this.clickedProducts = new Set(favoritesArray);
+    }
 
 
     const savedCategory = localStorage.getItem('selectedCategory');
@@ -204,11 +211,85 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
 
 
 
+public favoritesGoods: Array<IGoodsResponse> = [];;
+
+
+// addToFavorites(product: any) {
+//   if (this.clickedProducts.has(product.id)) {
+//     this.FavoriteService.deleteFirebase(product.id as string).then(() => {
+//       this.clickedProducts.delete(product.id);  // Видаляємо id з колекції при видаленні
+//       this.loadFavoriteGoods();
+//       // this.toastService.success('Продукт видалений');
+//     });
+//     console.log('видалено з улюбленого:', product);
+//   } else {
+//     this.FavoriteService.createFirebase(product);
+//     this.clickedProducts.add(product.id);  // Додаємо id до колекції при додаванні
+//     console.log('Додано до улюбленого:', product);
+//   }
+// }
+
+
+
 addToFavorites(product: any) {
-  console.log('Додано/видалено з улюбленого:', product);
+  this.isClicked = this.clickedProducts.has(product.id);
 
-  this.FavoriteService.createFirebase(product);
+  if (this.isClicked) {
+    // this.FavoriteService.deleteFirebase(product.id as string).then(() => {
+    //   this.clickedProducts.delete(product.id);
+    //   // this.toastService.success('Продукт видалений');
+    // });
+    this.delete(product.id)
+    console.log('видалено з улюбленого:', product);
+  } else {
+    this.FavoriteService.createFirebase(product).then(() => {
+      this.clickedProducts.add(product.id);
+      localStorage.setItem('favorites', JSON.stringify(Array.from(this.clickedProducts)))
+      // this.toastService.success('Продукт додано до улюбленого');
+    });
+    console.log('Додано до улюбленого:', product);
+  }
 
+  this.loadFavoriteGoods();  // Включив виклик тут
+}
+
+
+
+saveDataToLocalStorage(): void {
+  localStorage.setItem('favorites', JSON.stringify(Array.from(this.clickedProducts)));
+}
+
+
+async delete(productId: string) {
+  try {
+    console.log('Спроба видалення продукта з ID:', productId);
+    await this.FavoriteService.deleteFirebase(productId);
+    this.clickedProducts.delete(productId);
+    console.log('видалено з улюбленого за ID:', productId);
+    await this.loadFavoriteGoods();
+
+    // Збереження улюблених продуктів та стану кнопок в Local Storage
+    this.saveDataToLocalStorage();
+  } catch (error) {
+    console.error('Помилка при видаленні з улюблених товарів:', error);
+  }
+}
+
+
+
+// Додавання або видалення з Local Storage
+
+
+
+
+
+
+
+loadFavoriteGoods(): void {
+  this.FavoriteService.getAllFirebase().subscribe((data) => {
+    this.favoritesGoods = data as IGoodsResponse[];
+    console.log(data)
+  });
 }
 
 
