@@ -5,9 +5,6 @@ import { CabinetUserComponent } from '../../pages/cabinet/cabinet-user/cabinet-u
 import { OrdersHistoryComponent } from '../../pages/cabinet/orders-history/orders-history.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
-import { FavoritesComponent } from './favorites/favorites.component';
-
-
 
 const routes: Routes = [
     {
@@ -15,7 +12,6 @@ const routes: Routes = [
       component: CabinetComponent, children: [
         { path: 'user', component: CabinetUserComponent },
         { path: 'order-history', component: OrdersHistoryComponent },
-        { path: 'favorites', component: FavoritesComponent },
         { path: 'change-password', component: ChangePasswordComponent },
     ],
 

@@ -18,7 +18,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { PhoneComponent } from '../app/shared/modals/phone/phone.component';
-import { FavoritesComponent } from '../app/pages/cabinet/favorites/favorites.component';
 
 
 
@@ -37,7 +36,7 @@ import { DatePipe } from '@angular/common';
     HeaderComponent,
     FooterComponent,
     CheckoutComponent,
-    PhoneComponent,FavoritesComponent
+    PhoneComponent
 
   ],
   imports: [

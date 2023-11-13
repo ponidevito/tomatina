@@ -12,6 +12,7 @@ export interface IGoodsRequest {
   price: number;
   image: string;
   count: number;
+  
 }
 export interface IGoodsResponse extends IGoodsRequest {
   id: number | string;

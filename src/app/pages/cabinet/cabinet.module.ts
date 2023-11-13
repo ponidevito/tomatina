@@ -6,7 +6,6 @@ import { OrdersHistoryComponent } from '../../pages/cabinet/orders-history/order
 import { CabinetRoutingModule } from '../../pages/cabinet/cabinet-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { FavoritesComponent } from '../../pages/cabinet/favorites/favorites.component';
 
 
 @NgModule({
@@ -15,7 +14,6 @@ import { FavoritesComponent } from '../../pages/cabinet/favorites/favorites.comp
     CabinetUserComponent,
     OrdersHistoryComponent,
     ChangePasswordComponent,
-    FavoritesComponent,
   ],
   imports: [
     CommonModule,

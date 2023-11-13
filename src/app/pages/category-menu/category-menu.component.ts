@@ -10,7 +10,6 @@ import { IMenu } from 'src/app/shared/interfaces/menu-select.interface';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { CategoryService } from '../../shared/services/category/category.service';
-import { FavoriteService } from '../../shared/services/favorite/favorite.service';
 
 
 
@@ -21,15 +20,12 @@ import { FavoriteService } from '../../shared/services/favorite/favorite.service
 })
 export class CategoryMenuComponent implements OnInit,OnDestroy {
 
-  favorites$: Observable<any[]> = new Observable<any[]>; // Значення за замовчуванням
   constructor(
     private goodsService: GoodsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private orderService: OrderService,
-    private cookieService: CookieService,
     public categoryService: CategoryService,
-    public FavoriteService: FavoriteService,
 
 
     
@@ -39,7 +35,6 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
         this.loadGoods();
       }
       
-      // this.selectFilter('Соуси');
     });
 
     this.categoryService.getSelectedCategory().subscribe((selectedCategory: string) => {
@@ -63,20 +58,9 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.loadGoods();
     const selectedCategoryValue = this.selectedCategoryControl.value;
-    this.favorites$ = this.FavoriteService.getAllFirebase();
-    // if (selectedCategoryValue !== null) {
-    //   this.changeSelectedCategory(selectedCategoryValue); // Викличте зміну значення
+  
 
-    //   // Решта вашого коду
-    // }
-    this.clickedProducts = new Set<string | number>();
 
-    this.loadFavoriteGoods()
-    const favoritesString = localStorage.getItem('favorites');
-    if (favoritesString) {
-      const favoritesArray = JSON.parse(favoritesString);
-      this.clickedProducts = new Set(favoritesArray);
-    }
 
 
     const savedCategory = localStorage.getItem('selectedCategory');
@@ -204,94 +188,6 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
     this.selectedCategoryControl.setValue(category);
     localStorage.setItem('selectedCategory', category); // Зберегти значення в localStorage
   }
-
-  isClicked: boolean = false;
-  // у вашому компоненті
-  clickedProducts: Set<string | number> = new Set<string | number>();
-
-
-
-public favoritesGoods: Array<IGoodsResponse> = [];;
-
-
-// addToFavorites(product: any) {
-//   if (this.clickedProducts.has(product.id)) {
-//     this.FavoriteService.deleteFirebase(product.id as string).then(() => {
-//       this.clickedProducts.delete(product.id);  // Видаляємо id з колекції при видаленні
-//       this.loadFavoriteGoods();
-//       // this.toastService.success('Продукт видалений');
-//     });
-//     console.log('видалено з улюбленого:', product);
-//   } else {
-//     this.FavoriteService.createFirebase(product);
-//     this.clickedProducts.add(product.id);  // Додаємо id до колекції при додаванні
-//     console.log('Додано до улюбленого:', product);
-//   }
-// }
-
-
-
-addToFavorites(product: any) {
-  this.isClicked = this.clickedProducts.has(product.id);
-
-  if (this.isClicked) {
-    // this.FavoriteService.deleteFirebase(product.id as string).then(() => {
-    //   this.clickedProducts.delete(product.id);
-    //   // this.toastService.success('Продукт видалений');
-    // });
-    this.delete(product.id)
-    console.log('видалено з улюбленого:', product);
-  } else {
-    this.FavoriteService.createFirebase(product).then(() => {
-      this.clickedProducts.add(product.id);
-      localStorage.setItem('favorites', JSON.stringify(Array.from(this.clickedProducts)))
-      // this.toastService.success('Продукт додано до улюбленого');
-    });
-    console.log('Додано до улюбленого:', product);
-  }
-
-  this.loadFavoriteGoods();  // Включив виклик тут
-}
-
-
-
-saveDataToLocalStorage(): void {
-  localStorage.setItem('favorites', JSON.stringify(Array.from(this.clickedProducts)));
-}
-
-
-async delete(productId: string) {
-  try {
-    console.log('Спроба видалення продукта з ID:', productId);
-    await this.FavoriteService.deleteFirebase(productId);
-    this.clickedProducts.delete(productId);
-    console.log('видалено з улюбленого за ID:', productId);
-    await this.loadFavoriteGoods();
-
-    // Збереження улюблених продуктів та стану кнопок в Local Storage
-    this.saveDataToLocalStorage();
-  } catch (error) {
-    console.error('Помилка при видаленні з улюблених товарів:', error);
-  }
-}
-
-
-
-// Додавання або видалення з Local Storage
-
-
-
-
-
-
-
-loadFavoriteGoods(): void {
-  this.FavoriteService.getAllFirebase().subscribe((data) => {
-    this.favoritesGoods = data as IGoodsResponse[];
-    console.log(data)
-  });
-}
-
 
 
 
