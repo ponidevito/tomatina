@@ -1,5 +1,12 @@
+@import ".././../../styles.scss";
 .section-delivery {
   padding: 70px 0px;
+  @include sm {
+    padding: 50px 0px;
+  }
+  @include xs {
+    padding: 30px 0px;
+  }
 }
 .delivery {
   &__container {
@@ -8,21 +15,59 @@
   &__top {
     &:not(:last-child) {
       margin-bottom: 70px;
+      @include sm {
+        margin-bottom: 50px;
+      }
+      @include xs {
+        margin-bottom: 30px;
+      }
     }
+  
+    .title {
+      font-size: 40px;
+      @include xs {
+        font-size: 30px;
+        text-align: center;
+      }
+    }
+    
   }
 
   &__row {
     display: flex;
-    align-items: center;
     justify-content: center;
     gap: 45px;
+
+    &:not(:last-child) {
+      margin-bottom: 130px;
+      @include lg {
+        margin-bottom: 70px;
+      }
+      @include sm {
+        margin-bottom: 50px;
+      }
+      @include xs {
+        margin-bottom: 30px;
+      }
+    }
+    @include lg {
+      flex-direction: column;
+    }
+    @include sm {
+      gap: 20px;
+    }
   }
 
   &__row-item {
+    flex: 0 1 50%;
+    @include lg {
+      flex: 1 1 100%;
+    }
   }
 
   &__row-content {
     display: flex;
+    justify-content: center;
   }
 
   &__row-image {
@@ -33,6 +78,9 @@
     top: 20px;
     img {
       max-width: 100%;
+    }
+    @include sm {
+      margin-right: 20px;
     }
   }
 
@@ -46,23 +94,58 @@
         color: #6d6d6d;
         font-size: 16px;
         line-height: 147%;
-        &::before{
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 10px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            border: 2px solid #599921;
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 10px;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          border: 2px solid #599921;
         }
       }
     }
     &.green-block {
-        ul li span {
-            color: #599921;
-        }
+      ul li span {
+        color: #599921;
+      }
     }
+
+    &.yellow-block {
+      ul li span {
+        color: #ffcc00;
+      }
+      ul li::before {
+        border: 2px solid #ffcc00;
+      }
+    }
+    &.red-block {
+      ul li span {
+        color: #ef2f3d;
+      }
+      ul li::before {
+        border: 2px solid #ef2f3d;
+      }
+    }
+  }
+  &__row-container {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    @include lg {
+      gap: 40px;
+    }
+    @include sm {
+      gap: 30px;
+    }
+    @include xs {
+      gap: 10px;
+    }
+  }
+
+  &__row-box {
+    display: flex;
   }
 
   &__row-title {
@@ -74,21 +157,90 @@
     &.green {
       color: #599921;
     }
+    &.yellow {
+      color: #ffcc00;
+    }
+    &.red {
+      color: #ef2f3d;
+    }
   }
 
   &__row-text {
   }
 
   &__map {
+    iframe {
+      width: 100%;
+      @include xs {
+        height: 300px;
+      }
+    }
+  }
+
+  &__row-pay {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    @media (max-width: 1380px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include md {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 }
-.top {
+
+.pay-delivery {
+  &__column {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    @include lg {
+      width: 70%;
+    }
+    @include md {
+      width: 100%;
+    }
+  }
+
+  &__image {
+    position: relative;
+    margin-right: 30px;
+    img {
+      @include lg {
+        width: 53px;
+        height: 47px;
+      }
+    }
+  }
+
+  &__content {
+    position: relative;
+    display: block;
+    width: 310px;
+    @include sm{
+        width: 100%;
+    }
+  }
+
   &__title {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    margin-bottom: 15px;
+    line-height: 1.3em;
+    @include lg {
+      font-size: 20px;
+    }
   }
-}
-.title {
-}
-.map-delivery {
-  &__map {
+
+  &__text {
+    letter-spacing: 0.03em;
+    line-height: 1.5em;
+    font-size: 16px;
+    color: #2d2c2c;
   }
 }
