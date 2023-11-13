@@ -36,7 +36,7 @@ import { DatePipe } from '@angular/common';
     HeaderComponent,
     FooterComponent,
     CheckoutComponent,
-    PhoneComponent
+    PhoneComponent,
 
   ],
   imports: [

@@ -39,6 +39,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'delivery',
+    loadChildren: () =>
+      import('../app/pages/delivery/delivery.module').then(
+        (m) => m.DeliveryModule
+      ),
+  },
+  {
     path: 'my-cabinet',
     canActivate: [AuthGuard],
     loadChildren: () =>
