@@ -46,6 +46,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'donatymo-razom',
+    loadChildren: () =>
+      import('../app/pages/donatymo-razom/donatymo-razom.module').then(
+        (m) => m.DonatymoRazomModule
+      ),
+  },
+  {
     path: 'my-cabinet',
     canActivate: [AuthGuard],
     loadChildren: () =>

@@ -22,8 +22,6 @@ import { PhoneComponent } from '../app/shared/modals/phone/phone.component';
 
 
 
-
-
 import { SharedModule } from '../app/shared/shared.module';
 import { CapitalizePipe } from './shared/pipes/capitalize/capitalize.pipe';
 import { DatePipe } from '@angular/common';
@@ -37,7 +35,6 @@ import { DatePipe } from '@angular/common';
     FooterComponent,
     CheckoutComponent,
     PhoneComponent,
-
   ],
   imports: [
     BrowserModule,
