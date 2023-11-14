@@ -67,6 +67,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'about',
+    loadChildren: () =>
+      import('../app/pages/about/about.module').then(
+        (m) => m.AboutModule
+      ),
+  },
+  {
     path: 'my-cabinet',
     canActivate: [AuthGuard],
     loadChildren: () =>
