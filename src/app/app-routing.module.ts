@@ -53,6 +53,20 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'contact',
+    loadChildren: () =>
+      import('../app/pages/contact/contact.module').then(
+        (m) => m.ContactModule
+      ),
+  },
+  {
+    path: 'oferta',
+    loadChildren: () =>
+      import('../app/pages/oferta/oferta.module').then(
+        (m) => m.OfertaModule
+      ),
+  },
+  {
     path: 'my-cabinet',
     canActivate: [AuthGuard],
     loadChildren: () =>

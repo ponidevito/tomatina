@@ -8,7 +8,7 @@ import { AccountService } from 'src/app/shared/services/account/account.service'
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { GoodsService } from 'src/app/shared/services/goods/goods.service';
 import { OrderService } from 'src/app/shared/services/order/order.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { Subscription } from 'rxjs';
 import { PhoneComponent } from 'src/app/shared/modals/phone/phone.component';
@@ -103,6 +103,12 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.subscription = this.categoryService.selectedCategory$.subscribe((category: string) => {
       this.selectedCategory = category;
       // Отримано нову категорію - виконати додаткові дії тут
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.closeMenuOnNavigation();
+      }
     });
   }
 
@@ -258,6 +264,16 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
     // navigate to /home
     this.router.navigate(['/home']);
+  }
+
+  closeMenuOnNavigation() {
+    const menuBlock = this.elRef.nativeElement.querySelector('.menu-block');
+    const body = document.getElementsByTagName('body')[0];
+  
+    // Закриваємо меню
+    this.show = false;
+    this.layer = false;
+    body.classList.remove('lockBurger');
   }
 
     // remove product

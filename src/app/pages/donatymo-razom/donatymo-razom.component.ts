@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class DonatymoRazomComponent implements OnInit {
   counterValue: number = 1378167;
   targetValue: number = 2756333.8;
-  duration: number = 4000; // час анімації в мілісекундах
+  duration: number = 4000; 
 
   ngOnInit() {
     this.animateCounter();

@@ -9,7 +9,6 @@
     <div class="modal__wrapper" [class.active]="showModalCart" (click)="onModalWrapperClick($event)">
       <div class="modal">
           <div class="modal__body">
-            <!-- <div class="modal__body-cart_title"><h4 class="h4 title">Кошик</h4> <button class="modal__body-cart-delete-all" (click)="removeProduct(product, $event)">очистити кошик</button></div> -->
             <ng-container *ngIf="orderService.basket && orderService.basket.length > 0; else emptyBasket">
                           
             
@@ -213,15 +212,14 @@
                     </div>
                    
                 </div>
-                <div class="menu-block" [class._active]="show" id="menuBlock">
+                <div class="menu-block" [class._active]="show" id="menuBlock" (click)="closeMenuOnNavigation()">
                     <button class="btn-close cart-close" (click)="closeBlock()" ></button>
                     <div class="menu-block__container">
                       <div class="menu-block__align">
                           <nav>
                             <ul  class="menu-block__list"><li  class="menu-block_item"><a href="https://www.tomatina.ua/about/">Про tomatina</a></li>
-                                <li  class="menu-block_item"><a href="https://www.tomatina.ua/zbery-sam/">Збери сам</a></li>
-                                <li  class="menu-block_item"><a href="https://www.tomatina.ua/dostavka/">Доставка</a></li>
-                                <li  class="menu-block_item"><a href="https://www.tomatina.ua/contact/">Контакти</a></li>
+                                <li  class="menu-block_item"><a [routerLink]="[ '/delivery']" routerLinkActive="route-active">Доставка</a></li>
+                                <li  class="menu-block_item"><a [routerLink]="[ '/contact']" routerLinkActive="route-active">Контакти</a></li>
                              </ul>               
                          </nav>
                         
