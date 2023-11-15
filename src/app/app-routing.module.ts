@@ -74,6 +74,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'vacancies',
+    loadChildren: () =>
+      import('../app/pages/vacancies/vacancies.module').then(
+        (m) => m.VacanciesModule
+      ),
+  },
+  {
     path: 'my-cabinet',
     canActivate: [AuthGuard],
     loadChildren: () =>
