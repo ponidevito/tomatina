@@ -1,6 +1,7 @@
 @import ".././../../styles.scss";
 
 .section-vacancies {
+  position: relative;
   padding: 70px 0px;
   @include sm {
     padding: 50px 0px;
@@ -10,6 +11,12 @@
   }
 }
 .vacancies {
+  &__decor {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 32%;
+  }
   &__container {
     @media (min-width: 576px) {
       max-width: 540px;
@@ -57,8 +64,6 @@
     }
   }
 
-  &__item {
-  }
 
   &__item-image {
     position: relative;
@@ -87,9 +92,6 @@
         }
       }
     }
-  }
-
-  &__item-link {
   }
 
   &__item-content {

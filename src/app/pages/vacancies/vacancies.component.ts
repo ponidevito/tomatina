@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./vacancies.component.scss']
 })
 export class VacanciesComponent {
+  constructor(
+  
+  ) {}
+
 
 }
