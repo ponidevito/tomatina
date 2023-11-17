@@ -16,6 +16,9 @@
     z-index: -1;
     left: 0;
     top: 32%;
+    @include lg{
+      display: none;
+    }
   }
   &__container {
     @media (min-width: 576px) {

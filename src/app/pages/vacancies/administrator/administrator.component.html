@@ -1,10 +1,10 @@
-<section class="section-administrator administrator">
-    <div class="administrator__container">
-        <div class="administrator__row">
-            <div class="administrator__item">
-                <div class="administrator__content">
-                    <p class="administrator__label">Від нас ти отримаєш:</p>
-                    <ul class="administrator__list">
+<section class="section-cv cv administrator">
+    <div class="cv__container">
+        <div class="cv__row">
+            <div class="cv__item">
+                <div class="cv__content">
+                    <p class="cv__label"><strong>Від нас ти отримаєш:</strong></p>
+                    <ul class="cv__list">
                         <li>покрокове п’ятиденне навчання;</li>
                         <li>позмінний графік роботи (2/2);</li>
                         <li>розвозку по закінченні робочої зміни (діє в межах Львова)</li>
@@ -14,22 +14,22 @@
                         <li>перспективи кар’єрного росту в компанії — можливо, саме ти наш майбутній менеджер</li>
                     </ul>
 
-                    <p class="administrator__label">Твої задачі:</p>
-                    <ul>
+                    <p class="cv__label"><strong>Твої задачі:</strong></p>
+                    <ul class="cv__list">
                         <li>робота на відкритій лінії видачі;</li>
                         <li>ведення касової дисципліни;</li>
                         <li>консультація відвідувачів салат паста ба;</li>
                         <li>формування замовлень в зал та на доставку;</li>
                     </ul>
-                    <p class="administrator__label">Що очікуємо від тебе:</p>
-                    <ul>
+                    <p class="cv__label"><strong>Що очікуємо від тебе:</strong></p>
+                    <ul class="cv__list">
                         <li>вік 18 років +;</li>
                         <li>досвід роботи в напрямку fast food буде перевагою;</li>
                         <li>товариський та відповідальний;</li>
                         <li>готовий працювати в режимі багатозадачності;</li>
                         <li>готовий вчитись та розвиватись</li>
                     </ul>
-                    <p>Будемо раді бачити тебе в нашій команді молодих, активних та творчих людей, які люблять свою роботу і прагнуть приносити задоволення оточуючим!</p>
+                    <p class="cv__label">Будемо раді бачити тебе в нашій команді молодих, активних та творчих людей, які люблять свою роботу і прагнуть приносити задоволення оточуючим!</p>
                     <p><span>Зацікавило? Телефонуй та долучайся до команди!</span></p>
                     <ul>
                         <li><a href="tel:+380678844699">+380678844699 Ольга</a></li>
@@ -38,7 +38,45 @@
                     </ul>
                 </div>
             </div>
-            <div class="administrator__item"></div>
+            <div class="cv__item">
+                <h3 class="cv__title">Заявка на вакансію</h3>
+                <p class="cv__subtitle">Заповніть дану заявку і ми зв’яжемося з вами найблищим часом</p>
+                <form class="cv__form form-cv" [formGroup]="cvForm" (ngSubmit)="addForm()">
+                    <div class="form-cv__row">
+                        <input class="form-cv__input form-admin__input"  type="text" placeholder="Ваше ім'я" formControlName="firstName">
+                        <input class="form-cv__input form-admin__input" type="text" placeholder="Ваше Прізвище" formControlName="lastName">
+                    </div>
+                    <input type="email" class="form-cv__input form-admin__input" name="email" placeholder="Ваш e-mail" formControlName="email">
+                    <textarea name="textarea" style="resize: none;" class="form-cv__textarea form-admin__input" placeholder="Чому ви хочете працювати з нами?" formControlName="review"></textarea>
+
+                    <div class="file-upload form-cv__file">
+                        <div class="form-category__body form-admin__body form-cv__body">
+                        <ng-container *ngIf="!isUploaded; else uploadedState">
+                            <input type="file" class="form-category__fileBtn form-admin__fileBtn" id="file" [disabled]="isUploaded" #fileInput (change)="upload($event)">
+                            <label for="file">Прикріпити файл (pdf, pptx, xlsx, xls, doc, docx, jpg) до 5 MB</label>
+                          </ng-container>
+                          
+                     
+                        
+                        <div class="animated-progress progress-lightred form-cv__animated-progress">
+                            <span data-progress="100" [ngStyle]="{ width: uploadPercent + '%' }"></span>
+                          </div>
+                        <ng-template #uploadedState>
+                            <div>
+                              Файл успішно завантажено!
+                            </div>
+                            <button type="button" class="form-action__btnDelete btn-delete-image form-cv__btnDelete" (click)="deleteImage()">Delete</button>
+                          </ng-template>
+                        </div>
+                        <ng-container *ngIf="isUploaded">
+                            <img [src]="valueByControl('image')" width="265px" height="auto" alt="img">
+                        </ng-container>
+                      </div>
+                      <button type="submit"  class="btn button-add" [disabled]="cvForm.invalid">Надіслати</button>
+
+                </form>
+
+            </div>
         </div>
     </div>
 </section>

@@ -888,6 +888,123 @@ app-change-password {
   animation-duration: 1s;
 }
 
+// cv
+.section-cv {
+  padding: 100px 0px;
+  @include lg{
+    padding: 50px 0px;
+  }
+  @include sm{
+    padding: 30px 0px;
+  }
+}
+
+.cv {
+  &__container {
+    @media (min-width:1200px) {
+      max-width: 1480px;
+    }
+  }
+  &__row {
+    display: flex;
+    @media (max-width:1200px) {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+
+  &__item {
+    flex: 0 1 50%;
+    @media (max-width: 1200px) {
+      flex: 1 1 100%;
+      
+    }
+  }
+
+  &__content {
+    p {
+      font-size: 18px;
+      color: #6d6d6d;
+      margin-bottom: 20px;
+      line-height: 1.5em;
+      @include xs{
+        font-size: 16px;
+      }
+    }
+    p span {
+      color: #599921;
+    }
+    ul li a {
+      font-size: 18px;
+      color: #6d6d6d;
+      margin-bottom: 20px;
+      line-height: 1.5em;
+      transition: 0.3s;
+      &:hover {
+        color: #599921;
+      }
+      @include xs{
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__label {
+    font-size: 18px;
+    color: #6d6d6d;
+    margin-bottom: 20px;
+    line-height: 1.5em;
+    @include xs{
+      font-size: 16px;
+    }
+  }
+
+  &__list {
+    padding-left: 15px;
+    &:not(:last-child) {
+      margin-bottom: 60px;
+      @include lg{
+        margin-bottom: 40px;
+      }
+      @include xs{
+        margin-bottom: 20px;
+      }
+    }
+    li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 10px;
+      color: #6d6d6d;
+      font-size: 16px;
+      line-height: 147%;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        border: 2px solid #599921;
+      }
+    }
+  }
+  &__title {
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 1.2em;
+    color: #2d2c2c;
+    text-align: center;
+  }
+  &__subtitle {
+    font-size: 15px;
+    line-height: 1.2em;
+    color: #6d6d6d;
+    text-align: center;
+  }
+}
+
 html:not(.touch-screen)::-webkit-scrollbar,
 html:not(.touch-screen) *::-webkit-scrollbar {
   width: 5px;

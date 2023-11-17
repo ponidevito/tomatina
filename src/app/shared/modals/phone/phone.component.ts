@@ -31,8 +31,8 @@ export class PhoneComponent implements OnInit {
   public count = 0;
   public reviewForm!: FormGroup;
   public selectedStreet!: string;
-  public firstName!: string;
-  public lastName!: string;
+  // public firstName!: string;
+  // public lastName!: string;
   public review!: string | number;
 
   public reviewsArray: Array<IReviewResponse> = [];

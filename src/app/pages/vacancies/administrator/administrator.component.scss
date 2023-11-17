@@ -1,8 +1,82 @@
-.section-administrator {
-  padding: 100px 0px;
+@import "../../../../styles.scss";
+
+.cv {
+  &__form {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 70px 0 100px;
+    @include md {
+      padding: 0;
+    }
+  }
 }
-.administrator {
+.form-cv {
+  &__row {
+    display: flex;
+    gap: 20px;
+    @include sm {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__input {
+    &:focus {
+      outline: 2px solid #599921;
+    }
+    &::placeholder {
+      font-size: 16px;
+      @include sm {
+        font-size: 13px;
+      }
+    }
+  }
+
+  &__textarea {
+    height: 105px;
+    &:focus {
+      outline: 2px solid #599921;
+    }
+    &::placeholder {
+      font-size: 16px;
+      @include sm {
+        font-size: 13px;
+      }
+    }
+  }
+
+  &__body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    label {
+      font-size: 14px;
+    }
+  }
+
+  &__animated-progress {
+    margin: 0;
+  }
+  &__btnDelete {
+    margin-left: 0;
+  }
+}
+
+.cv {
   &__container {
-    max-width: 1480px;
+    // max-width: 1480px;
+    @media (min-width: 567px) {
+      max-width: 540px;
+    }
+    @media (min-width: 768px) {
+      max-width: 720px;
+    }
+    @media (min-width: 992px) {
+      max-width: 960px;
+    }
+    @media (min-width: 1200px) {
+      max-width: 1480px;
+    }
   }
 }
