@@ -8,23 +8,25 @@ import {
 import { ImageService } from 'src/app/shared/services/image/image.service';
 import { CvService } from '../../../shared/services/cv/cv.service';
 import { Title } from '@angular/platform-browser';
-import { ToastrService } from 'ngx-toastr';
+import { Router, NavigationEnd } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-administrator',
-  templateUrl: './administrator.component.html',
-  styleUrls: ['./administrator.component.scss'],
+  selector: 'app-cashier',
+  templateUrl: './cashier.component.html',
+  styleUrls: ['./cashier.component.scss'],
 })
-export class AdministratorComponent implements OnInit {
+export class CashierComponent {
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private ImageService: ImageService,
     private cvService: CvService,
     private titleService: Title,
+    private spinnerService: NgxSpinnerService,
     private toastService: ToastrService,
-    private spinnerService: NgxSpinnerService
   ) {}
 
   public cvForm!: FormGroup;
@@ -37,16 +39,10 @@ export class AdministratorComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCvForm();
-    this.titleService.setTitle('Вакансія адміністратор');
+    this.titleService.setTitle('Вакансія касир');
     this.loadData();
   }
 
-  loadData(): void {
-    this.spinnerService.show(); // Show spinner before starting async operations
-    setTimeout(() => {
-      this.spinnerService.hide();
-    }, 1000); 
-  }
   initCvForm(): void {
     this.cvForm = this.fb.group({
       firstName: [null, Validators.required],
@@ -56,8 +52,15 @@ export class AdministratorComponent implements OnInit {
       date: this.formatDateWithSpaces(),
       fileUpload: new FormControl(),
       image: [null, Validators.required],
-      vacancie: 'admin',
+      vacancie: 'cashier',
     });
+  }
+
+  loadData(): void {
+    this.spinnerService.show(); // Show spinner before starting async operations
+    setTimeout(() => {
+      this.spinnerService.hide();
+    }, 1000);
   }
 
   addForm(): void {
@@ -71,14 +74,13 @@ export class AdministratorComponent implements OnInit {
       date: this.formatDateWithSpaces(),
       review: formValuesCv.review,
       image: formValuesCv.image,
-      vacancie: 'admin',
+      vacancie: 'cashier',
     };
     console.log(newReview);
 
     // Додавання нового відгуку
     this.cvService.createFirebase(newReview).then(() => {
-      this.toastService.success('Ви відгукнулися на вакансію!');
-
+      this.toastService.success('Ви відгукнулися на вакансію!!');
     });
 
     // Скидання форми
@@ -147,10 +149,5 @@ export class AdministratorComponent implements OnInit {
   // This method returns the value of a field in the form by its name.
   valueByControl(control: string): string {
     return this.cvForm.get(control)?.value;
-  }
-
-  ngOnDestroy(): void {
-    this.spinnerService.hide();
-
   }
 }

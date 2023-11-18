@@ -52,6 +52,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     NgxMaskModule.forRoot()
 
   ],

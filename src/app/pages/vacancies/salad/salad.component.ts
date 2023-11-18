@@ -8,18 +8,19 @@ import {
 import { ImageService } from 'src/app/shared/services/image/image.service';
 import { CvService } from '../../../shared/services/cv/cv.service';
 import { Title } from '@angular/platform-browser';
+import { Router, NavigationEnd } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-
 @Component({
-  selector: 'app-administrator',
-  templateUrl: './administrator.component.html',
-  styleUrls: ['./administrator.component.scss'],
+  selector: 'app-salad',
+  templateUrl: './salad.component.html',
+  styleUrls: ['./salad.component.scss'],
 })
-export class AdministratorComponent implements OnInit {
+export class SaladComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private ImageService: ImageService,
     private cvService: CvService,
     private titleService: Title,
@@ -37,16 +38,16 @@ export class AdministratorComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCvForm();
-    this.titleService.setTitle('Вакансія адміністратор');
+    this.titleService.setTitle('Вакансія салатьє');
     this.loadData();
   }
-
   loadData(): void {
     this.spinnerService.show(); // Show spinner before starting async operations
     setTimeout(() => {
       this.spinnerService.hide();
-    }, 1000); 
+    }, 1000);
   }
+
   initCvForm(): void {
     this.cvForm = this.fb.group({
       firstName: [null, Validators.required],
@@ -56,7 +57,7 @@ export class AdministratorComponent implements OnInit {
       date: this.formatDateWithSpaces(),
       fileUpload: new FormControl(),
       image: [null, Validators.required],
-      vacancie: 'admin',
+      vacancie: 'salad',
     });
   }
 
@@ -71,14 +72,13 @@ export class AdministratorComponent implements OnInit {
       date: this.formatDateWithSpaces(),
       review: formValuesCv.review,
       image: formValuesCv.image,
-      vacancie: 'admin',
+      vacancie: 'salad',
     };
     console.log(newReview);
 
     // Додавання нового відгуку
     this.cvService.createFirebase(newReview).then(() => {
       this.toastService.success('Ви відгукнулися на вакансію!');
-
     });
 
     // Скидання форми
@@ -147,10 +147,5 @@ export class AdministratorComponent implements OnInit {
   // This method returns the value of a field in the form by its name.
   valueByControl(control: string): string {
     return this.cvForm.get(control)?.value;
-  }
-
-  ngOnDestroy(): void {
-    this.spinnerService.hide();
-
   }
 }

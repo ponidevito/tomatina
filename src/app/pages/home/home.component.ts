@@ -6,6 +6,7 @@ import { switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order/order.service';
 import { CategoryService } from '../../shared/services/category/category.service';
+import { Title } from '@angular/platform-browser';
 
 
 
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit{
     private router: Router,
     public orderService: OrderService,
     public categoryService: CategoryService,
+    private titleService: Title
 
   ) {
     this.eventSubscription = this.router.events.subscribe((event) => {
@@ -65,8 +67,14 @@ export class HomeComponent implements OnInit{
       this.selectedCategory = category;
       // Отримано нову категорію - виконати додаткові дії тут
     });
-  }
+    this.titleService.setTitle('Tomatina');
 
+  }
+  
+  changeTitle() {
+    // Змінюємо тайтл сторінки при виклику цього методу
+    this.titleService.setTitle('Tomatina');
+  }
   // This method downloads products from the server that match a specific category.
   loadGoods(): void {
     this.goodsService.getAllFirebase().subscribe((data) => {

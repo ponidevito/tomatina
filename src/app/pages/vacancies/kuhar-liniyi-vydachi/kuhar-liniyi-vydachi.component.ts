@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,24 +8,23 @@ import {
 import { ImageService } from 'src/app/shared/services/image/image.service';
 import { CvService } from '../../../shared/services/cv/cv.service';
 import { Title } from '@angular/platform-browser';
-import { ToastrService } from 'ngx-toastr';
+import { Router, NavigationEnd } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
-  selector: 'app-administrator',
-  templateUrl: './administrator.component.html',
-  styleUrls: ['./administrator.component.scss'],
+  selector: 'app-kuhar-liniyi-vydachi',
+  templateUrl: './kuhar-liniyi-vydachi.component.html',
+  styleUrls: ['./kuhar-liniyi-vydachi.component.scss']
 })
-export class AdministratorComponent implements OnInit {
-  constructor(
-    private fb: FormBuilder,
-    private ImageService: ImageService,
-    private cvService: CvService,
-    private titleService: Title,
+export class KuharLiniyiVydachiComponent {
+  constructor(private fb: FormBuilder,private router: Router, private ImageService: ImageService, private cvService: CvService, private titleService: Title,
+    private spinnerService: NgxSpinnerService,
     private toastService: ToastrService,
-    private spinnerService: NgxSpinnerService
-  ) {}
+    ) {
+  }
 
   public cvForm!: FormGroup;
   public review!: string | number;
@@ -37,26 +36,26 @@ export class AdministratorComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCvForm();
-    this.titleService.setTitle('Вакансія адміністратор');
-    this.loadData();
+    this.titleService.setTitle('Вакансія Кухар лінії видачі');
+this.loadData()
   }
-
   loadData(): void {
     this.spinnerService.show(); // Show spinner before starting async operations
     setTimeout(() => {
       this.spinnerService.hide();
     }, 1000); 
   }
+
   initCvForm(): void {
     this.cvForm = this.fb.group({
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
-      review: [this.review, Validators.required],
+      review:[this.review ,Validators.required],
       date: this.formatDateWithSpaces(),
       fileUpload: new FormControl(),
-      image: [null, Validators.required],
-      vacancie: 'admin',
+      image: [null ,Validators.required],
+      vacancie: 'kuhar-liniyi-vydachi',
     });
   }
 
@@ -71,14 +70,13 @@ export class AdministratorComponent implements OnInit {
       date: this.formatDateWithSpaces(),
       review: formValuesCv.review,
       image: formValuesCv.image,
-      vacancie: 'admin',
+      vacancie: 'kuhar-liniyi-vydachi',
     };
     console.log(newReview);
 
     // Додавання нового відгуку
     this.cvService.createFirebase(newReview).then(() => {
-      this.toastService.success('Ви відгукнулися на вакансію!');
-
+      this.toastService.success('Ви відгукнулися на вакансію!!');
     });
 
     // Скидання форми
@@ -92,6 +90,7 @@ export class AdministratorComponent implements OnInit {
     });
     this.isUploaded = false;
     this.uploadPercent = 0;
+
   }
 
   upload(event: any): void {
@@ -149,8 +148,5 @@ export class AdministratorComponent implements OnInit {
     return this.cvForm.get(control)?.value;
   }
 
-  ngOnDestroy(): void {
-    this.spinnerService.hide();
 
-  }
 }
