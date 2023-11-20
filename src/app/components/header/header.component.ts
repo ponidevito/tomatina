@@ -177,25 +177,40 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
 
 
-  openSubMenu(event: Event) {
-    event.preventDefault();
-    this.isSubMenu=!this.isSubMenu;
+  // openSubMenu(event: Event) {
+  //   event.preventDefault();
+  //   this.isSubMenu=!this.isSubMenu;
     
-    if (this.autoCloseTimer) {
-      clearTimeout(this.autoCloseTimer);
-    }
-    this.autoCloseTimer = setTimeout(() => {
-      this.isSubMenu = false;
-    }, 20000);
-  }
+  //   if (this.autoCloseTimer) {
+  //     clearTimeout(this.autoCloseTimer);
+  //   }
+  //   this.autoCloseTimer = setTimeout(() => {
+  //     this.isSubMenu = false;
+  //   }, 20000);
+  // }
 
-  closeSubMenu() {
-    this.isSubMenu = false;
-  }
+  // closeSubMenu() {
+  //   this.isSubMenu = false;
+  // }
 
-  onMenuItemSelect() {
-    this.closeSubMenu();
-  }
+  // onMenuItemSelect() {
+  //   this.closeSubMenu();
+  // }
+
+
+  // isSubMenu = false;
+
+openSubMenu() {
+  this.isSubMenu = true;
+}
+
+closeSubMenu() {
+  this.isSubMenu = false;
+}
+
+onMenuItemSelect() {
+  this.closeSubMenu();
+}
 
   // basket
 

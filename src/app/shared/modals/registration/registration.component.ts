@@ -69,9 +69,7 @@ export class RegistrationComponent implements OnInit {
     this.emailSignUp(email, password)
       .then(() => {
         this.toastr.success('User successfully created');
-        // this.router.navigate(['/my-cabinet/user']);
         // this.accountService.isUserLogin$.next(true);
-
         this.dialog.closeAll();
         this.regForm.reset();
       })
@@ -98,11 +96,8 @@ export class RegistrationComponent implements OnInit {
     
     setDoc(doc(this.afs, 'users', credential.user.uid), user);
     localStorage.setItem('currentUser', JSON.stringify(user));
-    // this.navigateToUserProfile();
   }
-  // navigateToUserProfile() {
-  //   // this.router.navigate(['/my-cabinet/user']);
-  // }
+
 
   // open modal
   openLoginModal(): void {

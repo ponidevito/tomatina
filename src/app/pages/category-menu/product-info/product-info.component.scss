@@ -60,8 +60,6 @@
     text-align: center;
   }
 
-  &__content {
-  }
 
   &__title {
     font-size: 42px;
@@ -105,8 +103,7 @@
     }
   }
 
-  &__order {
-  }
+
   &__image {
     width: 500px;
     @media (max-width: 1200px) {
@@ -153,8 +150,7 @@
 }
 .info-body {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
+
   display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
@@ -173,6 +169,9 @@
   -ms-flex-align: center;
   align-items: center;
   gap: 10px;
+  img{
+    margin-right: 5px;
+  }
   p {
     font-size: 14px;
     color: #6d6d6d;
@@ -181,6 +180,7 @@
     color: #2d2c2c;
     font-weight: 500;
   }
+
 }
 
 .thumb-input-number {

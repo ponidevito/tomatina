@@ -1,41 +1,43 @@
 <div class="admin-reviews reviews">
     <div class="reviews__container">
-        <div class="reviews__items">
-                            <!-- table -->
-                            <table class="table table-reviews table-global"> 
-                                <thead>
-                                    <tr class="tr-top  table-reviews__tr-top">
-                                        <th>№</th>
-                                        <th>Ім'я та прізвище</th>
-                                        <th>Дата та час</th>
-                                        <th>Email</th>
-                                        <th>Дія</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        <ng-container *ngFor="let item of adminRewiewsArray;index as i">
-                                    <tr class="tr-reviews">
-                                        <td><b>{{ item.count }}</b></td>
-                                        <td>{{ item.firstName }}  {{ item.lastName}}</td>
-                                        <td>{{ item.date }}</td>
-                                        <td>{{ item.email }}</td>
-                                        <td><button class=" table-reviews__button table-global__button" (click)="deleteReviews(item)">Видалити</button></td>
-
-                                    </tr>
-                                    <tr class="tr-textarea">
-                                        <td><textarea  style="width: 100%;">{{ item.review }}</textarea></td>
-                                        <td>Рейтинг &nbsp;<b>{{ item.rating }}</b></td>
-                                        <td>{{ item.selectedStreet }}</td>
-                                        <td><img [src]="item.image"  class="image" height="100px">
-                                            <ng-container *ngIf="!item.image || item.image.length === 0">
-                                                <div class=" table-reviews__empty table-global__empty">Пусто</div>
-                                              </ng-container></td>
-                                    </tr>
-                                        </ng-container>
-                                </tbody>
-
-                            </table> 
-        </div>
+       <div class="reviews__items">
+          <!-- table -->
+          <table class="table table-reviews table-global">
+             <thead>
+                <tr class="tr-top  table-reviews__tr-top">
+                   <th>№</th>
+                   <th>Ім'я та прізвище</th>
+                   <th>Дата та час</th>
+                   <th>Email</th>
+                   <th>Дія</th>
+                </tr>
+             </thead>
+             <tbody>
+                <ng-container *ngFor="let item of adminRewiewsArray;index as i">
+                   <tr class="tr-reviews">
+                      <td><b>{{ item.count }}</b></td>
+                      <td>{{ item.firstName }}  {{ item.lastName}}</td>
+                      <td>{{ item.date }}</td>
+                      <td>{{ item.email }}</td>
+                      <td><button class=" table-reviews__button table-global__button" (click)="deleteReviews(item)">Видалити</button></td>
+                   </tr>
+                   <tr class="tr-textarea">
+                      <td><textarea  style="width: 100%;">{{ item.review }}</textarea></td>
+                      <td>Рейтинг &nbsp;<b>{{ item.rating }}</b></td>
+                      <td>{{ item.selectedStreet }}</td>
+                      <td>
+                         <img [src]="item.image"  class="image" height="100px">
+                         <ng-container *ngIf="!item.image || item.image.length === 0">
+                            <div class=" table-reviews__empty table-global__empty">Пусто</div>
+                         </ng-container>
+                      </td>
+                   </tr>
+                </ng-container>
+                <ng-container *ngIf="!adminRewiewsArray || adminRewiewsArray.length === 0">
+                    <div class=" table-goods__empty table-global__empty">Немає доданих відгуків</div>
+                  </ng-container>
+             </tbody>
+          </table>
+       </div>
     </div>
-    
-</div>
+ </div>

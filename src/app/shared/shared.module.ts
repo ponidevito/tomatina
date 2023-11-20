@@ -20,7 +20,6 @@ import { CapitalizePipe } from '../shared/pipes/capitalize/capitalize.pipe';
 
 
 
-
 const MATERIAL = [
   MatExpansionModule,
   MatDialogModule,

@@ -7,7 +7,6 @@ import { AdminGoodsComponent } from '../admin/admin-goods/admin-goods.component'
 import { AdminOrderComponent } from '../admin/admin-order/admin-order.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdminReviewsComponent } from './admin-reviews/admin-reviews.component';
-import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.component';
 
 
 
@@ -19,7 +18,7 @@ import { AdminVacanciesComponent } from './admin-vacancies/admin-vacancies.compo
     AdminGoodsComponent,
     AdminOrderComponent,
     AdminReviewsComponent,
-    AdminVacanciesComponent
+
   ],
   imports: [
     CommonModule,

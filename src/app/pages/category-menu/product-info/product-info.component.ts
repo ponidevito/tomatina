@@ -4,6 +4,8 @@ import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order/order.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-product-info',
@@ -13,9 +15,10 @@ import { OrderService } from 'src/app/shared/services/order/order.service';
 export class ProductInfoComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
-    // private orderService: OrderService,
     private goodsService: GoodsService,
-    public orderService: OrderService
+    public orderService: OrderService,
+    private spinnerService: NgxSpinnerService
+
   ) {}
 
   public product: IGoodsResponse = {
@@ -45,11 +48,10 @@ export class ProductInfoComponent implements OnInit {
   breadcrumbItems = [
     { label: 'Головна', path: '/' },
     { label: this.getCategoryLabel(), path: '/category-menu/' + this.category },
-    // { label: 'Рол Тижня', path: '/акції/рол-тижня' },
   ];
 
   ngOnInit(): void {
-    // this.spinnerService.show(); // show spinner
+    this.spinnerService.show(); // show spinner
     this.orderService.loadBasket();
     this.orderService.updateBasket();
     this.loadGoods();
@@ -71,7 +73,7 @@ export class ProductInfoComponent implements OnInit {
 
       this.goodsService.getOneFirebase(id).subscribe((data) => {
         this.product = { ...data, id: data['id'].toString() } as IGoodsResponse;
-        // this.spinnerService.hide(); // show spinner
+        this.spinnerService.hide(); // show spinner
       });
     });
   }
@@ -88,8 +90,7 @@ export class ProductInfoComponent implements OnInit {
       )
       .subscribe((data) => {
         this.goodsArray = data as IGoodsResponse[];
-        // this.selectFilter('Соуси');
-        // this.spinnerService.hide();
+        this.spinnerService.hide();
       });
   }
 

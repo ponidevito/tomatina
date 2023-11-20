@@ -19,6 +19,9 @@
     @include lg{
       display: none;
     }
+    @media (max-width: 1560px) {
+      top: 38%;
+    }
   }
   &__container {
     @media (min-width: 576px) {

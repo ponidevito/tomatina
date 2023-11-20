@@ -8,9 +8,8 @@ import {
 import { ImageService } from 'src/app/shared/services/image/image.service';
 import { CvService } from '../../../shared/services/cv/cv.service';
 import { Title } from '@angular/platform-browser';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-kuhar-vok',
@@ -25,7 +24,6 @@ export class KuharVokComponent implements OnInit {
     private cvService: CvService,
     private titleService: Title,
     private toastService: ToastrService,
-    private spinnerService: NgxSpinnerService
   ) {}
 
   public cvForm!: FormGroup;
@@ -39,7 +37,6 @@ export class KuharVokComponent implements OnInit {
   ngOnInit(): void {
     this.initCvForm();
     this.titleService.setTitle('Вакансія Кухар вок');
-    this.loadData();
   }
 
   initCvForm(): void {
@@ -55,12 +52,6 @@ export class KuharVokComponent implements OnInit {
     });
   }
 
-  loadData(): void {
-    this.spinnerService.show(); // Show spinner before starting async operations
-    setTimeout(() => {
-      this.spinnerService.hide();
-    }, 1000);
-  }
   addForm(): void {
     const formValuesCv = this.cvForm.value;
 

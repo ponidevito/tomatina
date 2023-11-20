@@ -8,8 +8,7 @@ import {
 import { ImageService } from 'src/app/shared/services/image/image.service';
 import { CvService } from '../../../shared/services/cv/cv.service';
 import { Title } from '@angular/platform-browser';
-import { Router, NavigationEnd } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -25,7 +24,6 @@ export class CashierComponent {
     private ImageService: ImageService,
     private cvService: CvService,
     private titleService: Title,
-    private spinnerService: NgxSpinnerService,
     private toastService: ToastrService,
   ) {}
 
@@ -40,7 +38,6 @@ export class CashierComponent {
   ngOnInit(): void {
     this.initCvForm();
     this.titleService.setTitle('Вакансія касир');
-    this.loadData();
   }
 
   initCvForm(): void {
@@ -56,12 +53,7 @@ export class CashierComponent {
     });
   }
 
-  loadData(): void {
-    this.spinnerService.show(); // Show spinner before starting async operations
-    setTimeout(() => {
-      this.spinnerService.hide();
-    }, 1000);
-  }
+
 
   addForm(): void {
     const formValuesCv = this.cvForm.value;

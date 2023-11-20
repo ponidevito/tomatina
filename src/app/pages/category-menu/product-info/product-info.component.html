@@ -19,16 +19,16 @@
                 </div>
             </div>
             
-            <div class="product-info__item item-right" >
+            <div class="product-info__item item-right">
                 <div class="product-info__content">
-                    <div class="product-info__weight">{{ product.weight }} г</div>
+                    <div class="product-info__weight">  {{ product.category.path === 'drinks' ? product.weight + ' мл' : product.weight + ' г' }}
+                    </div>
                     <h2 class="product-info__title">{{product.name | capitalize}}</h2>
                     <div class="product-info__ingredients" >{{ product.ingredients ? (product.ingredients | capitalize) : ''}}</div>
                     <div class="product-info__ingredients" >*{{ product.addInfo ? (product.addInfo | capitalize) : '' }}</div>
                     <div class="product-info__variations"><span>Харчова цінність:</span>  <b> {{ (product.proteins !== undefined && product.fats !== undefined && product.carbohydrates !== undefined) ? calculateCalories(product.proteins, product.fats, product.carbohydrates) : '' }} </b>
                       <span>ккал</span></div>
-               
-                    <div class="info-block" *ngIf="categoryName !=='special-edition'">
+                    <div class="info-block">
                       <div class="info-head">Харчова цінність страви:   <b> {{ (product.proteins !== undefined && product.fats !== undefined && product.carbohydrates !== undefined) ? calculateCalories(product.proteins, product.fats, product.carbohydrates) : '' }} </b>
                       </div>
                       <div class="info-body">
@@ -55,7 +55,7 @@
                   </div>
                   <div class="product-detail-btns"> 
                     <button class="btn btn-primary product-detail-button order-btn add-to-cart-btn" (click)="addToBasket(product)"> Додати в кошик </button> 
-                    <button class="btn btn-white product-detail-button-white order-btn fast-order"> Швидке замовлення </button></div>
+                    <button class="btn btn-white product-detail-button-white order-btn fast-order" [routerLink]="[ '/checkout' ]" (click)="addToBasket(product)"> Швидке замовлення </button></div>
                 </div>
             </div>
             

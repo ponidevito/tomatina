@@ -1,51 +1,43 @@
-import { Component, HostListener, OnDestroy,OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { GoodsService } from '../../shared/services/goods/goods.service';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order/order.service';
-import { CookieService } from 'ngx-cookie-service';
 import { IMenu } from 'src/app/shared/interfaces/menu-select.interface';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { CategoryService } from '../../shared/services/category/category.service';
-
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-category-menu',
   templateUrl: './category-menu.component.html',
   styleUrls: ['./category-menu.component.scss'],
 })
-export class CategoryMenuComponent implements OnInit,OnDestroy {
-
+export class CategoryMenuComponent implements OnInit, OnDestroy {
   constructor(
     private goodsService: GoodsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private orderService: OrderService,
     public categoryService: CategoryService,
-
-
-    
+    private spinnerService: NgxSpinnerService
   ) {
     this.eventSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.loadGoods();
       }
-      
     });
 
-    this.categoryService.getSelectedCategory().subscribe((selectedCategory: string) => {
-      // Отримано оновлену категорію
-      this.selectedCategory = selectedCategory;
-      this.selectedCategoryControl.setValue(selectedCategory);
-      // Викликати інші методи або логіку, яку вам потрібно виконати після отримання нової категорії
-    });
+    this.categoryService
+      .getSelectedCategory()
+      .subscribe((selectedCategory: string) => {
+        this.selectedCategory = selectedCategory;
+        this.selectedCategoryControl.setValue(selectedCategory);
+      });
   }
-
-
 
   private eventSubscription!: Subscription;
 
@@ -57,11 +49,7 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.loadGoods();
-    const selectedCategoryValue = this.selectedCategoryControl.value;
-  
-
-
-
+    this.spinnerService.show(); // show spinner
 
     const savedCategory = localStorage.getItem('selectedCategory');
     if (savedCategory) {
@@ -85,8 +73,6 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
   }
 
   // This method downloads products from the server that match a specific category.
-
-  // This method downloads products from the server that match a specific category.
   loadGoods(): void {
     this.activatedRoute.params
       .pipe(
@@ -97,12 +83,9 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
       )
       .subscribe((data) => {
         this.goodsArray = data as IGoodsResponse[];
-        // this.selectFilter('Соуси');
-        // this.spinnerService.hide();
+        this.spinnerService.hide();
       });
   }
-
-
 
   proteins: number = 45;
   fats: number = 48;
@@ -166,14 +149,16 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
     { value: 'zapikanky', viewValue: 'Запіканки' },
     { value: 'deserty', viewValue: 'Десерти' },
     { value: 'smuzi', viewValue: 'Смузі' },
-    { value: 'drinks', viewValue: 'Напої' }
+    { value: 'drinks', viewValue: 'Напої' },
   ];
-
 
   onCategorySelect(event: MatSelectChange) {
     const route = event.value;
     console.log('Обрана категорія:', route);
-    console.log('Обрана категорія FormControl:', this.selectedCategoryControl.value);
+    console.log(
+      'Обрана категорія FormControl:',
+      this.selectedCategoryControl.value
+    );
     this.selectedCategoryControl.setValue(route); // Оновіть значення у FormControl
     localStorage.setItem('selectedCategory', route); // Зберегти значення в localStorage
 
@@ -182,14 +167,11 @@ export class CategoryMenuComponent implements OnInit,OnDestroy {
 
   selectedCategory: string = 'special-edition';
 
-
   changeSelectedCategory(category: string) {
     this.selectedCategory = category;
     this.selectedCategoryControl.setValue(category);
     localStorage.setItem('selectedCategory', category); // Зберегти значення в localStorage
   }
-
-
 
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();

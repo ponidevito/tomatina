@@ -65,8 +65,8 @@
                 <div class="header__menu menu">
                     <nav class="menu__body">
                        <ul class="menu__list">
-                          <li class="menu__item menu-show">
-                             <a href="javascript:void(0)"  class="menu__link menu" (click)="openSubMenu($event)">МЕНЮ</a>
+                          <li class="menu__item menu-show" (mouseover)="openSubMenu()" (mouseout)="closeSubMenu()">
+                             <a href="javascript:void(0)"  class="menu__link menu" >МЕНЮ</a>
                              <ul class="menu__submenu" [ngClass]="{'active': isSubMenu}">
                                 <li  class="menu__show-submenu menu__submenu-item">
                                    <a [routerLink]="[ 'category-menu/healthy' ]" routerLinkActive="route-active" class="menu__submenu-link" (click)="onMenuItemSelect();onMenuSelect('healthy')">

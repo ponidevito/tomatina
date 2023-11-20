@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GoodsService } from '../../shared/services/goods/goods.service';
 import { IGoodsResponse } from 'src/app/shared/interfaces/goods.inteface';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+
 import { Subscription } from 'rxjs';
 import { OrderService } from 'src/app/shared/services/order/order.service';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { Title } from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -22,11 +23,12 @@ export class HomeComponent implements OnInit{
   
   constructor(
     private goodsService: GoodsService,
-    private activatedRoute: ActivatedRoute,
     private router: Router,
     public orderService: OrderService,
     public categoryService: CategoryService,
-    private titleService: Title
+    private titleService: Title,
+    private spinnerService: NgxSpinnerService,
+
 
   ) {
     this.eventSubscription = this.router.events.subscribe((event) => {
@@ -47,10 +49,10 @@ export class HomeComponent implements OnInit{
   public categoryName!: string;
 
   ngOnInit(): void {
+    this.spinnerService.show(); // show spinner
     this.orderService.loadBasket();
     this.orderService.updateBasket();
     this.loadGoods();
-    // Перевірити наявність збереженого стану корзини в localStorage
     const savedBasket = localStorage.getItem('basket');
     if (savedBasket) {
       const basketItems = JSON.parse(savedBasket);
@@ -79,7 +81,7 @@ export class HomeComponent implements OnInit{
   loadGoods(): void {
     this.goodsService.getAllFirebase().subscribe((data) => {
       this.goodsArray = data as IGoodsResponse[];
-      // this.spinnerService.hide(); // show spinner
+      this.spinnerService.hide(); // show spinner
     });
   }
 

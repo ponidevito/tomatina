@@ -1,6 +1,8 @@
 <section class="healthy-menu">
     <div class="healthy-menu__container">
-
+      <ngx-spinner 
+      color = "#fff" type="ball-fall" [fullScreen] = "true"><p style="color: white" > Loading... </p>
+    </ngx-spinner>
         <div class="categories-menu">
             <div class="category-title">healthy &amp; tasty menu</div>
                 <ul class="categories-list">
@@ -41,7 +43,7 @@
                            <li class="product_label"  style="background-color: #28af33">Сніданки до 18:00</li>
                         </ul>
                      </a>
-                      <div class="product_top-right" *ngIf="categoryName !=='special-edition'">
+                      <div class="product_top-right">
          
  
                         <div class="info-main">

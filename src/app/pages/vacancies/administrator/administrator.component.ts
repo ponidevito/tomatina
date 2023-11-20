@@ -9,8 +9,6 @@ import { ImageService } from 'src/app/shared/services/image/image.service';
 import { CvService } from '../../../shared/services/cv/cv.service';
 import { Title } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
-
 
 @Component({
   selector: 'app-administrator',
@@ -24,7 +22,6 @@ export class AdministratorComponent implements OnInit {
     private cvService: CvService,
     private titleService: Title,
     private toastService: ToastrService,
-    private spinnerService: NgxSpinnerService
   ) {}
 
   public cvForm!: FormGroup;
@@ -38,15 +35,9 @@ export class AdministratorComponent implements OnInit {
   ngOnInit(): void {
     this.initCvForm();
     this.titleService.setTitle('Вакансія адміністратор');
-    this.loadData();
   }
 
-  loadData(): void {
-    this.spinnerService.show(); // Show spinner before starting async operations
-    setTimeout(() => {
-      this.spinnerService.hide();
-    }, 1000); 
-  }
+
   initCvForm(): void {
     this.cvForm = this.fb.group({
       firstName: [null, Validators.required],
@@ -149,8 +140,5 @@ export class AdministratorComponent implements OnInit {
     return this.cvForm.get(control)?.value;
   }
 
-  ngOnDestroy(): void {
-    this.spinnerService.hide();
 
-  }
 }
