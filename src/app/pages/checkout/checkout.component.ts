@@ -50,7 +50,6 @@ export class CheckoutComponent implements OnInit {
   public foodForm!: FormGroup;
   public orderForm!: FormGroup;
 
-  // public selectedValue!: string;
   public selectedHolders!: string;
   public selectedInterval!: string;
   public selectedPickup!: string;
@@ -58,7 +57,6 @@ export class CheckoutComponent implements OnInit {
   public cash: string = 'gotivka';
   public withoutRestFrom!: string;
   public noCall!: string;
-  // public includeShopper = false;
   public inAdvance = false;
   public pickup = false;
   public adress = true;
@@ -180,7 +178,7 @@ export class CheckoutComponent implements OnInit {
         currentUser.firstName,
         [
           Validators.required,
-          Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/),
+          Validators.pattern(/^[A-Za-zА-Яа-яЁёЇїІіҐґЄє']*$/),
           Validators.minLength(2),
         ],
       ],
@@ -188,7 +186,7 @@ export class CheckoutComponent implements OnInit {
         currentUser.lastName,
         [
           Validators.required,
-          Validators.pattern(/^[A-Za-zА-Яа-яЁё]*$/),
+          Validators.pattern(/^[A-Za-zА-Яа-яЁёЇїІіҐґЄє']*$/),
           Validators.minLength(2),
         ],
       ],
@@ -295,8 +293,7 @@ export class CheckoutComponent implements OnInit {
 
   // This method count order
 
- 
-  // }
+
 
   addForm(): void {
     const myDate = new Date();
@@ -317,7 +314,6 @@ export class CheckoutComponent implements OnInit {
       const formValuesOrder = this.orderForm.value;
       const formValuesFood = this.foodForm.value;
       const newOrder: any = {
-        // Додайте дані з першої форми
         selectedHolders: formValuesOrder.selectedHolders,
         count: this.count + 1,
         productName: productName,
@@ -340,7 +336,6 @@ export class CheckoutComponent implements OnInit {
       newOrder.date = date;
       newOrder.selectedInterval = formValuesFood.selectedInterval;
 
-      // Перевірка наявності числових значень 'count' та знаходження максимального значення
       const counts = this.ordersArray
         .filter((item) => !isNaN(item.count))
         .map((item) => item.count);
@@ -352,13 +347,8 @@ export class CheckoutComponent implements OnInit {
       this.orderService.createFirebase(newOrder).then(() => {
         this.toastService.success('Замовлення оформлене!');
       });
-
-      console.log('Current user ID:', userUID); // Перевірте значення userUID в консолі
-console.log('New order:', newOrder); 
-
       this.clearBasket();
       this.orderForm.reset();
-      // Закриття діалогу або інші дії
     }
   }
 
@@ -380,8 +370,6 @@ console.log('New order:', newOrder);
     this.foodForm.reset();
     this.router.navigate(['/']);
 
-    // this.foodForm.reset();
-    // this.router.navigate(['my-cabinet/order-history']);
   }
 
   // This method disables form validation if order pickup is selected.
@@ -465,7 +453,6 @@ console.log('New order:', newOrder);
 
   toggleTextAreaVisibility(): void {
     this.showTextArea = !this.showTextArea;
-    // this.remainingSum = 0;
   }
 
   ngOnDestroy(): void {

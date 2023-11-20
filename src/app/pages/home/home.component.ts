@@ -9,27 +9,22 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { Title } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   subscription: Subscription;
   selectedCategory: string = 'special-edition';
 
-  
   constructor(
     private goodsService: GoodsService,
     private router: Router,
     public orderService: OrderService,
     public categoryService: CategoryService,
     private titleService: Title,
-    private spinnerService: NgxSpinnerService,
-
-
+    private spinnerService: NgxSpinnerService
   ) {
     this.eventSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -37,7 +32,6 @@ export class HomeComponent implements OnInit{
       }
     });
     this.subscription = new Subscription(); // Це можна винести в окремий рядок
-
   }
 
   private eventSubscription!: Subscription;
@@ -65,14 +59,15 @@ export class HomeComponent implements OnInit{
         this.orderService.hideCartIcon();
       }
     }
-    this.subscription = this.categoryService.selectedCategory$.subscribe((category: string) => {
-      this.selectedCategory = category;
-      // Отримано нову категорію - виконати додаткові дії тут
-    });
+    this.subscription = this.categoryService.selectedCategory$.subscribe(
+      (category: string) => {
+        this.selectedCategory = category;
+        // Отримано нову категорію - виконати додаткові дії тут
+      }
+    );
     this.titleService.setTitle('Tomatina');
-
   }
-  
+
   changeTitle() {
     // Змінюємо тайтл сторінки при виклику цього методу
     this.titleService.setTitle('Tomatina');
@@ -85,13 +80,9 @@ export class HomeComponent implements OnInit{
     });
   }
 
-
-  
   onMenuSelect(category: string) {
     this.categoryService.setSelectedCategory(category);
     localStorage.setItem('selectedCategory', category); // Зберегти значення в localStorage
-
-    
   }
 
   public isExpanded = false;
@@ -100,10 +91,7 @@ export class HomeComponent implements OnInit{
     this.isExpanded = !this.isExpanded;
   }
 
-
   ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
-
-
 }

@@ -3,7 +3,7 @@
 .home {
   position: relative;
   padding: 0px 0px 100px 0px;
-  @include lg{
+  @include lg {
     padding: 0px 0px 30px 0px;
   }
   &__container {
@@ -17,8 +17,7 @@
     margin: 60px 0px 45px 0px;
   }
 
-  &__items {
-  }
+
 
   &__bg {
     height: calc(100vh - 50px - 100px);
@@ -171,10 +170,7 @@
   }
 }
 
-.home {
-  &__about {
-  }
-}
+
 .about-home {
   &__container {
     max-width: 1215px;
@@ -188,11 +184,11 @@
     flex: 0 1 50%;
     &:last-child {
       align-self: flex-end;
-      @include lg{
-       display: none;
+      @include lg {
+        display: none;
       }
     }
-    @include lg{
+    @include lg {
       flex: 1 1 100%;
     }
   }
@@ -204,7 +200,7 @@
     color: #599921;
     &:not(:last-child) {
       margin-bottom: 20px;
-      @include lg{
+      @include lg {
         margin-bottom: 10px;
       }
     }
@@ -214,10 +210,10 @@
     font-size: 40px;
     color: #2d2c2c;
     line-height: 1.2em;
-    @include lg{
+    @include lg {
       font-size: 35px;
     }
-    @include xs{
+    @include xs {
       font-size: 30px;
     }
   }
@@ -334,7 +330,6 @@
   top: 5px;
   transform: rotate(135deg);
   border-color: #db2526;
-  
 }
 .about-home__read-more.expanded {
   color: #db2526;

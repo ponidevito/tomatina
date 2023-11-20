@@ -37,51 +37,55 @@
       gap: 20px;
       border-bottom: unset;
     }
-    th{
-      &:last-child{
+    th {
+      &:last-child {
         justify-content: center;
-       }
+      }
     }
   }
-  .tr-reviews{
-    grid-template-columns: minmax(auto, 50px) minmax(auto, 200px) minmax(auto, 130px) minmax(auto, 200px) minmax(auto, auto);
-    td{
-      &:last-child{
+  .tr-reviews {
+    grid-template-columns: minmax(auto, 50px) minmax(auto, 200px) minmax(
+        auto,
+        130px
+      ) minmax(auto, 200px) minmax(auto, auto);
+    td {
+      &:last-child {
         justify-content: center;
-       }
+      }
     }
   }
-  &__empty{
+  &__empty {
     font-size: 16px;
-
   }
 }
 .tr-textarea {
   padding: 10px 0px;
-  grid-template-columns: minmax(auto, 300px) minmax(auto, 100px) minmax(auto, auto) minmax(auto, auto);
+  grid-template-columns: minmax(auto, 300px) minmax(auto, 100px) minmax(
+      auto,
+      auto
+    ) minmax(auto, auto);
   height: 100%;
-   td {
+  td {
     height: 100%;
-    &:last-child{
+    &:last-child {
       justify-content: end;
-     }
-   }
-   textarea {
+    }
+  }
+  textarea {
     resize: none;
     outline: none;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.68);
     font-family: inherit;
     height: 100%;
-   }
-   .image{
+  }
+  .image {
     cursor: pointer;
-    transition: .3s ease;
-    &:hover{
-      transform: scale(2.0);
+    transition: 0.3s ease;
+    &:hover {
+      transform: scale(2);
     }
-   }
-
+  }
 }
 tr {
   display: grid;
@@ -112,7 +116,7 @@ td,
 th {
   display: flex;
   min-width: 80px;
-  &:first-child{
+  &:first-child {
     min-width: 40px;
   }
   @include md {

@@ -20,14 +20,15 @@ export class AdminReviewsComponent implements OnInit {
     this.loadReviews();
   }
 
+ // This method loads all orders from Firebase using the getAllFirebase() method from the reviewService.
   loadReviews(): void {
     this.reviewService.getAllFirebase().subscribe((data) => {
-      this.adminRewiewsArray = data as IReviewResponse[]; // Додайте нові відгуки на початок масиву
+      this.adminRewiewsArray = data as IReviewResponse[]; 
       this.adminRewiewsArray.sort((a, b) => b.count - a.count);
     });
   }
 
-  // delete goods
+  // delete Reviews
   deleteReviews(review: IReviewResponse): void {
     this.reviewService.deleteFirebase(review.id as string).then(() => {
       this.loadReviews();

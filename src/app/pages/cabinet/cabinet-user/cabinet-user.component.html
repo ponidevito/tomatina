@@ -12,10 +12,6 @@
                 <input type="text"  formControlName="phone"  mask="(000) 000-00-00" prefix="+38" name="phone" class="cabinet-user__input form-admin__input" placeholder="*Ваш номер телефону">
                 <input type="email"  formControlName="email" name="email" class="cabinet-user__input form-admin__input" placeholder="*Ваш емейл">
               
-                <div class="cabinet-user__top">
-                    <div class="cabinet-user__number"><b>2</b></div>
-                    <h4 class="cabinet-user__title">Адреси</h4>       
-                </div>             
                 <div class="cabinet-user__actions">
               <button type="submit" class="cabinet-user__btnSave button-save"(click)="updateUser()" [disabled]="userForm.invalid" >Зберегти зміни</button>
             </div>

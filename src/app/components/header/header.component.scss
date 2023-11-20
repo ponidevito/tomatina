@@ -282,8 +282,6 @@
           }
         }
       }
-
-     
     }
   }
 
@@ -302,7 +300,6 @@
     @media (max-width: 670px) {
       font-size: 12px;
     }
-  
   }
 
   &__submenu {
@@ -321,7 +318,7 @@
     z-index: 2;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ;
+    transition: all 0.3s;
 
     @media (max-width: 1540px) {
       top: 116px;
@@ -564,7 +561,6 @@
     z-index: 110;
     transform: translatex(0px);
   }
-
 
   .modal {
     display: flex;

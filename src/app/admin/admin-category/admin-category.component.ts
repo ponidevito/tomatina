@@ -143,9 +143,6 @@ export class AdminCategoryComponent implements OnInit {
 
   // delete category
   deleteCategory(category: ICategoryResponse): void {
-    // this.CategoryService.delete(category.id ).subscribe(() => {
-    //   this.loadActions();
-    // });
     this.CategoryService.deleteFirebase(category.id as string).then(() => {
       this.loadCategories();
       this.toastService.success('Category successfully deleted');

@@ -8,7 +8,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ROLE } from 'src/app/shared/constants/role.constant';
 import { AccountService } from 'src/app/shared/services/account/account.service';
-// import { OrderService } from 'src/app/shared/services/order/order.service';
 
 import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { doc, docData, Firestore, getDoc } from '@angular/fire/firestore';
@@ -18,9 +17,6 @@ import { ToastrService } from 'ngx-toastr';
 import {
   BehaviorSubject,
   Subscription,
-  first,
-  from,
-  lastValueFrom,
 } from 'rxjs';
 import { ILogin } from '../../interfaces/account.interface';
 
@@ -68,7 +64,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initAuthForm();
     localStorage.getItem('currentUser') || '{}';
-    // console.log(    localStorage.getItem('userRole') || '{}')
   }
 
   initAuthForm(): void {

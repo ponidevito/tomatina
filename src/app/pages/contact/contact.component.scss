@@ -93,8 +93,8 @@
     display: flex;
     align-items: center;
     gap: 30px;
-    @include xs{
-        gap: 10px;
+    @include xs {
+      gap: 10px;
     }
   }
 

@@ -1,4 +1,10 @@
-import { Component, ElementRef, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from 'src/app/shared/modals/login/login.component';
 import { DeliveryModalComponent } from '../../shared/modals/delivery-modal/delivery-modal.component';
@@ -13,16 +19,12 @@ import { CategoryService } from '../../shared/services/category/category.service
 import { Subscription } from 'rxjs';
 import { PhoneComponent } from 'src/app/shared/modals/phone/phone.component';
 
-
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-
 })
-export class HeaderComponent implements OnInit,OnDestroy {
-
+export class HeaderComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(
@@ -33,11 +35,9 @@ export class HeaderComponent implements OnInit,OnDestroy {
     private goodsService: GoodsService,
     public orderService: OrderService,
     public router: Router,
-    public categoryService: CategoryService,
-
+    public categoryService: CategoryService
   ) {
     this.subscription = new Subscription(); // Це можна винести в окремий рядок
-
   }
 
   @HostListener('document:click', ['$event'])
@@ -52,8 +52,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
     if (!menuBlock.contains(event.target) && !burger.contains(event.target)) {
       this.closeBlock();
     }
-    if (!menuButton.contains(event.target) &&  !submenu.contains(event.target)
-    ) {
+    if (!menuButton.contains(event.target) && !submenu.contains(event.target)) {
       this.closeSubMenu();
     }
   }
@@ -77,7 +76,6 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   public goodsArray: Array<IGoodsResponse> = [];
   public totalSum!: number;
-  
 
   selectedCategory: string = 'special-edition';
 
@@ -100,10 +98,12 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.checkUpdatesUserLogin();
     this.totalSum = this.getTotalSum();
 
-    this.subscription = this.categoryService.selectedCategory$.subscribe((category: string) => {
-      this.selectedCategory = category;
-      // Отримано нову категорію - виконати додаткові дії тут
-    });
+    this.subscription = this.categoryService.selectedCategory$.subscribe(
+      (category: string) => {
+        this.selectedCategory = category;
+        // Отримано нову категорію - виконати додаткові дії тут
+      }
+    );
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -112,46 +112,46 @@ export class HeaderComponent implements OnInit,OnDestroy {
     });
   }
 
-    // This method calculates the price and quantity of the product and displays the total amount
-    getTotalSum(): number {
-      if (!this.orderService.basket) {
-        return 0;
-      }
-    
-      return this.orderService.basket.reduce(
-        (total, product) => total + product.price * product.count,
-        0
-      );
+  // This method calculates the price and quantity of the product and displays the total amount
+  getTotalSum(): number {
+    if (!this.orderService.basket) {
+      return 0;
     }
 
+    return this.orderService.basket.reduce(
+      (total, product) => total + product.price * product.count,
+      0
+    );
+  }
+
   public userName = '';
-    // This method checks whether the browser's local storage contains a record of the logged-in user.
-    checkUserLogin(): void {
-      const currentUser = JSON.parse(
-        localStorage.getItem('currentUser') as string
-      );
-      const role = JSON.parse(localStorage.getItem('userRole') || '{}');
-      this.userRole = role;
-      if (currentUser && currentUser.role === ROLE.ADMIN) {
-        this.isLogin = true;
-        this.loginUrl = 'admin/category';
-        this.userName=currentUser['firstName']
-      } else if (currentUser && currentUser.role === ROLE.USER) {
-        this.isLogin = true;
-        this.loginUrl = 'my-cabinet/user';
-        this.userName=currentUser['firstName']
-      } else {
-        this.isLogin = false;
-        this.loginUrl = '';
-      }
+  // This method checks whether the browser's local storage contains a record of the logged-in user.
+  checkUserLogin(): void {
+    const currentUser = JSON.parse(
+      localStorage.getItem('currentUser') as string
+    );
+    const role = JSON.parse(localStorage.getItem('userRole') || '{}');
+    this.userRole = role;
+    if (currentUser && currentUser.role === ROLE.ADMIN) {
+      this.isLogin = true;
+      this.loginUrl = 'admin/category';
+      this.userName = currentUser['firstName'];
+    } else if (currentUser && currentUser.role === ROLE.USER) {
+      this.isLogin = true;
+      this.loginUrl = 'my-cabinet/user';
+      this.userName = currentUser['firstName'];
+    } else {
+      this.isLogin = false;
+      this.loginUrl = '';
     }
-  
-    // This method checks the user's status. If the status has changed, the user's record is checked for in the browser's local storage and the isLogin, loginUrl, and loginPage variables are set to the appropriate values.
-    checkUpdatesUserLogin(): void {
-      this.accountService.isUserLogin$.subscribe(() => {
-        this.checkUserLogin();
-      });
-    }
+  }
+
+  // This method checks the user's status. If the status has changed, the user's record is checked for in the browser's local storage and the isLogin, loginUrl, and loginPage variables are set to the appropriate values.
+  checkUpdatesUserLogin(): void {
+    this.accountService.isUserLogin$.subscribe(() => {
+      this.checkUserLogin();
+    });
+  }
 
   //  close
   closeBlock() {
@@ -171,104 +171,64 @@ export class HeaderComponent implements OnInit,OnDestroy {
     this.dialog.open(DeliveryModalComponent);
   }
 
-  isSubMenu=false;
+  isSubMenu = false;
 
   autoCloseTimer: any;
 
+  openSubMenu() {
+    this.isSubMenu = true;
+  }
 
+  closeSubMenu() {
+    this.isSubMenu = false;
+  }
 
-  // openSubMenu(event: Event) {
-  //   event.preventDefault();
-  //   this.isSubMenu=!this.isSubMenu;
-    
-  //   if (this.autoCloseTimer) {
-  //     clearTimeout(this.autoCloseTimer);
-  //   }
-  //   this.autoCloseTimer = setTimeout(() => {
-  //     this.isSubMenu = false;
-  //   }, 20000);
-  // }
+  onMenuItemSelect() {
+    this.closeSubMenu();
+  }
+  //  modal
+  public showModalCart = false;
+  //  open cart modal
+  openModalCart() {
+    this.showModalCart = !this.showModalCart;
+    this.layerCart = !this.layerCart;
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('lockModal');
+  }
 
-  // closeSubMenu() {
-  //   this.isSubMenu = false;
-  // }
+  closeModalCart() {
+    this.showModalCart = false;
+    this.layerCart = false;
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.remove('lockModal');
+  }
 
-  // onMenuItemSelect() {
-  //   this.closeSubMenu();
-  // }
-
-
-  // isSubMenu = false;
-
-openSubMenu() {
-  this.isSubMenu = true;
-}
-
-closeSubMenu() {
-  this.isSubMenu = false;
-}
-
-onMenuItemSelect() {
-  this.closeSubMenu();
-}
-
-  // basket
-
-    //  modal
-    public showModalCart = false;
-    //  open cart modal
-    openModalCart() {
-     this.showModalCart = !this.showModalCart;
-     this.layerCart = !this.layerCart;
-      // this.basketHeight = !this.basketHeight;
-      // this.layerBig = !this.layerBig;
-      const body = document.getElementsByTagName('body')[0];
-      body.classList.add('lockModal');
-    }
-
-   closeModalCart() {
-      this.showModalCart = false;
-      this.layerCart = false;
- 
-       // this.basketHeight = !this.basketHeight;
-       // this.layerBig = !this.layerBig;
-       const body = document.getElementsByTagName('body')[0];
-       body.classList.remove('lockModal');
-     }
-
-    
   // This method is responsible for closing the cart modal window when the user clicks outside of it.
   onModalWrapperClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const modal = target.closest('.modal');
     const body = document.getElementsByTagName('body')[0];
     if (!modal) {
-      // event.stopPropagation();
-
       this.layerCart = false;
       this.showModalCart = false;
-      // this.layerBig = false;
-      // this.basketHeight = false;
       body.classList.remove('lockModal');
     }
   }
 
-   // close busket
-   closeBusket(): void {
+  // close busket
+  closeBusket(): void {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('lockModal');
     this.showModalCart = false;
     this.layerCart = false;
-    // this.basketHeight = false;
   }
 
   clearBasket() {
-    this.orderService.basket = []; // Очистити кошик, просто призначити пустий масив
-    this.orderService.count = 0; // Скинути кількість товарів
-    localStorage.removeItem('basket'); // Видалити збережений кошик
-    localStorage.removeItem('count'); 
+    this.orderService.basket = []; 
+    this.orderService.count = 0; 
+    localStorage.removeItem('basket'); 
+    localStorage.removeItem('count');
     this.orderService.hideCartIcon();
-
   }
 
   navigateToCatalog() {
@@ -282,29 +242,25 @@ onMenuItemSelect() {
   }
 
   closeMenuOnNavigation() {
-    const menuBlock = this.elRef.nativeElement.querySelector('.menu-block');
     const body = document.getElementsByTagName('body')[0];
-  
     // Закриваємо меню
     this.show = false;
     this.layer = false;
     body.classList.remove('lockBurger');
   }
 
-    // remove product
-    removeProduct(product: IGoodsResponse, event: any) {
-      const index = this.orderService.basket.indexOf(product);
-      if (index > -1) {
-        this.orderService.basket.splice(index, 1);
-        --this.orderService.count;
-        localStorage.setItem('basket', JSON.stringify(this.orderService.basket));
-        localStorage.setItem('count', JSON.stringify(this.orderService.count));
-      }
-      // this line to stop the event from propagating
-      // event.stopPropagation();
+  // remove product
+  removeProduct(product: IGoodsResponse, event: any) {
+    const index = this.orderService.basket.indexOf(product);
+    if (index > -1) {
+      this.orderService.basket.splice(index, 1);
+      --this.orderService.count;
+      localStorage.setItem('basket', JSON.stringify(this.orderService.basket));
+      localStorage.setItem('count', JSON.stringify(this.orderService.count));
     }
-  
-  
+
+  }
+
   // method count products
   public productCount(product: IGoodsResponse, value: boolean): void {
     const index = this.orderService.basket.findIndex(
@@ -319,22 +275,17 @@ onMenuItemSelect() {
     }
   }
 
-
   onMenuSelect(category: string) {
     this.categoryService.setSelectedCategory(category);
     localStorage.setItem('selectedCategory', category); // Зберегти значення в localStorage
-
-    
   }
 
-    //  open modal
-    openDialog() {
-      this.dialog.open(PhoneComponent);
-    }
-
+  //  open modal
+  openDialog() {
+    this.dialog.open(PhoneComponent);
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-
   }
 }

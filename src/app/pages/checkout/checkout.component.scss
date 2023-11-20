@@ -950,7 +950,7 @@
     gap: 20px;
     &:not(:last-child) {
       margin-bottom: 15px;
-      @include xs{
+      @include xs {
         margin-bottom: 10px;
       }
     }

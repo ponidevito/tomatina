@@ -1,41 +1,6 @@
 @import "../../../styles.scss";
 
 .footer {
-  // .footer-decor-left {
-  //   &::before {
-  //     content: "";
-  //     background: url(../../../assets/images/footer/footer-decor-left.png);
-  //     background-position: 0 100%;
-  //     display: block;
-  //     position: absolute;
-  //     top: 0;
-  //     left: 0;
-  //     width: 100%;
-  //     height: 100%;
-  //     background-repeat: no-repeat;
-  //     background-size: 33% auto;
-  //     pointer-events: none;
-  //     z-index: 3;
-  //   }
-  // }
-  // .footer-decor-right {
-  //   &::before {
-  //     content: "";
-  //     background: url(../../../assets/images/footer/footer-decor-right.png);
-  //     background-position: 100% 100%;
-  //     display: block;
-  //     position: absolute;
-  //     top: 0;
-  //     left: 0;
-  //     width: 100%;
-  //     height: 100%;
-  //     background-repeat: no-repeat;
-  //     background-size: 33% auto;
-  //     pointer-events: none;
-  //     z-index: 3;
-  //   }
-  // }
-
   &__container {
     max-width: 1840px;
     padding: 0px 60px;

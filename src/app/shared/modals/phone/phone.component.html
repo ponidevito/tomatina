@@ -1,72 +1,65 @@
 
 <div class="mat-wrapper">
-<h2 mat-dialog-title>Залишіть відгук</h2>  
-<button mat-button mat-dialog-close class="mat-close"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/></svg></button>
-<mat-dialog-content class="mat-dialog-content">
-  <form [formGroup]="reviewForm" (ngSubmit)="addForm()">
-
-  <div class="mat-dialog-content__box">
-   
-    <mat-form-field class="mat-first" appearance="outline">
-      <input matInput placeholder="Ваше ім'я" formControlName="firstName">
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <input matInput placeholder="Ваше прізвище" formControlName="lastName">
-    </mat-form-field>
-</div>
-
-  <mat-form-field appearance="outline">
-    <input matInput placeholder="Ваш e-mail"  formControlName="email">
-  </mat-form-field>
-
-  <div class="mat-dialog-rate__box">
-    <mat-form-field style="margin-bottom: -1.25em" class="mat-dialog-rate__adress-select"  appearance="outline">
-      <mat-select  formControlName="selectedStreet" name="review">
-      <mat-option  *ngFor="let adress of streets" [value]="adress.value" [disabled]="adress.disabled">
-        {{adress.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <div class="rate-services">
-    <p>Ваша оцінка:</p>
-    <p>
-      <span class="comment-love select-love">
-        <i class="select-icon" 
-           [ngClass]="{'icon-love-filled': isFilled(index), 'icon-love-empty': !isFilled(index)}"
-           (mouseenter)="setRating(index)"
-           *ngFor="let heart of [0, 1, 2, 3, 4]; let index = index">
-        </i>
-      </span>
-    </p>
-  </div>
-
-
-
-  </div>
-
-  <mat-form-field  appearance="outline">
-    <textarea style="resize: none;" matInput placeholder="Ваш відгук ..." formControlName="review"></textarea>
-  </mat-form-field>
-
-  <div class="mat-dialog-content file-upload form-admin__file">
-    <div class="form-category__body form-admin__body">
-    <input type="file" class="form-category__fileBtn form-admin__fileBtn" id="file" [disabled]="isUploaded" (change)="upload($event)">
-    <div class="animated-progress progress-lightred">
-        <span data-progress="100" [ngStyle]="{ width: uploadPercent + '%' }"></span>
-      </div>
-      <ng-container  *ngIf="isUploaded">
-        <button type="button" class="form-action__btnDelete btn-delete-image" (click)="deleteImage()">Delete</button>
-    </ng-container>
-    </div>
-    <ng-container *ngIf="isUploaded">
-        <img [src]="valueByControl('image')" width="265px" height="auto" alt="img">
-    </ng-container>
-  </div>
-
-  <mat-dialog-actions>
-    <button type="submit" [disabled]="reviewForm.invalid" mat-button class="mat-dialog-subtitle-send" >Надіслати</button>
-  </mat-dialog-actions>
-</form>
-</mat-dialog-content>
+  <h2 mat-dialog-title>Залишіть відгук</h2>
+  <button mat-button mat-dialog-close class="mat-close">
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M13.41,12l6.3-6.29a1,1,0,1,0-1.42-1.42L12,10.59,5.71,4.29A1,1,0,0,0,4.29,5.71L10.59,12l-6.3,6.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L12,13.41l6.29,6.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"/>
+     </svg>
+  </button>
+  <mat-dialog-content class="mat-dialog-content">
+     <form [formGroup]="reviewForm" (ngSubmit)="addForm()">
+     <div class="mat-dialog-content__box">
+        <mat-form-field class="mat-first" appearance="outline">
+           <input matInput placeholder="Ваше ім'я" formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+           <input matInput placeholder="Ваше прізвище" formControlName="lastName">
+        </mat-form-field>
+     </div>
+     <mat-form-field appearance="outline">
+        <input matInput placeholder="Ваш e-mail"  formControlName="email">
+     </mat-form-field>
+     <div class="mat-dialog-rate__box">
+        <mat-form-field style="margin-bottom: -1.25em" class="mat-dialog-rate__adress-select"  appearance="outline">
+           <mat-select  formControlName="selectedStreet" name="review">
+              <mat-option  *ngFor="let adress of streets" [value]="adress.value" [disabled]="adress.disabled">
+              {{adress.viewValue}}
+              </mat-option>
+           </mat-select>
+        </mat-form-field>
+        <div class="rate-services">
+           <p>Ваша оцінка:</p>
+           <p>
+              <span class="comment-love select-love">
+              <i class="select-icon" 
+              [ngClass]="{'icon-love-filled': isFilled(index), 'icon-love-empty': !isFilled(index)}"
+              (mouseenter)="setRating(index)"
+              *ngFor="let heart of [0, 1, 2, 3, 4]; let index = index">
+              </i>
+              </span>
+           </p>
+        </div>
+     </div>
+     <mat-form-field  appearance="outline">
+        <textarea style="resize: none;" matInput placeholder="Ваш відгук ..." formControlName="review"></textarea>
+     </mat-form-field>
+     <div class="mat-dialog-content file-upload form-admin__file">
+        <div class="form-category__body form-admin__body">
+           <input type="file" class="form-category__fileBtn form-admin__fileBtn" id="file" [disabled]="isUploaded" (change)="upload($event)">
+           <div class="animated-progress progress-lightred">
+              <span data-progress="100" [ngStyle]="{ width: uploadPercent + '%' }"></span>
+           </div>
+           <ng-container  *ngIf="isUploaded">
+              <button type="button" class="form-action__btnDelete btn-delete-image" (click)="deleteImage()">Delete</button>
+           </ng-container>
+        </div>
+        <ng-container *ngIf="isUploaded">
+           <img [src]="valueByControl('image')" width="265px" height="auto" alt="img">
+        </ng-container>
+     </div>
+     <mat-dialog-actions>
+        <button type="submit" [disabled]="reviewForm.invalid" mat-button class="mat-dialog-subtitle-send" >Надіслати</button>
+     </mat-dialog-actions>
+     </form>
+  </mat-dialog-content>
 </div>

@@ -5,9 +5,9 @@
                 <tr class="tr-top  table-global__tr-top">
                 <th>№ Замовлення</th>
                 <th >Дата та час</th>
-                <th>Адреса</th>
                 <th>Сума</th>
                 <th>Статус</th>
+                <th></th>
                 <th></th>
             </tr>
             </thead>
@@ -24,7 +24,7 @@
 
                 </tr>
                 <tr >
-                    <td></td>
+                    <td>{{ order.selectedPickup }}</td>
                     <td>{{order.productName}}</td>
                     <td>Прибори:&nbsp;{{ order.selectedHolders }}</td>
                     <td>{{order.productCountNumber}}&nbsp;шт.</td>

@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class DonatymoRazomComponent implements OnInit {
   counterValue: number = 1378167;
   targetValue: number = 2756333.8;
-  duration: number = 4000; 
+  duration: number = 4000;
 
   ngOnInit() {
     this.animateCounter();
@@ -17,7 +17,6 @@ export class DonatymoRazomComponent implements OnInit {
   animateCounter() {
     const startTime = new Date().getTime();
     const endTime = startTime + this.duration;
-
     const updateCounter = () => {
       const currentTime = new Date().getTime();
       const progress = Math.min(1, (currentTime - startTime) / this.duration);

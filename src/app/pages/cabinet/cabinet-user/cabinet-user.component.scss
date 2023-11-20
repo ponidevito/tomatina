@@ -46,7 +46,7 @@
     font-size: 18px;
     color: #252525;
     flex: 0 1 50%;
-    &:focus{
+    &:focus {
       outline: 2px solid #599921;
     }
     @include sm {
@@ -60,9 +60,8 @@
     justify-content: space-between;
     width: 100%;
     gap: 20px;
-    @include lg{
+    @include lg {
       padding-bottom: 20px;
-
     }
     @include sm {
       flex-direction: column;

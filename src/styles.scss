@@ -378,6 +378,9 @@ body {
       gap: 15px;
       flex-wrap: wrap;
     }
+    &.box-wrap{
+      // flex-wrap: wrap;
+    }
   }
 
   &__input {

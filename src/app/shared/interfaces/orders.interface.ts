@@ -16,6 +16,7 @@ export interface IOrders {
   phone: number;
   userUID: string;
   productCountNumber:number,
+  selectedPickup:string
 
 }
 
@@ -36,6 +37,8 @@ export interface IOrdersRequest {
   totalSum: number;
   userUID: string;
   productCountNumber:number,
+  selectedPickup:string
+
 
 }
 

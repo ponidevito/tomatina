@@ -1,196 +1,169 @@
 <section class="section-checkout checkout">
-    <div class="checkout_container">
-      <ngx-spinner 
-      color = "#fff" type="ball-fall" [fullScreen] = "true"><p style="color: white" > Loading... </p>
-    </ngx-spinner>
-        <div class="checkout__top top-title">
-            <h1 class="checkout__title title" *ngIf="!orderService.basket || orderService.basket.length > 0">Оформити замовлення</h1>
-        </div>
-        <div class="checkout__items">
-          <div class="checkout__item">
-            <form class="checkout__formFood" [formGroup]="foodForm"  >
+  <div class="checkout_container">
+     <ngx-spinner 
+        color = "#fff" type="ball-fall" [fullScreen] = "true">
+        <p style="color: white" > Loading... </p>
+     </ngx-spinner>
+     <div class="checkout__top top-title">
+        <h1 class="checkout__title title" *ngIf="!orderService.basket || orderService.basket.length > 0">Оформити замовлення</h1>
+     </div>
+     <div class="checkout__items">
+        <div class="checkout__item">
+           <form class="checkout__formFood" [formGroup]="foodForm"  >
               <div class="order-checkout__box-contact">
-              <div class="order-checkout__form-title"><b>1.</b>Контактні дані</div>
-              <div class="checkout__input-box">
-                <input type="text" class="checkout__input" formControlName="firstName" name="firstName"  placeholder="Ваше ім'я*" [class.error-input]="isInvalid('firstName')" [class.valid-input]="isValid('firstName')">
-                <input type="text" class="checkout__input" formControlName="lastName" name="lastName"  placeholder="Ваше Прізвище*"  [class.error-input]="isInvalid('lastName')" [class.valid-input]="isValid('lastName')">
-
-            </div>
-            <input type="text" class="checkout__input input-contact" formControlName="phone"  mask="(000) 000-00-00" prefix="+38" [class.error-input]="isInvalid('phone')" [class.valid-input]="isValid('phone')">
-            <input type="email" class="checkout__input input-contact email-input" formControlName="email" placeholder="Email, щоб отримати копію замовлення">
-          </div>
-          <div class="order-checkout__form-title"><b>2.</b>Інформація про доставку</div>
-            <div class="order-checkout__box-pickup">
-            <label class="order-checkout__checkbox"> 
-              <input  type="radio" name="delivery_method"  checked="" value="local_pickup"> <span>Самовивіз </span> 
-            </label>
-            <!-- select -->
-
-            <mat-form-field style="margin-bottom: -1.25em" class="checkout__adress-select"  appearance="outline">
-              <mat-select  formControlName="selectedPickup" name="pickup">
-              <mat-option  *ngFor="let adress of pickups" [value]="adress.value" [disabled]="adress.disabled">
-                {{adress.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-        <!-- time -->
-
-        <div class="checkout__input-box">
-          <mat-form-field style="margin-bottom: -1.25em" class="example-full-width checkout__input-date" appearance="outline">
-            <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker"  formControlName="date" >
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker [max]="maxDate"></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field style="margin-bottom: -1.25em" class="checkout__food-select"  appearance="outline">
-            <mat-select formControlName="selectedInterval" name="interval">
-            <mat-option  *ngFor="let time of times"  [value]="time.value" >
-              {{time.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field> 
-      </div>
-
-
+                 <div class="order-checkout__form-title"><b>1.</b>Контактні дані</div>
+                 <div class="checkout__input-box">
+                    <input type="text" class="checkout__input" formControlName="firstName" name="firstName"  placeholder="Ваше ім'я*" [class.error-input]="isInvalid('firstName')" [class.valid-input]="isValid('firstName')">
+                    <input type="text" class="checkout__input" formControlName="lastName" name="lastName"  placeholder="Ваше Прізвище*"  [class.error-input]="isInvalid('lastName')" [class.valid-input]="isValid('lastName')">
+                 </div>
+                 <input type="text" class="checkout__input input-contact" formControlName="phone"  mask="(000) 000-00-00" prefix="+38" [class.error-input]="isInvalid('phone')" [class.valid-input]="isValid('phone')">
+                 <input type="email" class="checkout__input input-contact email-input" formControlName="email" placeholder="Email, щоб отримати копію замовлення">
+              </div>
+              <div class="order-checkout__form-title"><b>2.</b>Інформація про доставку</div>
+              <div class="order-checkout__box-pickup">
+                 <label class="order-checkout__checkbox"> 
+                 <input  type="radio" name="delivery_method"  checked="" value="local_pickup"> <span>Самовивіз </span> 
+                 </label>
+                 <!-- select -->
+                 <mat-form-field style="margin-bottom: -1.25em" class="checkout__adress-select"  appearance="outline">
+                    <mat-select  formControlName="selectedPickup" name="pickup">
+                       <mat-option  *ngFor="let adress of pickups" [value]="adress.value" [disabled]="adress.disabled">
+                       {{adress.viewValue}}
+                       </mat-option>
+                    </mat-select>
+                 </mat-form-field>
+                 <!-- time -->
+                 <div class="checkout__input-box">
+                    <mat-form-field style="margin-bottom: -1.25em" class="example-full-width checkout__input-date" appearance="outline">
+                       <input matInput [matDatepickerFilter]="myFilter" [matDatepicker]="picker"  formControlName="date" >
+                       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                       <mat-datepicker #picker [max]="maxDate"></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field style="margin-bottom: -1.25em" class="checkout__food-select"  appearance="outline">
+                       <mat-select formControlName="selectedInterval" name="interval">
+                          <mat-option  *ngFor="let time of times"  [value]="time.value" >
+                          {{time.viewValue}}
+                          </mat-option>
+                       </mat-select>
+                    </mat-form-field>
+                 </div>
+              </div>
+           </form>
         </div>
-
-            </form>
-
- 
-          </div>
-
-          <div class="checkout__item">
-            <h2 class="checkout__delivery-text">Ваше замовлення</h2>
-            <div class="checkout__busket">
+        <div class="checkout__item">
+           <h2 class="checkout__delivery-text">Ваше замовлення</h2>
+           <div class="checkout__busket">
               <ng-container *ngFor="let product of orderService.basket">
-              <div class="checkout__products">
-                <img [src]="product.image" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]" alt="img">
-                   <div class="checkout__count">
-                      <h5 class="checkout__title-buy" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]">{{product.name}}</h5>
-                      <div class="checkout__box">
-                        <div class="checkout__summa">{{ product.price * product.count }} <span>грн</span></div>
-
-                        <div class="checkout__box-wrap">
-                        <div class="thumb-input-number">
-                          <button type="button" class="decrement" (click)="productCount(product, false)">-</button>
-                          <input [value]="product.count" readonly="" class="product-qty" tabindex="-1" max="999">
-                          <button type="button" class="increment" (click)="productCount(product, true)">+</button>
+                 <div class="checkout__products">
+                    <img [src]="product.image" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]" alt="img">
+                    <div class="checkout__count">
+                       <h5 class="checkout__title-buy" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]">{{product.name}}</h5>
+                       <div class="checkout__box">
+                          <div class="checkout__summa">{{ product.price * product.count }} <span>грн</span></div>
+                          <div class="checkout__box-wrap">
+                             <div class="thumb-input-number">
+                                <button type="button" class="decrement" (click)="productCount(product, false)">-</button>
+                                <input [value]="product.count" readonly="" class="product-qty" tabindex="-1" max="999">
+                                <button type="button" class="increment" (click)="productCount(product, true)">+</button>
+                             </div>
+                             <button class="checkout__remove"  (click)="removeProduct(product, $event)">
+                                <div class="checkout__trash"></div>
+                             </button>
+                          </div>
                        </div>
-                      <button class="checkout__remove"  (click)="removeProduct(product, $event)"><div class="checkout__trash"></div></button>
                     </div>
-                    </div>
-                    </div>
-
-          </div>
-      </ng-container>
-     
-      <!-- <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span></div> -->
-      <ng-container *ngIf="!orderService.basket || orderService.basket.length === 0">
-          <div class="checkout__empty-box">
-          <img class="checkout__empty-image" src="../../../assets/images/header-informer/cart-empty.png" alt="img">
-          <h3 class="checkout__empty">Кошик порожній</h3>
-          <a  (click)="navigateToCatalog()"  class="checkout__empty-btn">ПЕРЕЙТИ ДО КАТАЛОГУ</a>
-        </div>
-        </ng-container>
-          </div>
-
-                <!-- form order -->
-                <form class="form checkout__order order-checkout" [formGroup]="orderForm">
-                  <div class="order-checkout__box" *ngIf="showHolders">
-
-                  <div class="order-checkout__holders" [ngClass]="{ 'hide': !showHolders }">
+                 </div>
+              </ng-container>
+              <!-- <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span></div> -->
+              <ng-container *ngIf="!orderService.basket || orderService.basket.length === 0">
+                 <div class="checkout__empty-box">
+                    <img class="checkout__empty-image" src="../../../assets/images/header-informer/cart-empty.png" alt="img">
+                    <h3 class="checkout__empty">Кошик порожній</h3>
+                    <a  (click)="navigateToCatalog()"  class="checkout__empty-btn">ПЕРЕЙТИ ДО КАТАЛОГУ</a>
+                 </div>
+              </ng-container>
+           </div>
+           <!-- form order -->
+           <form class="form checkout__order order-checkout" [formGroup]="orderForm">
+              <div class="order-checkout__box" *ngIf="showHolders">
+                 <div class="order-checkout__holders" [ngClass]="{ 'hide': !showHolders }">
                     <div class="order-checkout__title">Прибори</div>
                     <div class="order-checkout__description">Вкажіть кількість осіб, на яке робите замовлення</div>
                     <div class="thumb-input-number"> 
-                      <button type="button" class="decrement" (click)="decrementCount()">-</button> 
-                      <input id="things-count" class="product-qty" formControlName="selectedHolders"  value="1"   name="food"  tabindex="-1" data-min="0"> 
-                      <button type="button" class="increment" (click)="incrementCount()">+</button>
+                       <button type="button" class="decrement" (click)="decrementCount()">-</button> 
+                       <input id="things-count" class="product-qty" formControlName="selectedHolders"  value="1"   name="food"  tabindex="-1" data-min="0"> 
+                       <button type="button" class="increment" (click)="incrementCount()">+</button>
                     </div>
                     <div class="order-checkout__price-wrap"> <b>Безкоштовно</b></div>
-                  </div>
-
-
-
-
-                </div>
-                <!-- whithout holders -->
-                <div class="order-checkout__without-holders" (change)="toggleHoldersVisibility()"> 
-                  <label class="order-checkout__checkbox"> 
-                    <input type="checkbox" name="without_holders"> 
-                    <span>Без приборів та серветок, з любов'ю до навколишнього середовища</span> 
-                  </label>
-                </div>
-
-                <!-- package -->
-
-                <div class="order-checkout__package">
-                  <div class="order-checkout__title">Обери пакет</div> 
-                  <div class="order-checkout__package-box">
-                    <label class="order-checkout__checkbox"> 
-                        <input type="radio"  formControlName="freePackage" name="freePackage" value="freePackage" checked=""> <span>безкоштовний пакет</span> 
-                    </label>
-                    <label class="order-checkout__checkbox"> 
-                      <input type="radio"  formControlName="freePackage"  name="freePackage" value="shopper" data-price="10" (change)="updateTotalSum($event)"> <span>брендований шопер по собівартості - 10 грн</span> 
-                    </label>
-                  </div>
                  </div>
-
-                 <!-- part -->
-
-                 <div class="order-checkout__form-part">
-                  <div class="order-checkout__form-title"><b>3.</b> Інформація про оплату</div>
-                   <div class="order-checkout__pay-block" *ngIf="showHolders">
-                     <div class="order-checkout__checkbox-entry-wrap"> 
-                      <label class="order-checkout__checkbox mb-15" (change)="togglePayVisibility('gotivka')"> 
-                        <input type="radio" formControlName="cash" name="cash"  value="gotivka" >
-                        <span>Оплата готівкою</span> 
-                      </label>
-                    </div>
-                     <div class="order-checkout__toogle-block" *ngIf="showPay">
-                        <div class="order-checkout__moneychange-input">
-                          <div class="order-checkout__moneychange-box" *ngIf="withoutRest">
-                           <div class="order-checkout__text">Решта з</div>
-                           <input class="input" type="number"  formControlName="remainingSum" (input)="calculateRemaining($event)" placeholder="Сума" name="user_sum"> 
-                          </div>
-                           <label class="order-checkout__checkbox mb-15" (change)="toggleRestVisibility()"> 
-                              <input type="checkbox" formControlName="withoutRestFrom" value="bez reshti" name="without_rest"><span>Без решти</span> 
-                          </label>
-                        </div>
-                     </div>
-                     <div class="order-checkout__checkbox-entry-wrap" (change)="togglePayVisibility('card')"> 
-                      <label class="order-checkout__checkbox"> 
-                        <input type="radio" formControlName="cash" name="cash" value="card" > 
-                        <span>Оплата через термінал</span>
-                       </label>
-                      </div>
-                  </div>
-                  <div class="order-checkout__comment">
-                  <div class="order-checkout__checkbox-entry-wrap" > 
-                     <label class="order-checkout__checkbox"> 
-                        <input type="checkbox"  formControlName="noCall" name="no_call"><span>Мені можна не телефонувати для підтвердження замовлення</span> </label>
-                    </div>
-                  <div class="order-checkout__checkbox-entry-wrap "> 
-                    <label class="order-checkout__checkbox" (change)="toggleTextAreaVisibility()"> 
-                      <input type="checkbox" name="is_comment"><span>Коментар / промокод / інше</span>
+              </div>
+              <!-- whithout holders -->
+              <div class="order-checkout__without-holders" (change)="toggleHoldersVisibility()"> 
+                 <label class="order-checkout__checkbox"> 
+                 <input type="checkbox" name="without_holders"> 
+                 <span>Без приборів та серветок, з любов'ю до навколишнього середовища</span> 
+                 </label>
+              </div>
+              <!-- package -->
+              <div class="order-checkout__package">
+                 <div class="order-checkout__title">Обери пакет</div>
+                 <div class="order-checkout__package-box">
+                    <label class="order-checkout__checkbox"> 
+                    <input type="radio"  formControlName="freePackage" name="freePackage" value="freePackage" checked=""> <span>безкоштовний пакет</span> 
                     </label>
+                    <label class="order-checkout__checkbox"> 
+                    <input type="radio"  formControlName="freePackage"  name="freePackage" value="shopper" data-price="10" (change)="updateTotalSum($event)"> <span>брендований шопер по собівартості - 10 грн</span> 
+                    </label>
+                 </div>
+              </div>
+              <!-- pay -->
+              <div class="order-checkout__form-part">
+                 <div class="order-checkout__form-title"><b>3.</b> Інформація про оплату</div>
+                 <div class="order-checkout__pay-block" *ngIf="showHolders">
+                    <div class="order-checkout__checkbox-entry-wrap"> 
+                       <label class="order-checkout__checkbox mb-15" (change)="togglePayVisibility('gotivka')"> 
+                       <input type="radio" formControlName="cash" name="cash"  value="gotivka" >
+                       <span>Оплата готівкою</span> 
+                       </label>
                     </div>
-                  <div class="order-checkout__toggle-block" *ngIf="showTextArea"><textarea formControlName="addComment" name="comment" maxlength="499" class="order-checkout__textarea" placeholder="Ваш коментар"></textarea></div>
-                </div>
-                </div>
-
-                </form>
-
-
-                <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span>
-                </div>
-
-          <div class="checkout__actions">
-            <button type="submit" (click)="addForm()" [disabled]="foodForm.invalid" class="checkout__btn btn btn-primary" >Оформити замовлення</button>
-
-          </div> 
-          </div>
- 
+                    <div class="order-checkout__toogle-block" *ngIf="showPay">
+                       <div class="order-checkout__moneychange-input">
+                          <div class="order-checkout__moneychange-box" *ngIf="withoutRest">
+                             <div class="order-checkout__text">Решта з</div>
+                             <input class="input" type="number"  formControlName="remainingSum" (input)="calculateRemaining($event)" placeholder="Сума" name="user_sum"> 
+                          </div>
+                          <label class="order-checkout__checkbox mb-15" (change)="toggleRestVisibility()"> 
+                          <input type="checkbox" formControlName="withoutRestFrom" value="bez reshti" name="without_rest"><span>Без решти</span> 
+                          </label>
+                       </div>
+                    </div>
+                    <div class="order-checkout__checkbox-entry-wrap" (change)="togglePayVisibility('card')"> 
+                       <label class="order-checkout__checkbox"> 
+                       <input type="radio" formControlName="cash" name="cash" value="card" > 
+                       <span>Оплата через термінал</span>
+                       </label>
+                    </div>
+                 </div>
+                 <div class="order-checkout__comment">
+                    <div class="order-checkout__checkbox-entry-wrap" > 
+                       <label class="order-checkout__checkbox"> 
+                       <input type="checkbox"  formControlName="noCall" name="no_call"><span>Мені можна не телефонувати для підтвердження замовлення</span> </label>
+                    </div>
+                    <div class="order-checkout__checkbox-entry-wrap "> 
+                       <label class="order-checkout__checkbox" (change)="toggleTextAreaVisibility()"> 
+                       <input type="checkbox" name="is_comment"><span>Коментар / промокод / інше</span>
+                       </label>
+                    </div>
+                    <div class="order-checkout__toggle-block" *ngIf="showTextArea"><textarea formControlName="addComment" name="comment" maxlength="499" class="order-checkout__textarea" placeholder="Ваш коментар"></textarea></div>
+                 </div>
+              </div>
+           </form>
+           <div class="checkout__total" *ngIf="!orderService.basket || orderService.basket.length > 0"><span>До оплати: </span>{{ getTotalSum() }} <span> грн </span>
            </div>
-    </div>
+           <div class="checkout__actions">
+              <button type="submit" (click)="addForm()" [disabled]="foodForm.invalid" class="checkout__btn btn btn-primary" >Оформити замовлення</button>
+           </div>
+        </div>
+     </div>
+  </div>
 </section>
-

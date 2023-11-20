@@ -31,8 +31,6 @@ export class PhoneComponent implements OnInit {
   public count = 0;
   public reviewForm!: FormGroup;
   public selectedStreet!: string;
-  // public firstName!: string;
-  // public lastName!: string;
   public review!: string | number;
 
   public reviewsArray: Array<IReviewResponse> = [];
@@ -169,7 +167,6 @@ export class PhoneComponent implements OnInit {
     );
   }
 
-
   countOrder(): void {
     this.reviewService.getAllFirebase().subscribe((data) => {
       this.count = data.length;
@@ -178,7 +175,7 @@ export class PhoneComponent implements OnInit {
 
   addForm(): void {
     const formValuesReviews = this.reviewForm.value;
-  
+
     // Отримання даних для нового відгуку
     const newReview: any = {
       firstName: formValuesReviews.firstName,
@@ -190,26 +187,25 @@ export class PhoneComponent implements OnInit {
       review: formValuesReviews.review,
       image: formValuesReviews.image,
     };
-  
+
     // Перевірка наявності числових значень 'count' та знаходження максимального значення
     const counts = this.reviewsArray
-      .filter(item => !isNaN(item.count))
-      .map(item => item.count);
-  
+      .filter((item) => !isNaN(item.count))
+      .map((item) => item.count);
+
     // Обчислення максимального значення 'count' для нового відгуку
     const maxCount = counts.length > 0 ? Math.max(...counts) : 0;
     newReview.count = maxCount + 1;
-  
+
     // Додавання нового відгуку
     this.reviewService.createFirebase(newReview).then(() => {
       this.toastService.success('Відгук доданий!');
     });
-  
+
     // Скидання форми
     this.reviewForm.reset();
   }
-  
-  
+
   // This method returns the value of a field in the form by its name.
   valueByControl(control: string): string {
     return this.reviewForm.get(control)?.value;

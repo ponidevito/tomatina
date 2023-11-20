@@ -4,7 +4,7 @@
       color = "#fff" type="ball-fall" [fullScreen] = "true"><p style="color: white" > Loading... </p>
     </ngx-spinner>
         <div class="categories-menu">
-            <div class="category-title">healthy &amp; tasty menu</div>
+            <div class="category-title"></div>
                 <ul class="categories-list">
                     <li class="categories-list-item " [class.active]="categoryName === 'special-edition'"><a [routerLink]="[ '/category-menu/special-edition' ]" (click)="changeSelectedCategory('special-edition')">Special Edition</a></li>
                     <li class="categories-list-item " [class.active]="categoryName === 'healthy'"><a  [routerLink]="[ '/category-menu/healthy' ]" (click)="changeSelectedCategory('healthy')">healthy & tasty menu</a></li>
@@ -39,11 +39,8 @@
                   <div class="product_image-wrap">
                      <a class="product_image">
                         <img [src]="product.image" [routerLink]="[ '/category-menu/'+product.category.path, product.id ]" alt="img">
-                        <ul class="product_labels" *ngIf="categoryName !=='drinks' && categoryName !=='special-edition'">
-                           <li class="product_label"  style="background-color: #28af33">Сніданки до 18:00</li>
-                        </ul>
                      </a>
-                      <div class="product_top-right">
+                      <div class="product_top-right" *ngIf="categoryName !== 'combo'">
          
  
                         <div class="info-main">
@@ -54,8 +51,8 @@
                                  <path d="M5.46875 12.6245H1.53125C1.169 12.6245 0.875 12.3305 0.875 11.9683C0.875 11.606 1.169 11.312 1.53125 11.312H5.46875C5.831 11.312 6.125 11.606 6.125 11.9683C6.125 12.3305 5.831 12.6245 5.46875 12.6245Z" fill="#2d7d7d"></path>
                               </svg>
                            </button>
-                           <div class="info-block">
-                              <div class="info-head">Основна страва:   <b> {{ (product.proteins !== undefined && product.fats !== undefined && product.carbohydrates !== undefined) ? calculateCalories(product.proteins, product.fats, product.carbohydrates) : '' }} </b>
+                           <div class="info-block" >
+                              <div class="info-head">Основна страва:   <b> {{ (product.proteins !== undefined && product.fats !== undefined && product.carbohydrates !== undefined) ? calculateCalories(product.proteins, product.fats, product.carbohydrates) : '' }} ккал </b>
                               </div>
                               <div class="info-body">
                                  <div class="info-item">

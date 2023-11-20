@@ -10,9 +10,8 @@
     width: 100%;
     padding: 50px 15px 45px 15px;
   }
-  @include sm{
+  @include sm {
     padding: 30px 15px 25px 15px;
-
   }
 }
 .mdc-dialog__title {
@@ -33,13 +32,12 @@
     display: flex;
     align-items: center;
   }
-
 }
 .mdc-dialog__actions {
   justify-content: center;
 }
 .file-upload {
-  &:not(:last-child){
+  &:not(:last-child) {
     margin-bottom: 20px;
   }
 }

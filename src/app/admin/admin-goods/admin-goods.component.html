@@ -9,8 +9,6 @@
                 <!-- form category -->
                 <form class="goods-form form-goods form-admin" [class.active]="showForm" [formGroup]="goodsForm" (ngSubmit)="addGoods()">
                     <div class="form-goods__box form-admin__box">
-                        
-
                         <select formControlName="category" class="form-select" *ngIf="adminCategories && adminCategories.length > 0">
                             <option disabled selected value="">Виберіть категорію</option>
                             <ng-container *ngFor="let category of adminCategories">
@@ -20,14 +18,17 @@
 
                         <input type="text"  formControlName="name" name="name" class="form-goods__input form-admin__input" placeholder="*Назва">
                       </div>
-                      <div class="form-goods__box form-admin__box">
+                      <div class="form-goods__box box-wrap form-admin__box">
                         <input type="text" formControlName="ingredients"  name="ingredients" class="form-goods__input form-admin__input" placeholder="*Інгредієнти">
                         <input type="text" formControlName="addInfo"  name="addInfo" class="form-goods__input form-admin__input" placeholder="*Дод.Інфо">
+                      </div>
+                      <div class="form-goods__box box-wrap form-admin__box">
                         <input type="number"   formControlName="proteins"  name="proteins" class="form-goods__input form-admin__input" placeholder="*Білки">
                         <input type="number"   formControlName="fats"  name="fats" class="form-goods__input form-admin__input" placeholder="*Жири">
+                      </div>
+                      <div class="form-goods__box box-wrap form-admin__box">
                         <input type="number"   formControlName="carbohydrates"  name="carbohydrates" class="form-goods__input form-admin__input" placeholder="*Вуглеводи">
-                        <input type="number"   formControlName="weight"  name="weight" class="form-goods__input form-admin__input" placeholder="*Вага">
-
+                        <input type="number"   formControlName="weight"  name="weight" class="form-goods__input form-admin__input" placeholder="*Вага"> 
                         <input type="number" min="1"   formControlName="price" name="price" class="form-goods__input form-admin__input" placeholder="*Ціна">
                       </div>
                       <div class="form-goods__file form-admin__file">
