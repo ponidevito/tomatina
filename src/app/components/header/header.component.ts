@@ -215,6 +215,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+
   // close busket
   closeBusket(): void {
     const body = document.getElementsByTagName('body')[0];
@@ -258,7 +259,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       localStorage.setItem('basket', JSON.stringify(this.orderService.basket));
       localStorage.setItem('count', JSON.stringify(this.orderService.count));
     }
-
+    event.stopPropagation();
   }
 
   // method count products

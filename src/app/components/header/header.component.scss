@@ -282,6 +282,12 @@
           }
         }
       }
+
+    }
+    .menu__submenu.active {
+      display: block;
+      opacity: 1;
+      visibility: visible;
     }
   }
 
@@ -303,7 +309,6 @@
   }
 
   &__submenu {
-    display: none;
     width: 62%;
     position: fixed;
     display: flex;
@@ -326,6 +331,9 @@
     @media (max-width: 1366px) {
       width: 70%;
     }
+    @include lg{
+      top: 86px;
+    }
     @include md {
       width: 80%;
     }
@@ -333,7 +341,7 @@
       width: 90%;
     }
     @include xs {
-      top: 125px;
+      top: 96px;
       width: 100%;
     }
   }
@@ -570,9 +578,7 @@
     height: 100%;
     overflow: auto;
     width: 680px;
-    @media (max-width: 1200px) {
-      height: 100vh;
-    }
+   
     @include md {
       max-width: 100%;
       width: 100%;

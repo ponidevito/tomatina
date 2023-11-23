@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { CategoryService } from '../../shared/services/category/category.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-category-menu',
   templateUrl: './category-menu.component.html',
@@ -23,7 +23,8 @@ export class CategoryMenuComponent implements OnInit, OnDestroy {
     private router: Router,
     private orderService: OrderService,
     public categoryService: CategoryService,
-    private spinnerService: NgxSpinnerService
+    private spinnerService: NgxSpinnerService,
+    private cdr: ChangeDetectorRef
   ) {
     this.eventSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -105,14 +106,25 @@ export class CategoryMenuComponent implements OnInit, OnDestroy {
   }
 
   // method count products
-  public productCount(product: IGoodsResponse, value: boolean): void {
+  // public productCount(product: IGoodsResponse, value: boolean): void {
+  //   const index = this.goodsArray.findIndex((p) => p.id === product.id);
+  //   if (index !== -1) {
+  //     if (value) {
+  //       ++this.goodsArray[index].count;
+  //     } else if (!value && this.goodsArray[index].count > 1) {
+  //       --this.goodsArray[index].count;
+  //     }
+  //   }
+  // }
+
+  public productCount(product: IGoodsResponse, increment: boolean): void {
     const index = this.goodsArray.findIndex((p) => p.id === product.id);
     if (index !== -1) {
-      if (value) {
-        ++this.goodsArray[index].count;
-      } else if (!value && this.goodsArray[index].count > 1) {
-        --this.goodsArray[index].count;
-      }
+      const newCount = increment ? this.goodsArray[index].count + 1 : Math.max(this.goodsArray[index].count - 1, 1);
+      this.goodsArray[index].count = newCount;
+  
+      // Оновлення Angular Change Detection
+      this.cdr.detectChanges();
     }
   }
 
